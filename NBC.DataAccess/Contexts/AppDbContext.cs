@@ -7,6 +7,8 @@ namespace NBC.DataAccess.Contexts {
 
     public virtual DbSet<Year> Years { get; set; }
     public virtual DbSet<Setting> Settings { get; set; }
+    public virtual DbSet<Unit> Units { get; set; }
+
 
     protected override void OnModelCreating(DbModelBuilder modelBuilder) {
       modelBuilder.Properties<DateTime>().Configure(c => c.HasColumnType("datetime2"));

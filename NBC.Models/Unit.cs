@@ -1,10 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace NBC.Models {
-  class Unit {
+  public class Unit {
+
+    public Unit() {
+      Address = new Address();
+    }
+
+    public int Id { get; set; }
+
+    [StringLength(255)]
+    public string Name { get; set; }
+
+    public Address Address { get; set; }
+
+    
   }
 }

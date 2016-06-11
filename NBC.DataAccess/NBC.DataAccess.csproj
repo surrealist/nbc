@@ -59,6 +59,10 @@
     <Compile Include="Migrations\201606110503363_addSettings.Designer.cs">
       <DependentUpon>201606110503363_addSettings.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201606110549393_addUnitandItsAddress.cs" />
+    <Compile Include="Migrations\201606110549393_addUnitandItsAddress.Designer.cs">
+      <DependentUpon>201606110549393_addUnitandItsAddress.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Bases\RepositoryBase.cs" />
@@ -81,6 +85,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201606110503363_addSettings.resx">
       <DependentUpon>201606110503363_addSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606110549393_addUnitandItsAddress.resx">
+      <DependentUpon>201606110549393_addUnitandItsAddress.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
