@@ -51,8 +51,18 @@
   <ItemGroup>
     <Compile Include="Contexts\AppDbContext.cs" />
     <Compile Include="Bases\IRepository_T.cs" />
+    <Compile Include="Migrations\201606110428211_InitialCreate.cs" />
+    <Compile Include="Migrations\201606110428211_InitialCreate.Designer.cs">
+      <DependentUpon>201606110428211_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606110503363_addSettings.cs" />
+    <Compile Include="Migrations\201606110503363_addSettings.Designer.cs">
+      <DependentUpon>201606110503363_addSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Bases\RepositoryBase.cs" />
+    <Compile Include="Repositories\SettingRepository.cs" />
     <Compile Include="Repositories\YearRepository.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -64,6 +74,14 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201606110428211_InitialCreate.resx">
+      <DependentUpon>201606110428211_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606110503363_addSettings.resx">
+      <DependentUpon>201606110503363_addSettings.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

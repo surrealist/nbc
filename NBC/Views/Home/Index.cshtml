@@ -2,10 +2,24 @@
 @model IEnumerable<Year>
 
 @{
-    ViewBag.Title = "Home Page";
+  ViewBag.Title = "Home Page";
+  int currentYear = (int)(ViewBag.Y ?? -1);
 }
 
 <h2>Home</h2>
 
 
 @Model.Count() years.
+
+@foreach (var y in Model) {
+  <form action="~/Home/ChangeCurrentYear" method="post">
+    @{
+      var isCurrentYear = y.Id == currentYear;
+    }
+    <button name="year" value="@y.Id" 
+            class="btn btn-default" 
+            disabled="@isCurrentYear">
+      @y.Id
+    </button>
+  </form>
+}

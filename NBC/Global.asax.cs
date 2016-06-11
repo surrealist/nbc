@@ -31,8 +31,13 @@ namespace NBC {
       var builder = new ContainerBuilder();
 
       builder.RegisterControllers(typeof(MvcApplication).Assembly);
+
       builder.RegisterType<YearRepository>().As<IRepository<Year>>();
-      builder.RegisterType<YearService>().As<IService<Year>>(); 
+      builder.RegisterType<SettingRepository>().As<IRepository<Setting>>();
+
+      builder.RegisterType<YearService>().As<IService<Year>>();
+      builder.RegisterType<SettingService>().As<IService<Setting>>(); 
+      
       builder.RegisterType<AppDbContext>().As<DbContext>(); 
 
       var container = builder.Build();

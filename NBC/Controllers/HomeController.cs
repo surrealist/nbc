@@ -11,19 +11,24 @@ namespace NBC.Controllers {
   public class HomeController : Controller {
 
     private IService<Year> yearService;
+    private SettingService settingService;
 
-    public HomeController(IService<Year> yearService) {
+    public HomeController(IService<Year> yearService,
+                          IService<Setting> settingService) {
       this.yearService = yearService;
+      this.settingService = (SettingService)settingService;
     }
 
     public ActionResult Index() {
       var items = yearService.All();
+      var currentYear = settingService.Current.CurrentYearId;
+      ViewBag.Y = currentYear;
       return View(items);
     }
 
     public ActionResult About() {
-      ViewBag.Message = "Your application description page.";
-
+      var currentYear = settingService.Current.CurrentYearId;
+      ViewBag.Y = currentYear;
       return View();
     }
 
@@ -31,6 +36,14 @@ namespace NBC.Controllers {
       ViewBag.Message = "Your contact page.";
 
       return View();
+    }
+
+    [HttpPost]
+    public ActionResult ChangeCurrentYear(int year) {
+      settingService.ChangeCurrentYear(year);
+      settingService.SaveChanges();
+
+      return RedirectToAction("Index");
     }
   }
 }
