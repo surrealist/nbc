@@ -11,6 +11,10 @@
     <AssemblyName>NBC.Services</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <SccProjectName>%24/nbc/nbc-master/NBC.Services</SccProjectName>
+    <SccLocalPath>.</SccLocalPath>
+    <SccAuxPath>http://jltfs.jlcontrol.com/tfs/defaultcollection</SccAuxPath>
+    <SccProvider>{4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}</SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -49,10 +53,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActionTypeService.cs" />
+    <Compile Include="ActivityTypeService.cs" />
+    <Compile Include="ActualWorkService.cs" />
+    <Compile Include="ApplicantConsultService.cs" />
+    <Compile Include="ApplicantService.cs" />
     <Compile Include="Bases\IService_T.cs" />
     <Compile Include="Bases\ServiceBase_T.cs" />
+    <Compile Include="CompanyService.cs" />
+    <Compile Include="ConsultantService.cs" />
+    <Compile Include="PersonService.cs" />
     <Compile Include="SettingService.cs" />
+    <Compile Include="SVActivityYearService.cs" />
     <Compile Include="SVService.cs" />
+    <Compile Include="SVUnitYear.cs" />
+    <Compile Include="TimeTableService.cs" />
+    <Compile Include="UnitActivityService.cs" />
+    <Compile Include="UnitConsultService.cs" />
     <Compile Include="UnitService.cs" />
     <Compile Include="YearService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NBC", "NBC\NBC.csproj", "{952B11CE-832D-40A3-8CE7-7130D5E026AA}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NBC.Models", "NBC.Models\NBC.Models.csproj", "{D210DCCC-20E2-4E17-8124-54ABCD702B24}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NBC.Services", "NBC.Services\NBC.Services.csproj", "{403DAAF9-93FC-4E43-9F9A-8DC860A852A5}"
@@ -13,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NBC.DataAccess", "NBC.DataA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NBC.Facts", "NBC.Facts\NBC.Facts.csproj", "{BE34085C-E7F4-46D3-96C6-4A840ACDBC62}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "NBC.UITests", "NBC.UITests\NBC.UITests.fsproj", "{D9090D16-CF87-4C11-BA91-32FB7B9EE7CC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NBC.Web", "NBC.Web\NBC.Web.csproj", "{49B70D1F-CD75-47D4-B65F-3A4953FD6058}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,10 +19,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{952B11CE-832D-40A3-8CE7-7130D5E026AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{952B11CE-832D-40A3-8CE7-7130D5E026AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{952B11CE-832D-40A3-8CE7-7130D5E026AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{952B11CE-832D-40A3-8CE7-7130D5E026AA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D210DCCC-20E2-4E17-8124-54ABCD702B24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D210DCCC-20E2-4E17-8124-54ABCD702B24}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D210DCCC-20E2-4E17-8124-54ABCD702B24}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -41,12 +35,33 @@ Global
 		{BE34085C-E7F4-46D3-96C6-4A840ACDBC62}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE34085C-E7F4-46D3-96C6-4A840ACDBC62}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE34085C-E7F4-46D3-96C6-4A840ACDBC62}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D9090D16-CF87-4C11-BA91-32FB7B9EE7CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D9090D16-CF87-4C11-BA91-32FB7B9EE7CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D9090D16-CF87-4C11-BA91-32FB7B9EE7CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D9090D16-CF87-4C11-BA91-32FB7B9EE7CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49B70D1F-CD75-47D4-B65F-3A4953FD6058}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49B70D1F-CD75-47D4-B65F-3A4953FD6058}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49B70D1F-CD75-47D4-B65F-3A4953FD6058}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49B70D1F-CD75-47D4-B65F-3A4953FD6058}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://jltfs.jlcontrol.com/tfs/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = NBC.Models\\NBC.Models.csproj
+		SccProjectName1 = NBC.Models
+		SccLocalPath1 = NBC.Models
+		SccProjectUniqueName2 = NBC.Services\\NBC.Services.csproj
+		SccProjectName2 = NBC.Services
+		SccLocalPath2 = NBC.Services
+		SccProjectUniqueName3 = NBC.DataAccess\\NBC.DataAccess.csproj
+		SccProjectName3 = NBC.DataAccess
+		SccLocalPath3 = NBC.DataAccess
+		SccProjectUniqueName4 = NBC.Facts\\NBC.Facts.csproj
+		SccProjectName4 = NBC.Facts
+		SccLocalPath4 = NBC.Facts
+		SccProjectUniqueName5 = NBC.Web\\NBC.Web.csproj
+		SccProjectName5 = NBC.Web
+		SccLocalPath5 = NBC.Web
 	EndGlobalSection
 EndGlobal

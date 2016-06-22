@@ -11,6 +11,10 @@
     <AssemblyName>NBC.DataAccess</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <SccProjectName>%24/nbc/nbc-master/NBC.DataAccess</SccProjectName>
+    <SccLocalPath>.</SccLocalPath>
+    <SccAuxPath>http://jltfs.jlcontrol.com/tfs/defaultcollection</SccAuxPath>
+    <SccProvider>{4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}</SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,12 +34,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Castle.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Moq, Version=4.5.8.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
+      <HintPath>..\packages\Moq.4.5.8\lib\net45\Moq.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -51,22 +63,86 @@
   <ItemGroup>
     <Compile Include="Contexts\AppDbContext.cs" />
     <Compile Include="Bases\IRepository_T.cs" />
-    <Compile Include="Migrations\201606110428211_InitialCreate.cs" />
-    <Compile Include="Migrations\201606110428211_InitialCreate.Designer.cs">
-      <DependentUpon>201606110428211_InitialCreate.cs</DependentUpon>
+    <Compile Include="Contexts\FakeAppDbContext.cs" />
+    <Compile Include="Migrations\201606030413287_InitialCreate.cs" />
+    <Compile Include="Migrations\201606030413287_InitialCreate.Designer.cs">
+      <DependentUpon>201606030413287_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201606110503363_addSettings.cs" />
-    <Compile Include="Migrations\201606110503363_addSettings.Designer.cs">
-      <DependentUpon>201606110503363_addSettings.cs</DependentUpon>
+    <Compile Include="Migrations\201606081214379_Units_AddField.cs" />
+    <Compile Include="Migrations\201606081214379_Units_AddField.Designer.cs">
+      <DependentUpon>201606081214379_Units_AddField.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201606110549393_addUnitandItsAddress.cs" />
-    <Compile Include="Migrations\201606110549393_addUnitandItsAddress.Designer.cs">
-      <DependentUpon>201606110549393_addUnitandItsAddress.cs</DependentUpon>
+    <Compile Include="Migrations\201606081226305_Unit_AddClass.cs" />
+    <Compile Include="Migrations\201606081226305_Unit_AddClass.Designer.cs">
+      <DependentUpon>201606081226305_Unit_AddClass.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606110314543_Setting_AddAutoID.cs" />
+    <Compile Include="Migrations\201606110314543_Setting_AddAutoID.Designer.cs">
+      <DependentUpon>201606110314543_Setting_AddAutoID.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606120200392_modVer1.cs" />
+    <Compile Include="Migrations\201606120200392_modVer1.Designer.cs">
+      <DependentUpon>201606120200392_modVer1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606131029570_modV3.cs" />
+    <Compile Include="Migrations\201606131029570_modV3.Designer.cs">
+      <DependentUpon>201606131029570_modV3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606140446483_addAddress.cs" />
+    <Compile Include="Migrations\201606140446483_addAddress.Designer.cs">
+      <DependentUpon>201606140446483_addAddress.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606160408233_addCreate-Modified-history.cs" />
+    <Compile Include="Migrations\201606160408233_addCreate-Modified-history.Designer.cs">
+      <DependentUpon>201606160408233_addCreate-Modified-history.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606180306383_JengModified.cs" />
+    <Compile Include="Migrations\201606180306383_JengModified.Designer.cs">
+      <DependentUpon>201606180306383_JengModified.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606200322296_jengMod.cs" />
+    <Compile Include="Migrations\201606200322296_jengMod.Designer.cs">
+      <DependentUpon>201606200322296_jengMod.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606200830237_Change-Model.cs" />
+    <Compile Include="Migrations\201606200830237_Change-Model.Designer.cs">
+      <DependentUpon>201606200830237_Change-Model.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606200835442_Update-Model.cs" />
+    <Compile Include="Migrations\201606200835442_Update-Model.Designer.cs">
+      <DependentUpon>201606200835442_Update-Model.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606200846161_Update-Model2.cs" />
+    <Compile Include="Migrations\201606200846161_Update-Model2.Designer.cs">
+      <DependentUpon>201606200846161_Update-Model2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606200920505_YingMod.cs" />
+    <Compile Include="Migrations\201606200920505_YingMod.Designer.cs">
+      <DependentUpon>201606200920505_YingMod.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606220059364_jengMod1.cs" />
+    <Compile Include="Migrations\201606220059364_jengMod1.Designer.cs">
+      <DependentUpon>201606220059364_jengMod1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Bases\RepositoryBase.cs" />
+    <Compile Include="Repositories\ActionTypeRepository.cs" />
+    <Compile Include="Repositories\ActivityTypeRepository.cs" />
+    <Compile Include="Repositories\ActualWorkRepository.cs" />
+    <Compile Include="Repositories\ApplicantConsultRepository.cs" />
+    <Compile Include="Repositories\ApplicantRepository.cs" />
+    <Compile Include="Repositories\CompanyRepository.cs" />
+    <Compile Include="Repositories\ConsultantRepository.cs" />
+    <Compile Include="Repositories\PersonRepository.cs" />
     <Compile Include="Repositories\SettingRepository.cs" />
+    <Compile Include="Repositories\SVActivityYearRepository.cs" />
+    <Compile Include="Repositories\SVRepository.cs" />
+    <Compile Include="Repositories\SVUnitYear.cs" />
+    <Compile Include="Repositories\TimeTableRepository.cs" />
+    <Compile Include="Repositories\UnitActivityRepository.cs" />
+    <Compile Include="Repositories\UnitConsultRepository.cs" />
+    <Compile Include="Repositories\UnitRepository.cs" />
     <Compile Include="Repositories\YearRepository.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -80,14 +156,50 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201606110428211_InitialCreate.resx">
-      <DependentUpon>201606110428211_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201606030413287_InitialCreate.resx">
+      <DependentUpon>201606030413287_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201606110503363_addSettings.resx">
-      <DependentUpon>201606110503363_addSettings.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201606081214379_Units_AddField.resx">
+      <DependentUpon>201606081214379_Units_AddField.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201606110549393_addUnitandItsAddress.resx">
-      <DependentUpon>201606110549393_addUnitandItsAddress.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201606081226305_Unit_AddClass.resx">
+      <DependentUpon>201606081226305_Unit_AddClass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606110314543_Setting_AddAutoID.resx">
+      <DependentUpon>201606110314543_Setting_AddAutoID.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606120200392_modVer1.resx">
+      <DependentUpon>201606120200392_modVer1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606131029570_modV3.resx">
+      <DependentUpon>201606131029570_modV3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606140446483_addAddress.resx">
+      <DependentUpon>201606140446483_addAddress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606160408233_addCreate-Modified-history.resx">
+      <DependentUpon>201606160408233_addCreate-Modified-history.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606180306383_JengModified.resx">
+      <DependentUpon>201606180306383_JengModified.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606200322296_jengMod.resx">
+      <DependentUpon>201606200322296_jengMod.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606200830237_Change-Model.resx">
+      <DependentUpon>201606200830237_Change-Model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606200835442_Update-Model.resx">
+      <DependentUpon>201606200835442_Update-Model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606200846161_Update-Model2.resx">
+      <DependentUpon>201606200846161_Update-Model2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606200920505_YingMod.resx">
+      <DependentUpon>201606200920505_YingMod.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606220059364_jengMod1.resx">
+      <DependentUpon>201606220059364_jengMod1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
