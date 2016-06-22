@@ -1,0 +1,158 @@
+namespace NBC.DataAccess.Migrations
+{
+    using System;
+    using System.Data.Entity.Migrations;
+    
+    public partial class addCreateModifiedhistory : DbMigration
+    {
+        public override void Up()
+        {
+            AddColumn("dbo.ActionTypes", "CreatedBy", c => c.String(maxLength: 255));
+            AddColumn("dbo.ActionTypes", "CreatedDate", c => c.DateTime(nullable: false, precision: 7, storeType: "datetime2"));
+            AddColumn("dbo.ActionTypes", "ModifiedBy", c => c.String(maxLength: 255));
+            AddColumn("dbo.ActionTypes", "ModifiedDate", c => c.DateTime(nullable: false, precision: 7, storeType: "datetime2"));
+            AddColumn("dbo.ActualWorks", "CreatedBy", c => c.String(maxLength: 255));
+            AddColumn("dbo.ActualWorks", "CreatedDate", c => c.DateTime(nullable: false, precision: 7, storeType: "datetime2"));
+            AddColumn("dbo.ActualWorks", "ModifiedBy", c => c.String(maxLength: 255));
+            AddColumn("dbo.ActualWorks", "ModifiedDate", c => c.DateTime(nullable: false, precision: 7, storeType: "datetime2"));
+            AddColumn("dbo.Applicants", "CreatedBy", c => c.String(maxLength: 255));
+            AddColumn("dbo.Applicants", "CreatedDate", c => c.DateTime(nullable: false, precision: 7, storeType: "datetime2"));
+            AddColumn("dbo.Applicants", "ModifiedBy", c => c.String(maxLength: 255));
+            AddColumn("dbo.Applicants", "ModifiedDate", c => c.DateTime(nullable: false, precision: 7, storeType: "datetime2"));
+            AddColumn("dbo.Companies", "CreatedBy", c => c.String(maxLength: 255));
+            AddColumn("dbo.Companies", "CreatedDate", c => c.DateTime(nullable: false, precision: 7, storeType: "datetime2"));
+            AddColumn("dbo.Companies", "ModifiedBy", c => c.String(maxLength: 255));
+            AddColumn("dbo.Companies", "ModifiedDate", c => c.DateTime(nullable: false, precision: 7, storeType: "datetime2"));
+            AddColumn("dbo.Consultants", "CreatedBy", c => c.String(maxLength: 255));
+            AddColumn("dbo.Consultants", "CreatedDate", c => c.DateTime(nullable: false, precision: 7, storeType: "datetime2"));
+            AddColumn("dbo.Consultants", "ModifiedBy", c => c.String(maxLength: 255));
+            AddColumn("dbo.Consultants", "ModifiedDate", c => c.DateTime(nullable: false, precision: 7, storeType: "datetime2"));
+            AddColumn("dbo.People", "CreatedBy", c => c.String(maxLength: 255));
+            AddColumn("dbo.People", "CreatedDate", c => c.DateTime(nullable: false, precision: 7, storeType: "datetime2"));
+            AddColumn("dbo.People", "ModifiedBy", c => c.String(maxLength: 255));
+            AddColumn("dbo.People", "ModifiedDate", c => c.DateTime(nullable: false, precision: 7, storeType: "datetime2"));
+            AddColumn("dbo.SVs", "CreatedBy", c => c.String(maxLength: 255));
+            AddColumn("dbo.SVs", "CreatedDate", c => c.DateTime(nullable: false, precision: 7, storeType: "datetime2"));
+            AddColumn("dbo.SVs", "ModifiedBy", c => c.String(maxLength: 255));
+            AddColumn("dbo.SVs", "ModifiedDate", c => c.DateTime(nullable: false, precision: 7, storeType: "datetime2"));
+            AddColumn("dbo.TimeTables", "CreatedBy", c => c.String(maxLength: 255));
+            AddColumn("dbo.TimeTables", "CreatedDate", c => c.DateTime(nullable: false, precision: 7, storeType: "datetime2"));
+            AddColumn("dbo.TimeTables", "ModifiedBy", c => c.String(maxLength: 255));
+            AddColumn("dbo.TimeTables", "ModifiedDate", c => c.DateTime(nullable: false, precision: 7, storeType: "datetime2"));
+            AddColumn("dbo.Units", "CreatedBy", c => c.String(maxLength: 255));
+            AddColumn("dbo.Units", "CreatedDate", c => c.DateTime(nullable: false, precision: 7, storeType: "datetime2"));
+            AddColumn("dbo.Units", "ModifiedBy", c => c.String(maxLength: 255));
+            AddColumn("dbo.Units", "ModifiedDate", c => c.DateTime(nullable: false, precision: 7, storeType: "datetime2"));
+            AddColumn("dbo.Years", "CreatedBy", c => c.String(maxLength: 255));
+            AddColumn("dbo.Years", "CreatedDate", c => c.DateTime(nullable: false, precision: 7, storeType: "datetime2"));
+            AddColumn("dbo.Years", "ModifiedBy", c => c.String(maxLength: 255));
+            AddColumn("dbo.Years", "ModifiedDate", c => c.DateTime(nullable: false, precision: 7, storeType: "datetime2"));
+            AlterColumn("dbo.ActionTypes", "Name", c => c.String(maxLength: 255));
+            AlterColumn("dbo.ActualWorks", "ActionDetail", c => c.String(maxLength: 2048));
+            AlterColumn("dbo.Companies", "Name", c => c.String(maxLength: 255));
+            AlterColumn("dbo.Companies", "ComCode", c => c.String(maxLength: 255));
+            AlterColumn("dbo.Consultants", "Title", c => c.String(maxLength: 255));
+            AlterColumn("dbo.Consultants", "FirstName", c => c.String(maxLength: 255));
+            AlterColumn("dbo.Consultants", "SurName", c => c.String(maxLength: 255));
+            AlterColumn("dbo.Consultants", "Tel", c => c.String(maxLength: 255));
+            AlterColumn("dbo.Consultants", "Email", c => c.String(maxLength: 255));
+            AlterColumn("dbo.Consultants", "Notes", c => c.String(maxLength: 2048));
+            AlterColumn("dbo.People", "Title", c => c.String(maxLength: 255));
+            AlterColumn("dbo.People", "FirstName", c => c.String(maxLength: 255));
+            AlterColumn("dbo.People", "SurName", c => c.String(maxLength: 255));
+            AlterColumn("dbo.People", "Mobile", c => c.String(maxLength: 255));
+            AlterColumn("dbo.People", "Email", c => c.String(maxLength: 255));
+            AlterColumn("dbo.SVs", "Name", c => c.String(maxLength: 255));
+            AlterColumn("dbo.SVs", "Alias", c => c.String(maxLength: 255));
+            AlterColumn("dbo.SVs", "Tel", c => c.String(maxLength: 255));
+            AlterColumn("dbo.SVs", "Email", c => c.String(maxLength: 255));
+            AlterColumn("dbo.TimeTables", "PlanDetail", c => c.String(maxLength: 2048));
+            AlterColumn("dbo.Units", "Alias", c => c.String(maxLength: 255));
+            AlterColumn("dbo.Units", "Tel", c => c.String(maxLength: 255));
+            AlterColumn("dbo.Units", "Email", c => c.String(maxLength: 255));
+            AlterColumn("dbo.Units", "ContactPersonName", c => c.String(maxLength: 255));
+            AlterColumn("dbo.Units", "ConactPersonTel", c => c.String(maxLength: 255));
+            AlterColumn("dbo.Units", "ContactPersonEmail", c => c.String(maxLength: 255));
+            AlterColumn("dbo.Units", "HeadPersonName", c => c.String(maxLength: 255));
+            AlterColumn("dbo.Units", "HeadPersonTel", c => c.String(maxLength: 255));
+            AlterColumn("dbo.Units", "HeadPersonEmail", c => c.String(maxLength: 255));
+            AlterColumn("dbo.Units", "Notes", c => c.String(maxLength: 2048));
+            AlterColumn("dbo.Years", "Name", c => c.String(maxLength: 255));
+        }
+        
+        public override void Down()
+        {
+            AlterColumn("dbo.Years", "Name", c => c.String(maxLength: 100));
+            AlterColumn("dbo.Units", "Notes", c => c.String());
+            AlterColumn("dbo.Units", "HeadPersonEmail", c => c.String(maxLength: 30));
+            AlterColumn("dbo.Units", "HeadPersonTel", c => c.String(maxLength: 15));
+            AlterColumn("dbo.Units", "HeadPersonName", c => c.String(maxLength: 100));
+            AlterColumn("dbo.Units", "ContactPersonEmail", c => c.String(maxLength: 30));
+            AlterColumn("dbo.Units", "ConactPersonTel", c => c.String(maxLength: 15));
+            AlterColumn("dbo.Units", "ContactPersonName", c => c.String(maxLength: 100));
+            AlterColumn("dbo.Units", "Email", c => c.String(maxLength: 30));
+            AlterColumn("dbo.Units", "Tel", c => c.String(maxLength: 15));
+            AlterColumn("dbo.Units", "Alias", c => c.String());
+            AlterColumn("dbo.TimeTables", "PlanDetail", c => c.String());
+            AlterColumn("dbo.SVs", "Email", c => c.String());
+            AlterColumn("dbo.SVs", "Tel", c => c.String());
+            AlterColumn("dbo.SVs", "Alias", c => c.String());
+            AlterColumn("dbo.SVs", "Name", c => c.String());
+            AlterColumn("dbo.People", "Email", c => c.String());
+            AlterColumn("dbo.People", "Mobile", c => c.String());
+            AlterColumn("dbo.People", "SurName", c => c.Int(nullable: false));
+            AlterColumn("dbo.People", "FirstName", c => c.String());
+            AlterColumn("dbo.People", "Title", c => c.String());
+            AlterColumn("dbo.Consultants", "Notes", c => c.String());
+            AlterColumn("dbo.Consultants", "Email", c => c.String());
+            AlterColumn("dbo.Consultants", "Tel", c => c.String());
+            AlterColumn("dbo.Consultants", "SurName", c => c.String());
+            AlterColumn("dbo.Consultants", "FirstName", c => c.String());
+            AlterColumn("dbo.Consultants", "Title", c => c.String());
+            AlterColumn("dbo.Companies", "ComCode", c => c.String());
+            AlterColumn("dbo.Companies", "Name", c => c.String());
+            AlterColumn("dbo.ActualWorks", "ActionDetail", c => c.String());
+            AlterColumn("dbo.ActionTypes", "Name", c => c.String());
+            DropColumn("dbo.Years", "ModifiedDate");
+            DropColumn("dbo.Years", "ModifiedBy");
+            DropColumn("dbo.Years", "CreatedDate");
+            DropColumn("dbo.Years", "CreatedBy");
+            DropColumn("dbo.Units", "ModifiedDate");
+            DropColumn("dbo.Units", "ModifiedBy");
+            DropColumn("dbo.Units", "CreatedDate");
+            DropColumn("dbo.Units", "CreatedBy");
+            DropColumn("dbo.TimeTables", "ModifiedDate");
+            DropColumn("dbo.TimeTables", "ModifiedBy");
+            DropColumn("dbo.TimeTables", "CreatedDate");
+            DropColumn("dbo.TimeTables", "CreatedBy");
+            DropColumn("dbo.SVs", "ModifiedDate");
+            DropColumn("dbo.SVs", "ModifiedBy");
+            DropColumn("dbo.SVs", "CreatedDate");
+            DropColumn("dbo.SVs", "CreatedBy");
+            DropColumn("dbo.People", "ModifiedDate");
+            DropColumn("dbo.People", "ModifiedBy");
+            DropColumn("dbo.People", "CreatedDate");
+            DropColumn("dbo.People", "CreatedBy");
+            DropColumn("dbo.Consultants", "ModifiedDate");
+            DropColumn("dbo.Consultants", "ModifiedBy");
+            DropColumn("dbo.Consultants", "CreatedDate");
+            DropColumn("dbo.Consultants", "CreatedBy");
+            DropColumn("dbo.Companies", "ModifiedDate");
+            DropColumn("dbo.Companies", "ModifiedBy");
+            DropColumn("dbo.Companies", "CreatedDate");
+            DropColumn("dbo.Companies", "CreatedBy");
+            DropColumn("dbo.Applicants", "ModifiedDate");
+            DropColumn("dbo.Applicants", "ModifiedBy");
+            DropColumn("dbo.Applicants", "CreatedDate");
+            DropColumn("dbo.Applicants", "CreatedBy");
+            DropColumn("dbo.ActualWorks", "ModifiedDate");
+            DropColumn("dbo.ActualWorks", "ModifiedBy");
+            DropColumn("dbo.ActualWorks", "CreatedDate");
+            DropColumn("dbo.ActualWorks", "CreatedBy");
+            DropColumn("dbo.ActionTypes", "ModifiedDate");
+            DropColumn("dbo.ActionTypes", "ModifiedBy");
+            DropColumn("dbo.ActionTypes", "CreatedDate");
+            DropColumn("dbo.ActionTypes", "CreatedBy");
+        }
+    }
+}

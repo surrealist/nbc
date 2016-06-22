@@ -1,0 +1,175 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+
+    @RenderSection("scripts", required: false)
+    <link href="~/Content/bootsnipp_submenu.css" rel="stylesheet" />
+    <link href="~/Content/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="~/Content/buttons.dataTables.min.css" rel="stylesheet" />
+    <link href="~/Content/bootsnipp_iconmenu.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav"></ul>
+            </div>
+        </div>
+    </div>
+    <div class="navbar navbar-purple navbar-twitch" role="navigation">
+        <div class="container">
+            <div class="">
+                <ul class="nav navbar-nav">
+                    <li class="active">
+                        <a href="/Admin/HomeAdmin">
+                            <span class="small-nav" data-toggle="tooltip" data-placement="right" title="Home">
+                                <span class="glyphicon glyphicon-home"></span>
+                            </span>
+                            <span class="full-nav"> Home </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                            <span class="small-nav" data-toggle="tooltip" data-placement="right" title="ตั้งค่าระบบ">
+                                <span class="glyphicon glyphicon-cog"></span>
+                            </span>
+                            <span class="full-nav"> ตั้งค่าระบบ </span>
+                        </a>
+                    </li>
+                    <li>
+                        <div id="collapseTwo" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <table class="table">
+                                    <tr>
+                                        <td>
+                                            <a href="/Admin/Years/">
+                                                <span class="small-nav" data-toggle="tooltip" data-placement="right" title="ปีงบประมาณ">
+                                                    <span class="glyphicon glyphicon-credit-card"></span>
+                                                </span>
+                                                <span class="full-nav"> ปีงบประมาณ </span>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a href="/Admin/SVs/">
+                                                <span class="small-nav" data-toggle="tooltip" data-placement="right" title="หน่วย กสอ.">
+                                                    <span class="glyphicon glyphicon-hand-right"></span>
+                                                </span>
+                                                <span class="full-nav"> หน่วย กสอ. </span>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a href="/Admin/Units/">
+                                                <span class="small-nav" data-toggle="tooltip" data-placement="right" title="หน่วยร่วมทั้งหมด">
+                                                    <span class="glyphicon glyphicon-globe"></span>
+                                                </span>
+                                                <span class="full-nav"> หน่วยร่วมทั้งหมด </span>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a href="http://www.jquery2dotnet.com">
+                                                <span class="small-nav" data-toggle="tooltip" data-placement="right" title="ประเภทกิจกรรมทั้งหมด">
+                                                    <span class="glyphicon glyphicon-tasks"></span>
+                                                </span>
+                                                <span class="full-nav"> ประเภทกิจกรรมทั้งหมดหน่วยร่วมทั้งหมด </span>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                            <span class="small-nav" data-toggle="tooltip" data-placement="right" title="ตั้งค่าปี">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                            <span class="full-nav"> ตั้งค่าปี </span>
+                        </a>
+                    </li>
+                    <li>
+                        <div id="collapseThree" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <table class="table">
+                                    <tr>
+                                        <td>
+                                            <a href="/Admin/Years/">
+                                                <span class="small-nav" data-toggle="tooltip" data-placement="right" title="กำหนดเป้าหมาย">
+                                                    <span class="glyphicon glyphicon-record"></span>
+                                                </span>
+                                                <span class="full-nav"> กำหนดเป้าหมาย </span>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a href="http://www.jquery2dotnet.com">
+                                                <span class="small-nav" data-toggle="tooltip" data-placement="right" title="หน่วยร่วมในปี">
+                                                    <span class="glyphicon glyphicon-hand-right"></span>
+                                                </span>
+                                                <span class="full-nav"> หน่วยร่วมในปี </span>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="small-nav" data-toggle="tooltip" data-placement="right" title="จัดการผู้ใช้งาน">
+                                <span class="glyphicon glyphicon-user"></span>
+                            </span>
+                            <span class="full-nav"> จัดการผู้ใช้งาน </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="small-nav" data-toggle="tooltip" data-placement="right" title="รายงาน">
+                                <span class="glyphicon glyphicon-print"></span>
+                            </span>
+                            <span class="full-nav"> รายงาน </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="container body-content">
+                @RenderBody()
+                <hr />
+                <footer>
+                    <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+                </footer>
+            </div>
+        </div>
+    </div>
+
+
+
+</body>
+</html>

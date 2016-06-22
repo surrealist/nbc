@@ -11,6 +11,10 @@
     <AssemblyName>NBC.Models</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <SccProjectName>%24/nbc/nbc-master/NBC.Models</SccProjectName>
+    <SccLocalPath>.</SccLocalPath>
+    <SccAuxPath>http://jltfs.jlcontrol.com/tfs/defaultcollection</SccAuxPath>
+    <SccProvider>{4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}</SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,6 +34,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -41,12 +53,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActionType.cs" />
+    <Compile Include="ActivityType.cs" />
+    <Compile Include="ActualWork.cs" />
     <Compile Include="Address.cs" />
+    <Compile Include="Applicant.cs" />
+    <Compile Include="ApplicantConsult.cs" />
+    <Compile Include="Company.cs" />
+    <Compile Include="Consultant.cs" />
+    <Compile Include="File.cs" />
+    <Compile Include="Person.cs" />
     <Compile Include="Setting.cs" />
     <Compile Include="SV.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SVActivityYear.cs" />
+    <Compile Include="SVUnitYear.cs" />
+    <Compile Include="TimeTable.cs" />
     <Compile Include="Unit.cs" />
+    <Compile Include="UnitActivity.cs" />
+    <Compile Include="UnitConsult.cs" />
     <Compile Include="Year.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
