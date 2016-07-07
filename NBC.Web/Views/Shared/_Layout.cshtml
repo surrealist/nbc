@@ -26,9 +26,11 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("เกี่ยวกับโครงการ", "About", "Home")</li>
+                    <li>@Html.ActionLink("ติดต่อ", "Contact", "Home")</li>
                     <li>@Html.ActionLink("เมนูสำหรับผู้ดูแลระบบ", "Index","HomeAdmin", new { Area = "Admin" }, new { })</li>
+                    <li>@Html.ActionLink("เมนูสำหรับหน่วยประสาน", "Index", "HomeSV", new { Area = "SV" }, new { })</li>
+                    <li>@Html.ActionLink("เมนูสำหรับหน่วยร่วม", "Index", "HomeUnit", new { Area = "Unit" }, new { })</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

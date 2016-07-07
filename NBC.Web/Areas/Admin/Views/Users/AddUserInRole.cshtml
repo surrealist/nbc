@@ -1,0 +1,160 @@
+﻿@using NBC.Models
+@model IEnumerable<UserInRole>
+@*@model NBC.Models.UserInRole*@
+@{
+    ViewBag.Title = "AddUserInRole";
+}
+
+@*<h2>จัดการผู้ใช้ระบบ</h2>*@
+
+<div>
+    @{
+        var iName = string.Empty;
+        var iuserName = string.Empty;
+        var User_Id = string.Empty;
+        var UserRole_Id = string.Empty;
+        foreach (var user in Model)
+        {
+            User_Id = Convert.ToString(user.User.Id);
+            iName = user.User.FullName;
+            iuserName = user.User.UserName;
+        }
+        <div>
+            <label for="btnSaveUserInRole" id="User_Id" name="User_Id" hidden="hidden">@User_Id</label>
+            <dl class="dl-horizontal">
+
+                <dt>
+                    @Html.DisplayName("UserName : ")
+                </dt>
+
+                <dd>
+                    @Html.Label(iuserName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayName("ชื่อ - นามสกุล")
+                </dt>
+
+                <dd>
+                    @Html.Label(iName)
+                </dd>
+            </dl>
+
+
+        </div>
+
+
+    }
+
+    <div>
+        @Html.Label("กำหนดสิทธิ์การเข้าใช้")
+        <div>
+            @Html.DropDownList("Role", new SelectList(ViewBag.role, "Id", "RoleName"), new { @class = "form-control", onchange = "" })
+        </div>
+        <div>
+            <label id="UserRole_Id"></label>
+        </div>
+        <div>
+            <br />
+            @* <button id="btnSaveUserInRole" class="btn btn-default" type="submit" name="UserRole_Id" value=@UserRole_Id>เพิ่มสิทธิ์</button>*@
+            <input id="btnSaveUserInRole" name="amount" value="เพิ่มสิทธิ์" class="btn btn-default" />
+        </div>
+    </div>
+
+
+
+
+
+
+</div>
+<form action="~/Admin/Users/DeleteUserInRole" method="post">
+    <table id="UserInRoles" class="table">
+        <thead>
+            <tr>
+                <th>ลำดับที่</th>
+                <th>สิทธิ์ในการใช้งาน</th>
+                <th></th>
+
+            </tr>
+        </thead>
+        <tbody>
+
+            @{
+                int count = 1;
+                foreach (var role in Model)
+                {
+                    var id = Convert.ToString(role.Id);
+                    <tr>
+                        <td>@(count++)</td>
+                        <td class="Id" hidden="hidden">
+                            @Html.Label("Id", id)
+                        </td>
+                        <td>
+                            @Html.Label(role.Role.RoleName)
+                        </td>
+                        <td>
+                            @{
+                                if (role.Role.RoleName != "Subscribers")
+                                {
+
+                                    <button type="button" class="delete btn btn-danger btn-xs" data-userinrole-id="@role.Id">
+                                        <span class="glyphicon glyphicon-trash"></span>
+                                    </button>
+
+                                }
+                            }
+
+
+                        </td>
+                    </tr>
+                                }
+            }
+
+
+        </tbody>
+    </table>
+</form>
+<p>
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |*@
+    @Html.ActionLink("Back to List", "Index")
+</p>
+<script type="text/javascript">
+    var count = @count;
+
+    $(document).ready(function () {
+
+        $('#btnSaveUserInRole').click(function () {
+            var $label = $('label[for="btnSaveUserInRole"]');
+            var User_Id = parseInt($label.text());
+            var Role_Id = $('#Role').val();
+            var url = "@Url.Content("~/Admin/Users/SaveUserInRole")"
+                + "/" +  User_Id + "?UserRole_Id=" + Role_Id;
+            // var tr = $(this).parents("tr");
+
+            $.post(url, function(result) {
+                if (result == "OK"){
+                    location.reload();
+                }else{
+                    alert(result);
+                }
+
+            });
+
+        });
+        $('#UserInRoles').on('click', 'button.delete', function () {
+
+            var UserInRoleId = $(this).data("userinroleId");
+            var url = "@Url.Content("~/Admin/Users/DeleteUserInRole")" + "/" + UserInRoleId;
+            $.post(url, function(result) {
+                if (result == "OK"){
+                    location.reload();
+                }else{
+                    alert(result);
+                }
+
+            });
+
+
+        });
+    });
+</script>

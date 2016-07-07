@@ -4,15 +4,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NBC.Models
 {
-    public class ActionType
+    public class ActionType:IRecord
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         [StringLength(255)]
         public String Name { get; set; }
-
-
-
         [StringLength(255)]
         public String CreatedBy { get; set; }
 

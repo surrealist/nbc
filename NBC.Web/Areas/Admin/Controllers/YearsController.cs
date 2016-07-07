@@ -2,26 +2,88 @@
 using System.Web.Mvc;
 using NBC.Models;
 using NBC.Services;
+using System;
 
 namespace NBC.Web.Areas.Admin.Controllers
 {
     public class YearsController : Controller
     {
         private YearService yearService;
+        private SettingService settingService;
 
-        public YearsController(YearService yearService)
+        public YearsController(YearService yearService, SettingService settingService)
         {
             this.yearService = yearService;
+            this.settingService = settingService;            
         }
 
         // GET: Admin/Years
         public ActionResult Index()
         {
-           // Session["SELECTED"] = "2556";
-             return View(yearService.All());
+            // Session["SELECTED"] = "2556";
+            var items = yearService.All();
+            var currentYear = settingService.Current.CurrentYearId;
+            ViewBag.Y = currentYear;
+            return View(items);          
            // return View();
         }
+        public ActionResult SetCurrentYear(string year)
+        {
+            try
+            {
+               
+              settingService.ChangeCurrentYear(Convert.ToInt32(year));
+                Year thisyear = yearService.Find(Convert.ToInt32(year));
+                thisyear.IsLock = false;
+                yearService.SaveChanges();
+                return this.Json(new { success = true });
+            }
+            catch (System.Exception)
+            {
 
+                return this.Json(new { success = false });
+            }
+           
+
+            
+        }
+        public ActionResult SetIsLockYear(string year)
+        {
+            try
+            {
+                var currentYear = settingService.Current.CurrentYearId;
+                if (currentYear != Convert.ToInt32(year))
+                {
+                    Year thisyear = yearService.Find(Convert.ToInt32(year));
+                    if (thisyear.IsLock != true)
+                    {
+                        thisyear.IsLock = true;
+                    }
+                    else {
+                        thisyear.IsLock = false;
+                    }
+                   
+                    yearService.SaveChanges();
+                    return this.Json(new { success = true });
+                }
+                else {
+                    Year thisyear = yearService.Find(Convert.ToInt32(year));
+                    thisyear.IsLock = false;
+                    yearService.SaveChanges();
+                    return this.Json(new { success = false});
+                }
+               // settingService.ChangeCurrentYear(Convert.ToInt32(year));
+               
+            }
+            catch (System.Exception)
+            {
+
+                return this.Json(new { success = false });
+            }
+
+
+
+        }
         // GET: Admin/Years/Details/5
         public ActionResult Details(int? id)
         {
@@ -34,7 +96,7 @@ namespace NBC.Web.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            return View(year);
+            return PartialView(year);
         }
 
         // GET: Admin/Years/Create
@@ -72,7 +134,7 @@ namespace NBC.Web.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            return View(year);
+            return PartialView(year);
         }
 
         // POST: Admin/Years/Edit/5
@@ -80,11 +142,11 @@ namespace NBC.Web.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,StartDate,EndDate,CreatedBy,CreatedDate,ModifiedBy,ModifiedDate")] Year year)
+        public ActionResult Edit(Year year)
         {
             if (ModelState.IsValid)
             {
-               // yearService.Entry(year).State = EntityState.Modified;
+                yearService.SetModified(year);
                 yearService.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -103,7 +165,7 @@ namespace NBC.Web.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            return View(year);
+            return PartialView(year);
         }
 
         // POST: Admin/Years/Delete/5

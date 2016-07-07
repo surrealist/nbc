@@ -46,6 +46,7 @@ namespace NBC.Services
         public void ChangeCurrentYear(int year)
         {
             Current.CurrentYearId = year;
+            SaveChanges();
         }
     }
 }

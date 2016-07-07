@@ -6,13 +6,15 @@ using System.Threading.Tasks;
 
 namespace NBC.DataAccess.Bases {
 
-  public interface IRepository<T> where T : class {
-    IQueryable<T> Query(Func<T, bool> criteria);
+    public interface IRepository<T> where T : class
+    {
+        IQueryable<T> Query(Func<T, bool> criteria);
 
-    T Add(T item);
-    T Remove(T item);
-    int SaveChanges();
-  }
+        void SetModified(T item);
+        T Add(T item);
+        T Remove(T item);
+        int SaveChanges();
+    }
 
 
 }

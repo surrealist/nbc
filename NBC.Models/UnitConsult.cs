@@ -1,14 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NBC.Models
 {
-    public class UnitConsult
+    public class UnitConsult : IRecord
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-
+        public virtual Unit Unit { get; set; }
+        public virtual Consultant Consultant { get; set; }
         public Boolean IsEnable { get; set; }
 
         [StringLength(255)]

@@ -2,15 +2,19 @@
 using System.Web.Mvc;
 using NBC.Models;
 using NBC.Services;
+using System;
 
 namespace NBC.Web.Areas.Admin.Controllers
 {
     public class SVsController : Controller
     {
         private SVService svService;
-        public SVsController(SVService svService)
+        private SettingService settingService;
+
+        public SVsController(SVService svService,SettingService settingService)
         {
             this.svService = svService;
+            this.settingService = settingService;
         }
 
         // GET: Admin/SVs
@@ -26,7 +30,7 @@ namespace NBC.Web.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SV sv = svService.Find(id);
+           NBC.Models.SV sv = svService.Find(id);
             if (sv == null)
             {
                 return HttpNotFound();
@@ -45,7 +49,7 @@ namespace NBC.Web.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Alias,Tel,Email,CreatedBy,CreatedDate,ModifiedBy,ModifiedDate")] SV sv)
+        public ActionResult Create([Bind(Include = "Id,Name,Alias,Tel,Email,CreatedBy,CreatedDate,ModifiedBy,ModifiedDate")] NBC.Models.SV sv)
         {
             if (ModelState.IsValid)
             {
@@ -64,12 +68,12 @@ namespace NBC.Web.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SV sv = svService.Find(id);
+            NBC.Models.SV sv = svService.Find(id);
             if (sv == null)
             {
                 return HttpNotFound();
             }
-            return View(sv);
+            return PartialView(sv);
         }
 
         // POST: Admin/SVs/Edit/5
@@ -77,12 +81,11 @@ namespace NBC.Web.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Alias,Tel,Email,CreatedBy,CreatedDate,ModifiedBy,ModifiedDate")] SV sv)
+        public ActionResult Edit([Bind(Include = "Id,Name,Alias,Tel,Email,CreatedBy,CreatedDate,ModifiedBy,ModifiedDate")] NBC.Models.SV sv)
         {
             if (ModelState.IsValid)
             {
-                //db.Entry(unit).State = EntityState.Modified;               
-
+                svService.SetModified(sv);
                 svService.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -96,7 +99,7 @@ namespace NBC.Web.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SV sv = svService.Find(id);
+            NBC.Models.SV sv = svService.Find(id);
             if (sv == null)
             {
                 return HttpNotFound();
@@ -108,7 +111,7 @@ namespace NBC.Web.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            SV sv = svService.Find(id);
+            NBC.Models.SV sv = svService.Find(id);
             svService.Remove(sv);
             svService.SaveChanges();
             return RedirectToAction("Index");

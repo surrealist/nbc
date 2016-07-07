@@ -9,11 +9,9 @@ namespace NBC.DataAccess.Contexts {
 
         public virtual DbSet<ActivityType> ActivityTypes { get; set; }
 
-        public virtual DbSet<ActualWork> ActualWorks { get; set; }
+        public virtual DbSet<ActualWork> ActualWorks { get; set; }       
 
         public virtual DbSet<Applicant> Applicants { get; set; }
-
-        public virtual DbSet<ApplicantConsult> ApplicantConsults { get; set; }
 
         public virtual DbSet<Company> Companies { get; set; }
 
@@ -38,8 +36,18 @@ namespace NBC.DataAccess.Contexts {
         public virtual DbSet<UnitConsult> UnitConsults { get; set; }
 
         public virtual DbSet<Year> Years { get; set; }
+        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Role> Roles { get; set; }
+        public virtual DbSet<UserInRole> UserInRoles { get; set; }
 
+        public virtual DbSet<MasAmphur> MasAmphurs { get; set; }
+        public virtual DbSet<MasBusinessType> MasBusinessTypes { get; set; }
 
+        public virtual DbSet<MasCareerType> MasCareerTypes { get; set; }
+        public virtual DbSet<MasEducationType> MasEducationTypes { get; set; }
+        public virtual DbSet<MasProvince> MasProvinces { get; set; }
+        public virtual DbSet<MasSubBusinessType> MasSubBusinessTypes { get; set; }
+        public virtual DbSet<MasTambol> MasTambols { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder) {
       modelBuilder.Properties<DateTime>().Configure(c => c.HasColumnType("datetime2"));

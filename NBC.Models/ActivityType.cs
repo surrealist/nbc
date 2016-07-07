@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NBC.Models
 {
-    public class ActivityType
+    public class ActivityType:IRecord
     {
         
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

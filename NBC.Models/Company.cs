@@ -3,27 +3,24 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 namespace NBC.Models
 {
-    public class Company
+    public class Company:IRecord
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [StringLength(255)]
-        public string Name { get; set; }
-
+        public string Name { get; set; }       
         public Address Address  { get; set; }
         [StringLength(255)]
-        public String ComCode { get; set; }
-
-
-
-        [StringLength(255)]
-        public String CreatedBy { get; set; }
-
+        public string ComCode { get; set; }
+        public virtual MasSubBusinessType SubBusinessType { get; set; }
+        [StringLength(2048)]
+        public string BusinessDetail { get; set; }
+        [StringLength(255)]       
+        public string CreatedBy { get; set; }
         public DateTime CreatedDate { get; set; }
         [StringLength(255)]
-        public String ModifiedBy { get; set; }
-
+        public string ModifiedBy { get; set; }
         public DateTime ModifiedDate { get; set; }
     }
 

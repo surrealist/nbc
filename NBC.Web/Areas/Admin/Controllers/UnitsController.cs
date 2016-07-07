@@ -27,7 +27,7 @@ namespace NBC.Web.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Unit unit = unitService.Find(id);
+            NBC.Models.Unit unit = unitService.Find(id);
             if (unit == null)
             {
                 return HttpNotFound();
@@ -46,7 +46,7 @@ namespace NBC.Web.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Alias,Adress,Tel,Email,ContactPersonName,ConactPersonTel,ContactPersonEmail,HeadPersonName,HeadPersonTel,HeadPersonEmail,Notes,CreatedBy,CreatedDate,ModifiedBy,ModifiedDate")] Unit unit)
+        public ActionResult Create([Bind(Include = "Id,Name,Alias,Address,Tel,Email,ContactPersonName,ConactPersonTel,ContactPersonEmail,HeadPersonName,HeadPersonTel,HeadPersonEmail,Notes,CreatedBy,CreatedDate,ModifiedBy,ModifiedDate")] NBC.Models.Unit unit)
         {
             if (ModelState.IsValid)
             {
@@ -65,7 +65,7 @@ namespace NBC.Web.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Unit unit = unitService.Find(id);
+            NBC.Models.Unit unit = unitService.Find(id);
             if (unit == null)
             {
                 return HttpNotFound();
@@ -78,7 +78,7 @@ namespace NBC.Web.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Alias,Adress,Tel,Email,ContactPersonName,ConactPersonTel,ContactPersonEmail,HeadPersonName,HeadPersonTel,HeadPersonEmail,Notes,CreatedBy,CreatedDate,ModifiedBy,ModifiedDate")] Unit unit)
+        public ActionResult Edit([Bind(Include = "Id,Name,Alias,Address,Tel,Email,ContactPersonName,ConactPersonTel,ContactPersonEmail,HeadPersonName,HeadPersonTel,HeadPersonEmail,Notes,CreatedBy,CreatedDate,ModifiedBy,ModifiedDate")] NBC.Models.Unit unit)
         {
             if (ModelState.IsValid)
             {
@@ -97,7 +97,7 @@ namespace NBC.Web.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Unit unit = unitService.Find(id);
+            NBC.Models.Unit unit = unitService.Find(id);
             if (unit == null)
             {
                 return HttpNotFound();
@@ -110,7 +110,7 @@ namespace NBC.Web.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Unit unit = unitService.Find(id);
+            NBC.Models.Unit unit = unitService.Find(id);
             unitService.Remove(unit);
             unitService.SaveChanges();
             return RedirectToAction("Index");

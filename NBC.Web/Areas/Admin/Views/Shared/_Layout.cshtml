@@ -8,14 +8,14 @@
     @Scripts.Render("~/bundles/bootstrap")
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
-
-    @RenderSection("scripts", required: false)
     <link href="~/Content/bootsnipp_submenu.css" rel="stylesheet" />
     <link href="~/Content/jquery.dataTables.min.css" rel="stylesheet" />
     <link href="~/Content/buttons.dataTables.min.css" rel="stylesheet" />
     <link href="~/Content/bootsnipp_iconmenu.css" rel="stylesheet" />
-    <link href="~/Content/font-awesome.css" rel="stylesheet" />
+    @*<link href="~/Content/font-awesome.css" rel="stylesheet" />*@
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+  
+
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -33,7 +33,7 @@
             </div>
         </div>
     </div>
-    <div class="navbar navbar-purple navbar-twitch" role="navigation">
+    <div class="navbar navbar-inverse navbar-twitch" role="navigation">
         <div class="container">
             <div class="">
                 <ul class="nav navbar-nav">
@@ -56,55 +56,69 @@
                     <li>
                         <div id="collapseTwo" class="panel-collapse collapse">
                             <div class="panel-body">
-                                <table class="table">
-                                    <tr>
-                                        <td>
-                                            <a href="/Admin/Years/">
-                                                <span class="small-nav" data-toggle="tooltip" data-placement="right" title="ปีงบประมาณ">
-                                                    <span class="glyphicon glyphicon-credit-card"></span>
-                                                </span>
-                                                <span class="full-nav"> ปีงบประมาณ </span>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <a href="/Admin/SVs/">
-                                                <span class="small-nav" data-toggle="tooltip" data-placement="right" title="หน่วย กสอ.">
-                                                    <span class="glyphicon glyphicon-hand-right"></span>
-                                                </span>
-                                                <span class="full-nav"> หน่วย กสอ. </span>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <a href="/Admin/Units/">
-                                                <span class="small-nav" data-toggle="tooltip" data-placement="right" title="หน่วยร่วมทั้งหมด">
-                                                    <span class="glyphicon glyphicon-globe"></span>
-                                                </span>
-                                                <span class="full-nav"> หน่วยร่วมทั้งหมด </span>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <a href="http://www.jquery2dotnet.com">
-                                                <span class="small-nav" data-toggle="tooltip" data-placement="right" title="ประเภทกิจกรรมทั้งหมด">
-                                                    <span class="glyphicon glyphicon-tasks"></span>
-                                                </span>
-                                                <span class="full-nav"> ประเภทกิจกรรมทั้งหมดหน่วยร่วมทั้งหมด </span>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                </table>
+                                <div style="background-color:purple">
+                                    <table class="table">
+                                        <tr>
+                                            <td>
+                                                <a href="/Admin/Years/">
+                                                    <span class="small-nav" data-toggle="tooltip" data-placement="right" title="ปีงบประมาณ">
+                                                        <span class="fa-stack fa-lg">
+                                                            <i class="fa fa-circle-thin fa-stack-2x"></i>
+                                                            <i class="fa fa-tachometer fa-stack-1x fa-inverse"></i>
+                                                        </span>
+                                                    </span>
+                                                    <span class="full-nav"> ปีงบประมาณ </span>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a href="/Admin/SVs/">
+                                                    <span class="small-nav" data-toggle="tooltip" data-placement="right" title="หน่วย กสอ.">
+                                                        <span class="fa-stack fa-lg">
+                                                            <i class="fa fa-circle-thin fa-stack-2x"></i>
+                                                            <i class="fa fa-cog fa-stack-1x fa-inverse"></i>
+                                                        </span>
+                                                    </span>
+                                                    <span class="full-nav"> หน่วย กสอ. </span>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a href="/Admin/Units/">
+                                                    <span class="small-nav" data-toggle="tooltip" data-placement="right" title="หน่วยร่วมทั้งหมด">
+                                                        <span class="fa-stack fa-lg">
+                                                            <i class="fa fa-circle-thin fa-stack-2x"></i>
+                                                            <i class="fa fa-cogs fa-stack-1x fa-inverse"></i>
+                                                        </span>
+                                                    </span>
+                                                    <span class="full-nav"> หน่วยร่วมทั้งหมด </span>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a href="/Admin/ActivityTypes/">
+                                                    <span class="small-nav" data-toggle="tooltip" data-placement="right" title="ประเภทกิจกรรมทั้งหมด">
+                                                        <span class="fa-stack fa-lg">
+                                                            <i class="fa fa-circle-thin fa-stack-2x"></i>
+                                                            <i class="fa fa-sign-in fa-stack-1x fa-inverse"></i>
+                                                        </span>
+                                                    </span>
+                                                    <span class="full-nav"> ประเภทกิจกรรมทั้งหมดหน่วยร่วมทั้งหมด </span>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </li>
                     <li>
                         <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
                             <span class="small-nav" data-toggle="tooltip" data-placement="right" title="ตั้งค่าปี">
-                                <span class="glyphicon glyphicon-calendar"></span>
+                                <span class="fa fa-calendar"></span>
                             </span>
                             <span class="full-nav"> ตั้งค่าปี </span>
                         </a>
@@ -112,33 +126,41 @@
                     <li>
                         <div id="collapseThree" class="panel-collapse collapse">
                             <div class="panel-body">
-                                <table class="table">
-                                    <tr>
-                                        <td>
-                                            <a href="/Admin/Years/">
-                                                <span class="small-nav" data-toggle="tooltip" data-placement="right" title="กำหนดเป้าหมาย">
-                                                    <span class="glyphicon glyphicon-record"></span>
-                                                </span>
-                                                <span class="full-nav"> กำหนดเป้าหมาย </span>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <a href="http://www.jquery2dotnet.com">
-                                                <span class="small-nav" data-toggle="tooltip" data-placement="right" title="หน่วยร่วมในปี">
-                                                    <span class="glyphicon glyphicon-hand-right"></span>
-                                                </span>
-                                                <span class="full-nav"> หน่วยร่วมในปี </span>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                </table>
+                                <div style="background-color:purple">
+                                    <table class="table">
+                                        <tr>
+                                            <td>
+                                                <a href="/Admin/SVActivityYears/">
+                                                    <span class="small-nav" data-toggle="tooltip" data-placement="right" title="กำหนดเป้าหมาย">
+                                                        <span class="fa-stack fa-lg">
+                                                            <i class="fa fa-circle-thin fa-stack-2x"></i>
+                                                            <i class="fa fa-flag-o fa-stack-1x fa-inverse"></i>
+                                                        </span>
+                                                    </span>
+                                                    <span class="full-nav"> กำหนดเป้าหมาย </span>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a href="/Admin/SVUnitYears/">
+                                                    <span class="small-nav" data-toggle="tooltip" data-placement="right" title="หน่วยร่วมในปี">
+                                                        <span class="fa-stack fa-lg">
+                                                            <i class="fa fa-circle-thin fa-stack-2x"></i>
+                                                            <i class="fa fa-calendar-o fa-stack-1x fa-inverse"></i>
+                                                        </span>
+                                                    </span>
+                                                    <span class="full-nav"> หน่วยร่วมในปี </span>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="/Admin/Users/">
                             <span class="small-nav" data-toggle="tooltip" data-placement="right" title="จัดการผู้ใช้งาน">
                                 <span class="glyphicon glyphicon-user"></span>
                             </span>
@@ -161,14 +183,15 @@
         <div class="row">
             <div class="container body-content">
                 @RenderBody()
-                <hr />
+                @*<hr />
                 <footer>
                     <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-                </footer>
+                </footer>*@
             </div>
         </div>
     </div>
-
+   
+    @RenderSection("scripts", required: false)
 
 
 </body>

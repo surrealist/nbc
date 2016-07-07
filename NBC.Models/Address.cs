@@ -26,33 +26,23 @@ namespace NBC.Models {
         [StringLength(255)]
         public String Road { get; set; }
 
-        public int Tambol_Id { get; set; }
+        public int? Tambol_Id { get; set; }
         [StringLength(255)]
-        public String Tambol { get; set; }
+        public String TambolName { get; set; }
 
-        public int Amphoe_Id { get; set; }
+        public int? Amphur_Id { get; set; }
 
         [StringLength(255)]
-        public String Amphoe { get; set; }
+        public String AmphurName { get; set; }
 
-        public int ProvinceCode { get; set; }
+        public int? Province_Id { get; set; }
+        [StringLength(255)]
+        public String ProvinceName { get; set; }
+
         [StringLength(5)]
         public String ZipCode { get; set; }
-
-        public float Latitude { get; set; }
-
-        public float Longtitude { get; set; }
-
-
-
-        [StringLength(255)]
-        public String CreatedBy { get; set; }
-
-        public DateTime CreatedDate { get; set; }
-        [StringLength(255)]
-        public String ModifiedBy { get; set; }
-
-        public DateTime ModifiedDate { get; set; }
-
+        public float? Latitude { get; set; }
+        public float? Longtitude { get; set; }
+     
     }
 }

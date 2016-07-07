@@ -64,65 +64,13 @@
     <Compile Include="Contexts\AppDbContext.cs" />
     <Compile Include="Bases\IRepository_T.cs" />
     <Compile Include="Contexts\FakeAppDbContext.cs" />
-    <Compile Include="Migrations\201606030413287_InitialCreate.cs" />
-    <Compile Include="Migrations\201606030413287_InitialCreate.Designer.cs">
-      <DependentUpon>201606030413287_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201607050550212_jengReinitial.cs" />
+    <Compile Include="Migrations\201607050550212_jengReinitial.Designer.cs">
+      <DependentUpon>201607050550212_jengReinitial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201606081214379_Units_AddField.cs" />
-    <Compile Include="Migrations\201606081214379_Units_AddField.Designer.cs">
-      <DependentUpon>201606081214379_Units_AddField.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201606081226305_Unit_AddClass.cs" />
-    <Compile Include="Migrations\201606081226305_Unit_AddClass.Designer.cs">
-      <DependentUpon>201606081226305_Unit_AddClass.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201606110314543_Setting_AddAutoID.cs" />
-    <Compile Include="Migrations\201606110314543_Setting_AddAutoID.Designer.cs">
-      <DependentUpon>201606110314543_Setting_AddAutoID.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201606120200392_modVer1.cs" />
-    <Compile Include="Migrations\201606120200392_modVer1.Designer.cs">
-      <DependentUpon>201606120200392_modVer1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201606131029570_modV3.cs" />
-    <Compile Include="Migrations\201606131029570_modV3.Designer.cs">
-      <DependentUpon>201606131029570_modV3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201606140446483_addAddress.cs" />
-    <Compile Include="Migrations\201606140446483_addAddress.Designer.cs">
-      <DependentUpon>201606140446483_addAddress.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201606160408233_addCreate-Modified-history.cs" />
-    <Compile Include="Migrations\201606160408233_addCreate-Modified-history.Designer.cs">
-      <DependentUpon>201606160408233_addCreate-Modified-history.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201606180306383_JengModified.cs" />
-    <Compile Include="Migrations\201606180306383_JengModified.Designer.cs">
-      <DependentUpon>201606180306383_JengModified.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201606200322296_jengMod.cs" />
-    <Compile Include="Migrations\201606200322296_jengMod.Designer.cs">
-      <DependentUpon>201606200322296_jengMod.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201606200830237_Change-Model.cs" />
-    <Compile Include="Migrations\201606200830237_Change-Model.Designer.cs">
-      <DependentUpon>201606200830237_Change-Model.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201606200835442_Update-Model.cs" />
-    <Compile Include="Migrations\201606200835442_Update-Model.Designer.cs">
-      <DependentUpon>201606200835442_Update-Model.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201606200846161_Update-Model2.cs" />
-    <Compile Include="Migrations\201606200846161_Update-Model2.Designer.cs">
-      <DependentUpon>201606200846161_Update-Model2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201606200920505_YingMod.cs" />
-    <Compile Include="Migrations\201606200920505_YingMod.Designer.cs">
-      <DependentUpon>201606200920505_YingMod.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201606220059364_jengMod1.cs" />
-    <Compile Include="Migrations\201606220059364_jengMod1.Designer.cs">
-      <DependentUpon>201606220059364_jengMod1.cs</DependentUpon>
+    <Compile Include="Migrations\201607070521051_jengMod.cs" />
+    <Compile Include="Migrations\201607070521051_jengMod.Designer.cs">
+      <DependentUpon>201607070521051_jengMod.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -130,10 +78,16 @@
     <Compile Include="Repositories\ActionTypeRepository.cs" />
     <Compile Include="Repositories\ActivityTypeRepository.cs" />
     <Compile Include="Repositories\ActualWorkRepository.cs" />
-    <Compile Include="Repositories\ApplicantConsultRepository.cs" />
     <Compile Include="Repositories\ApplicantRepository.cs" />
     <Compile Include="Repositories\CompanyRepository.cs" />
     <Compile Include="Repositories\ConsultantRepository.cs" />
+    <Compile Include="Repositories\MasAmphurRepository.cs" />
+    <Compile Include="Repositories\MasBusinessTypeRepository.cs" />
+    <Compile Include="Repositories\MasCareerTypeRepository.cs" />
+    <Compile Include="Repositories\MasEducationTypeRepository.cs" />
+    <Compile Include="Repositories\MasProvinceRepository.cs" />
+    <Compile Include="Repositories\MasSubBusinessTypeRepository.cs" />
+    <Compile Include="Repositories\MasTambolRepository.cs" />
     <Compile Include="Repositories\PersonRepository.cs" />
     <Compile Include="Repositories\SettingRepository.cs" />
     <Compile Include="Repositories\SVActivityYearRepository.cs" />
@@ -143,6 +97,9 @@
     <Compile Include="Repositories\UnitActivityRepository.cs" />
     <Compile Include="Repositories\UnitConsultRepository.cs" />
     <Compile Include="Repositories\UnitRepository.cs" />
+    <Compile Include="Repositories\UserInRoleRepository.cs" />
+    <Compile Include="Repositories\UserRepository.cs" />
+    <Compile Include="Repositories\RoleRepository.cs" />
     <Compile Include="Repositories\YearRepository.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -156,50 +113,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201606030413287_InitialCreate.resx">
-      <DependentUpon>201606030413287_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201607050550212_jengReinitial.resx">
+      <DependentUpon>201607050550212_jengReinitial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201606081214379_Units_AddField.resx">
-      <DependentUpon>201606081214379_Units_AddField.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201606081226305_Unit_AddClass.resx">
-      <DependentUpon>201606081226305_Unit_AddClass.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201606110314543_Setting_AddAutoID.resx">
-      <DependentUpon>201606110314543_Setting_AddAutoID.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201606120200392_modVer1.resx">
-      <DependentUpon>201606120200392_modVer1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201606131029570_modV3.resx">
-      <DependentUpon>201606131029570_modV3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201606140446483_addAddress.resx">
-      <DependentUpon>201606140446483_addAddress.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201606160408233_addCreate-Modified-history.resx">
-      <DependentUpon>201606160408233_addCreate-Modified-history.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201606180306383_JengModified.resx">
-      <DependentUpon>201606180306383_JengModified.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201606200322296_jengMod.resx">
-      <DependentUpon>201606200322296_jengMod.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201606200830237_Change-Model.resx">
-      <DependentUpon>201606200830237_Change-Model.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201606200835442_Update-Model.resx">
-      <DependentUpon>201606200835442_Update-Model.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201606200846161_Update-Model2.resx">
-      <DependentUpon>201606200846161_Update-Model2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201606200920505_YingMod.resx">
-      <DependentUpon>201606200920505_YingMod.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201606220059364_jengMod1.resx">
-      <DependentUpon>201606220059364_jengMod1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201607070521051_jengMod.resx">
+      <DependentUpon>201607070521051_jengMod.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

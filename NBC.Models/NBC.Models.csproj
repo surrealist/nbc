@@ -58,10 +58,20 @@
     <Compile Include="ActualWork.cs" />
     <Compile Include="Address.cs" />
     <Compile Include="Applicant.cs" />
-    <Compile Include="ApplicantConsult.cs" />
+    <Compile Include="ApplicantConsultant.cs" />
+    <Compile Include="ApplicantPerson.cs" />
     <Compile Include="Company.cs" />
     <Compile Include="Consultant.cs" />
-    <Compile Include="File.cs" />
+    <Compile Include="FileAction.cs" />
+    <Compile Include="FileDaily.cs" />
+    <Compile Include="IRecord.cs" />
+    <Compile Include="MasAmphur.cs" />
+    <Compile Include="MasBusinessType.cs" />
+    <Compile Include="MasCareerType.cs" />
+    <Compile Include="MasEducationType.cs" />
+    <Compile Include="MasProvince.cs" />
+    <Compile Include="MasSubBusinessType.cs" />
+    <Compile Include="MasTambol.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="Setting.cs" />
     <Compile Include="SV.cs" />
@@ -72,6 +82,10 @@
     <Compile Include="Unit.cs" />
     <Compile Include="UnitActivity.cs" />
     <Compile Include="UnitConsult.cs" />
+    <Compile Include="User.cs" />
+    <Compile Include="UserInRole.cs" />
+    <Compile Include="Role.cs" />
+    <Compile Include="WorkPlace.cs" />
     <Compile Include="Year.cs" />
   </ItemGroup>
   <ItemGroup>

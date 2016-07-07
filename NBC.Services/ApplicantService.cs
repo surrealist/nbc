@@ -25,23 +25,9 @@ namespace NBC.Services
 
         public override Applicant Add(Applicant item)
         {
-
-            AppDbContext Dbc = new AppDbContext();
-            UnitActivity unit = (from t in Dbc.UnitActivities where t.Name == item.UnitActivity.Name select t).SingleOrDefault();
-            Person person = (from t in Dbc.Persons where t.CitizenId == item.Person.CitizenId select t).SingleOrDefault();
-            //Not sure about this
-            if ((item.Person.CitizenId != null) && (item.UnitActivity.Name != null) )
-            {
-                item.CreatedDate = DateTime.Now;
-                item.ModifiedDate = DateTime.Now;
-                base.Add(item);
-                base.SaveChanges();
-                return item;
-            }
-            else
-            {
-                throw new Exception("this Unit is already exist");
-            }
+            base.Add(item);
+            base.SaveChanges();
+            return item;
         }
 
         public override Applicant Remove(Applicant item)

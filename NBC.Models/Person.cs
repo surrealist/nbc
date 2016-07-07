@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NBC.Models
 {
-    public class Person
+    public class Person : IRecord
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
@@ -14,27 +14,20 @@ namespace NBC.Models
         public  String FirstName { get; set; }
         [StringLength(255)]
         public String SurName { get; set; }
-
-        public int? CitizenId { get; set; }
-
+        [StringLength(13)]
+        public String CitizenId { get; set; }     
         public Address Address { get; set; }
         [StringLength(255)]
         public String Mobile { get; set; }
-
         [StringLength(255)]
-        public String Email { get; set; }
-
-        public Boolean isMainPerson { get; set; }
-
+        [EmailAddress]
+        public String Email { get; set; }    
 
         [StringLength(255)]
         public String CreatedBy { get; set; }
-
         public DateTime CreatedDate { get; set; }
         [StringLength(255)]
         public String ModifiedBy { get; set; }
-
         public DateTime ModifiedDate { get; set; }
-
     }
 }

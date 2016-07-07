@@ -12,7 +12,7 @@
     @*<hr />*@
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.Label("ชื่อปีงบประมาณ")
         </dt>
 
         <dd>
@@ -20,23 +20,25 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.StartDate)
+            @Html.Label("วันที่เริ่มปีงบประมาณ")
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.StartDate)
+           
+            @Html.ValueFor(model => model.StartDate, "{0:dd/MM/yyyy}")
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.EndDate)
+            @Html.Label("วันที่สิ้นสุดปีงบประมาณ")
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.EndDate)
+          
+            @Html.ValueFor(model => model.EndDate, "{0:dd/MM/yyyy}")
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.CreatedBy)
+            @Html.Label("สร้างโดย")
         </dt>
 
         <dd>
@@ -44,15 +46,16 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.CreatedDate)
+            @Html.Label("วันที่บันทึก")
+            
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.CreatedDate)
+           @Html.ValueFor(model => model.CreatedDate, "{0:dd/MM/yyyy}")
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ModifiedBy)
+            @Html.Label("ปรับปรุงโดย")
         </dt>
 
         <dd>
@@ -60,16 +63,16 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ModifiedDate)
-        </dt>
+            @Html.Label("วันที่ปรับปรุง")
+                    </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ModifiedDate)
+           @Html.ValueFor(model => model.ModifiedDate, "{0:dd/MM/yyyy}")
         </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |*@
     @Html.ActionLink("Back to List", "Index")
 </p>
