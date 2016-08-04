@@ -10,16 +10,17 @@
 <body ng-app="myApp">
     <div class="container">
         <div class="row">
-            <h2 class="text-left">หน่วยร่วม</h2>
+            <h2 class="text-left">หน่วยร่วม.</h2>
             <p>
-                @Html.ActionLink("เพิ่มหน่วยใหม่", "Create")
+                @*@Html.ActionLink("เพิ่มหน่วยใหม่", "Create")*@
+                <button class="openCreateBox btn btn-primary btn-xs" data-title="create" data-toggle="modal" data-target="#create">เพิ่มหน่วยร่วม</button>
             </p>
         </div>
 
         <div class="row">
 
             <div class="col-md-12">
-                <table id="tblUnit" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                <table id="tblUnits" class="table table-striped table-bordered" cellspacing="0" width="100%">
                     <thead>
                         <tr>
                             <th>
@@ -56,7 +57,7 @@
                                 E-mail หัวหน้าโครงการ
                             </th>
                             <th>
-                                Notes
+                               หมายเหตุ
                             </th>
                             <th></th>
                         </tr>
@@ -73,8 +74,34 @@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Alias)
                                 </td>
-                                <td >
-                                   @* @Html.DisplayFor(modelItem => item.Adress)*@
+                                <td>
+                                    @{
+                                        var No = item.Adress.No;
+                                        var Moo = item.Adress.Moo;
+                                        var MooBan = item.Adress.MooBan;
+                                        var AmphurName = item.Adress.AmphurName;
+                                        var Building = item.Adress.Building;
+                                        var Floor = item.Adress.Floor;
+                                        var ProvinceName = item.Adress.ProvinceName;
+                                        var Road = item.Adress.Road;
+                                        var Soi = item.Adress.Soi;
+                                        var TambolName = item.Adress.TambolName;
+                                        var ZipCode = item.Adress.ZipCode;
+                                        var address = "";
+                                        if (No != null) { address = "บ้านเลขที่ " + No; }
+                                        if (Moo != null) { address = address + " หมู่ที่ " + Moo; }
+                                        if (Floor != null) { address = address + " ชั้นที่ " + Floor; }
+                                        if (Building != null) { address = address + " ตึก/อาคาร " + Building; }
+                                        if (MooBan != null) { address = address + " หมู่บ้าน " + MooBan; }
+                                        if (Soi != null) { address = address + " ซอย " + Soi; }
+                                        if (Road != null) { address = address + " ถนน " + Road; }
+                                        if (TambolName != null) { address = address + " ตำบล/แขวง " + TambolName; }
+                                        if (AmphurName != null) { address = address + " อำเภอ/เขต " + AmphurName; }
+                                        if (ProvinceName != null) { address = address + " จังหวัด " + ProvinceName; }
+                                        if (ZipCode != null) { address = address + " รหัสไปรษณีย์ " + ZipCode; }
+
+                                    }
+                                    @Html.Label(address)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Tel)
@@ -104,69 +131,91 @@
                                     @Html.DisplayFor(modelItem => item.Notes)
                                 </td>
                                 <td>
-                                    <p data-placement="top" data-toggle="tooltip" title="แก้ไข"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button></p>
-                                    <p data-placement="top" data-toggle="tooltip" title="ลบ"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete"><span class="glyphicon glyphicon-trash"></span></button></p>
-                                    <p data-placement="top" data-toggle="tooltip" title="ดูข้อมูล"><button class="btn btn-info btn-xs" data-title="Delete" data-toggle="modal" data-target="#detail"><span class="glyphicon glyphicon-user"></span></button></p>
+                                    <p data-placement="top" data-toggle="tooltip" title="แก้ไข"> <button class="openEditBox btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-user-id="@item.Id" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button></p>
+                                    <p data-placement="top" data-toggle="tooltip" title="ดูข้อมูล"><button class="openDetailBox btn btn-info btn-xs" data-title="Detail" data-toggle="modal" data-user-id="@item.Id" data-target="#detail"><span class="glyphicon glyphicon-user"></span></button></p>
+                                    <p data-placement="top" data-toggle="tooltip" title="ลบ"><button class="openDeleteBox btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-user-id="@item.Id" data-target="#delete"><span class="glyphicon glyphicon-trash"></span></button></p>
                                 </td>
                             </tr>
-                        }
+                                        }
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-
-    <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+    <div class="modal fade" tabindex="-1" role="dialog" id="edit">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h4 class="modal-title custom_align" id="Heading">แก้ไขข้อมูลหน่วยร่วม</h4>
+                    @* <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>*@
+                    <h4 class="modal-title">แก้ไขข้อมูล</h4>
                 </div>
                 <div class="modal-body">
-                    @{
-                        foreach (var it in Model)
-                        {
-                            @Html.Partial("Edit", it)
-                        }
-
-                    }
-
-
+                    <p>One fine body&hellip;</p>
                 </div>
-                <div class="modal-footer ">
+                @*<div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>*@
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 
-                </div>
-            </div>
-            <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-    </div>
-    <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="detail">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h4 class="modal-title custom_align" id="Heading">ข้อความแจ้งเตือน</h4>
+                    @* <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>*@
+                    <h4 class="modal-title">ข้อมูลหน่วยร่วม</h4>
                 </div>
                 <div class="modal-body">
-
-                    <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span>คุณต้องการที่จะลบข้อมูลนี้ใช่หรือไม่</div>
-
+                    <p>One fine body&hellip;</p>
                 </div>
-                <div class="modal-footer ">
-                    <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-ok-sign"></span> ใช่ ต้องการลบ</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> ไม่ใช่</button>
+                @*<div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>*@
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="delete">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    @*<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>*@
+                    <h4 class="modal-title">ลบข้อมูล</h4>
                 </div>
-            </div>
-            <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-    </div>
-
+                <div class="modal-body">
+                    <p>One fine body&hellip;</p>
+                </div>
+                @*<div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>*@
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="create">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    @* <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>*@
+                    <h4 class="modal-title">เพิ่มหน่วยร่วม</h4>
+                </div>
+                <div class="modal-body">
+                    <p>One fine body&hellip;</p>
+                </div>
+                @*<div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>*@
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 </body>
+
 <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-1.12.3.js "></script>
-<script src="~/Scripts/jquerysession.js"></script>
+
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css "></script>
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.2.1/js/dataTables.buttons.min.js"></script>
@@ -181,13 +230,10 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
 
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.2.1/css/buttons.dataTables.min.css">
-
-
 <script language="javascript">
-
     $(document).ready(function () {
 
-        var table = $('#tblUnit').DataTable({
+        var table = $('#tblUnits').DataTable({
 
             dom: 'Bfrtip',
 
@@ -200,37 +246,58 @@
 
         });
 
-        $('#tblSV tbody').on('click', 'tr', function () {
-            var data = table.row(this).data();
-            $.session.set('SELECTED', "")
-            alert('You clicked on ' + data[0] + '\'s row');
+    });
+    $('.openEditBox').on('click', function (event) {
+        var button = $(this) // Button that triggered the modal
+        var userId = button.data('userId') // Extract info from data-* attributes
+        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
 
-            $.session.set('SELECTED', data[0])
+        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        var modal = $("#edit")
+        var u = userId
+        var url = "/Admin/Units/Edit/" + u
+        $.get(url).success(function (html) {
+            modal.find(".modal-body").html(html);
+            modal.modal("show");
+        })
+    });
+    $('.openDetailBox').on('click', function (event) {
+        var button = $(this) // Button that triggered the modal
+        var userId = button.data('userId') // Extract info from data-* attributes
+        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
 
-            $.post('/Admin/SVs/SetVariable',
-                { key: "SELECTED", value: data[0] }, function (data) {
-                    alert("Success " + data.success);
-                });
-            var elm = '<div class="modal fade" id="detail" tabindex="-1" role="dialog" aria-labelledby="detail" aria-hidden="true">' +
-                      '<div class="modal-dialog">' +
-                      '<div class="modal-content">' +
-                      '<div class="modal-header">' +
-                      '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>' +
-                     '<h4 class="modal-title custom_align" id="Heading">ข้อมูลหน่วย กสอ.</h4>' +
-                     '</div>' +
-                     '<div class="modal-body">' +
+        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        var modal = $("#detail")
+        var u = userId
+        var url = "/Admin/Units/Details/" + u;
+        $.get(url).success(function (html) {
+            modal.find(".modal-body").html(html);
+            modal.modal("show");
+        })
+    });
+    $('.openDeleteBox').on('click', function (event) {
+        var button = $(this) // Button that triggered the modal
+        var userId = button.data('userId') // Extract info from data-* attributes
+        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
 
+        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        var modal = $("#delete")
+        var u = userId
 
-                     '</div>' +
-                     '</div>' +
-                     '</div>' +
-                     '</div>';
-            $(elm).appendTo(this.container);
+        var url = "/Admin/Units/Delete/" + u;
+        $.get(url).success(function (html) {
+            modal.find(".modal-body").html(html);
+            modal.modal("show");
+        })
+    });
+    $('.openCreateBox').on('click', function (event) {
 
-        });
-
-
-
+        var modal = $("#create")
+        var url = "/Admin/Units/Create";
+        $.get(url).success(function (html) {
+            modal.find(".modal-body").html(html);
+            modal.modal("show");
+        })
     });
 
 </script>

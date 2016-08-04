@@ -9,23 +9,205 @@ using System.Web.Mvc;
 using NBC.DataAccess.Contexts;
 using NBC.Models;
 using NBC.Services;
+using NBC.Web.Areas.Admin.ViewModels;
 
 namespace NBC.Web.Areas.Admin.Controllers
 {
     public class SVActivityYearsController : Controller
     {
-        private SVActivityYearService svActivityYearService;
+        private SVActivityYearService svActivityYearService;       
+        private YearService YearService;
+        private SVService SVService;
+        private ActivityTypeService ActivityTypeService;
+        private SettingService settingService;
 
-
-        public SVActivityYearsController(SVActivityYearService service)
+        public SVActivityYearsController(SVActivityYearService service, YearService yearService, SVService svService, ActivityTypeService activityTypeService, SettingService settingService)
         {
             this.svActivityYearService = service;
+            this.YearService = yearService;
+            this.SVService = svService;
+            this.ActivityTypeService = activityTypeService;
+            this.settingService = settingService;
         }
 
         // GET: Admin/SVActivityYears
+       
         public ActionResult Index()
         {
-            return View(svActivityYearService.All());
+            var currentYear = settingService.Current.CurrentYearId;
+            var year = currentYear;
+            ViewBag.Y = currentYear;
+            //if (id != null) {
+            //    year = id;
+            //}
+            var vm = new List<SVActivityYearsIndexVM>();
+          
+           // 
+            var x = 0;
+            foreach (var item in svActivityYearService.getSVActivityYearByYear(Convert.ToInt32(year)))
+            {
+
+                //todo 
+                
+                var thisVM = new SVActivityYearsIndexVM();
+                if (vm.Count > 0)
+                {
+                    
+                    foreach (var vmItem in vm.ToList()) {
+                       
+                        if (vmItem.SV_ID == item.SV.Id)
+                        {
+                            if (item.ActitivityType_Id == "NBC")
+                            {
+                                vmItem.NBCTarget = item.Target;
+                            }
+                            else if (item.ActitivityType_Id == "INCU")
+                            {
+                                vmItem.INCUTarget = item.Target;
+                            }
+                            x = item.SV.Id;
+                        }
+                        else {
+                            if (x != item.SV.Id)
+                            {
+                                thisVM.SV_ID = item.SV.Id;
+                                thisVM.SVName = item.SV.Name;
+                                // thisVM.INCUSVACT_ID = item.ActitivityType_Id;
+                                if (item.ActitivityType_Id == "NBC")
+                                {
+                                    thisVM.NBCTarget = item.Target;
+                                }
+                                else if (item.ActitivityType_Id == "INCU")
+                                {
+                                    thisVM.INCUTarget = item.Target;
+                                }
+
+                                vm.Add(thisVM);
+                                x = item.SV.Id;
+
+                            }
+                           
+                            
+                        }
+
+                    }
+
+                }
+                else {
+                  
+
+                    thisVM.SV_ID = item.SV.Id;
+                    thisVM.SVName = item.SV.Name;
+                    // thisVM.INCUSVACT_ID = item.ActitivityType_Id;
+                    if (item.ActitivityType_Id == "NBC")
+                    {
+                        thisVM.NBCTarget = item.Target;
+                    }
+                    else if (item.ActitivityType_Id == "INCU")
+                    {
+                        thisVM.INCUTarget = item.Target;
+                    }
+
+                    vm.Add(thisVM);
+                }             
+               
+
+
+
+
+            }
+            return View(vm);
+        }
+        [HttpPost]
+        public ActionResult Index(int? id)
+        {
+            var currentYear = settingService.Current.CurrentYearId;
+            var year = currentYear;
+            ViewBag.Y = currentYear;
+            if (id != null)
+            {
+                year = id;
+            }
+            var vm = new List<SVActivityYearsIndexVM>();
+
+            // 
+            var x = 0;
+            foreach (var item in svActivityYearService.getSVActivityYearByYear(Convert.ToInt32(year)))
+            {
+
+                //todo 
+
+                var thisVM = new SVActivityYearsIndexVM();
+                if (vm.Count > 0)
+                {
+
+                    foreach (var vmItem in vm.ToList())
+                    {
+
+                        if (vmItem.SV_ID == item.SV.Id)
+                        {
+                            if (item.ActitivityType_Id == "NBC")
+                            {
+                                vmItem.NBCTarget = item.Target;
+                            }
+                            else if (item.ActitivityType_Id == "INCU")
+                            {
+                                vmItem.INCUTarget = item.Target;
+                            }
+                            x = item.SV.Id;
+                        }
+                        else
+                        {
+                            if (x != item.SV.Id)
+                            {
+                                thisVM.SV_ID = item.SV.Id;
+                                thisVM.SVName = item.SV.Name;
+                                // thisVM.INCUSVACT_ID = item.ActitivityType_Id;
+                                if (item.ActitivityType_Id == "NBC")
+                                {
+                                    thisVM.NBCTarget = item.Target;
+                                }
+                                else if (item.ActitivityType_Id == "INCU")
+                                {
+                                    thisVM.INCUTarget = item.Target;
+                                }
+
+                                vm.Add(thisVM);
+                                x = item.SV.Id;
+
+                            }
+
+
+                        }
+
+                    }
+
+                }
+                else
+                {
+
+
+                    thisVM.SV_ID = item.SV.Id;
+                    thisVM.SVName = item.SV.Name;
+                    // thisVM.INCUSVACT_ID = item.ActitivityType_Id;
+                    if (item.ActitivityType_Id == "NBC")
+                    {
+                        thisVM.NBCTarget = item.Target;
+                    }
+                    else if (item.ActitivityType_Id == "INCU")
+                    {
+                        thisVM.INCUTarget = item.Target;
+                    }
+
+                    vm.Add(thisVM);
+                }
+
+
+
+
+
+            }
+            return Json(vm, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Admin/SVActivityYears/Details/5
@@ -46,6 +228,7 @@ namespace NBC.Web.Areas.Admin.Controllers
         // GET: Admin/SVActivityYears/Create
         public ActionResult Create()
         {
+            
             return View();
         }
 
@@ -54,16 +237,53 @@ namespace NBC.Web.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Target,CreatedBy,CreatedDate,ModifiedBy,ModifiedDate")] SVActivityYear sVActivityYear)
+        public ActionResult Create(NBC.Web.Areas.Admin.ViewModels.SVActivityYearsIndexVM sVActivityYear)
         {
-            if (ModelState.IsValid)
+            try
             {
-                svActivityYearService.Add(sVActivityYear);
-                svActivityYearService.SaveChanges();
+               
+                
+                //for (int i = 1; i <= ActivityTypeService.All().Count(); i++) {
+
+                //}
+                foreach (var item in ActivityTypeService.All().ToList()) {
+                    SVActivityYear thisSVAc = new SVActivityYear();
+                    NBC.Models.ActivityType ac=null;
+                    if (item.Id == "NBC") {
+                        thisSVAc.Target = sVActivityYear.NBCTarget;
+                        ac = ActivityTypeService.Find("NBC");
+                        thisSVAc.ActitivityType_Id = "NBC";
+                    }
+
+                    if (item.Id == "INCU") {
+                        thisSVAc.Target = sVActivityYear.INCUTarget;
+                         ac = ActivityTypeService.Find("INCU");
+                        thisSVAc.ActitivityType_Id = "INCU";
+                    }
+
+                    NBC.Models.SV sv = SVService.Find(sVActivityYear.SV_ID);                   
+                    NBC.Models.Year year = YearService.Find(sVActivityYear.Year_ID);
+
+                    thisSVAc.Year_Id = sVActivityYear.Year_ID;                    
+                    thisSVAc.SV = sv;
+                    thisSVAc.Year = year;
+                    thisSVAc.ActitivityType = ac;
+
+                    svActivityYearService.Add(thisSVAc);
+                    svActivityYearService.SaveChanges();
+                }
+               
                 return RedirectToAction("Index");
             }
+            catch 
+            {
+
+               
+            }
+
 
             return View(sVActivityYear);
+
         }
 
         // GET: Admin/SVActivityYears/Edit/5
@@ -85,16 +305,34 @@ namespace NBC.Web.Areas.Admin.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Target,CreatedBy,CreatedDate,ModifiedBy,ModifiedDate")] SVActivityYear sVActivityYear)
+        //[ValidateAntiForgeryToken]
+        public ActionResult EditTarget(int Id, string NBCTarget, string INCUTarge, string Year)
         {
-            if (ModelState.IsValid)
+            var sVYear = svActivityYearService.getSVActivityYearBySVid(Id,Convert.ToInt32(Year));
+
+            try
             {
-                //db.Entry(sVActivityYear).State = EntityState.Modified;
-                svActivityYearService.SaveChanges();
-                return RedirectToAction("Index");
+                foreach (var item in sVYear) {
+                    SVActivityYear thisSVAc = svActivityYearService.Find(item.Id);
+                    if (item.ActitivityType_Id == "NBC") { thisSVAc.Target = Convert.ToInt32( NBCTarget); }
+                    if (item.ActitivityType_Id == "INCU") { thisSVAc.Target = Convert.ToInt32( INCUTarge); }
+                    svActivityYearService.SetModified(thisSVAc);
+                    svActivityYearService.SaveChanges();
+
+                }
+                return Content("OK");
+                // return RedirectToAction("Index");
             }
-            return View(sVActivityYear);
+            catch (Exception)
+            {
+                return Content("NotOK");
+
+                //return RedirectToAction("Index");
+            }
+
+               
+            
+            
         }
 
         // GET: Admin/SVActivityYears/Delete/5
@@ -113,16 +351,59 @@ namespace NBC.Web.Areas.Admin.Controllers
         }
 
         // POST: Admin/SVActivityYears/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        [HttpPost]
+       
+        public ActionResult DeleteConfirmed(int id, string Year)
         {
-            SVActivityYear sVActivityYear = svActivityYearService.Find(id);
-            svActivityYearService.Remove(sVActivityYear);
-            svActivityYearService.SaveChanges();
-            return RedirectToAction("Index");
-        }
+            try
+            {
+                 var sv = svActivityYearService.getSVActivityYearBySVid(id,Convert.ToInt32(Year));
+                 foreach (var item in sv) {
+                 SVActivityYear sVActivityYear = svActivityYearService.Find(item.Id);
+                 svActivityYearService.Remove(sVActivityYear);
+                 svActivityYearService.SaveChanges();
+                    
+                }
+                return Content("OK");
+            }
+            catch (Exception)
+            {
 
+                return Content("NotOK");
+            }
+           
+
+        }
+        [HttpGet]
+       
+        public ActionResult DDLYear()
+        {
+            var years = YearService.GetYear();
+            if (years == null)
+            {
+                return HttpNotFound();
+            }
+            return Json(years, JsonRequestBehavior.AllowGet);
+        }
+        [HttpGet]
+        public ActionResult DDLSVs()
+        {
+            var svs = SVService.All().ToList();
+            if (svs == null)
+            {
+                return HttpNotFound();
+            }
+            return Json(svs, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult DDLActivityType()
+        {
+            var activityType = ActivityTypeService.All().ToList();
+            if (activityType == null)
+            {
+                return HttpNotFound();
+            }
+            return Json(activityType, JsonRequestBehavior.AllowGet);
+        }
         //protected override void Dispose(bool disposing)
         //{
         //    if (disposing)

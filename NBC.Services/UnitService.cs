@@ -22,7 +22,12 @@ namespace NBC.Services {
             var key = (int)keys[0];
             return Query(x => x.Id == key).SingleOrDefault();
         }
+        public Unit GetWorkAtUnit(int id)
+        {
+            var workAt = Query(x => (x.Id == id)).SingleOrDefault();
 
+            return workAt;
+        }
         public override Unit Add(Unit item)
         {
             Unit tmp = Query(x => (x.Name == item.Name)&&(x.Alias ==  item.Alias)).SingleOrDefault();

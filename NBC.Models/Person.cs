@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -15,6 +16,8 @@ namespace NBC.Models
         [StringLength(255)]
         public String SurName { get; set; }
         [StringLength(13)]
+        [Required]
+        [Index("IX_PersonCitizenID",IsUnique = true)]
         public String CitizenId { get; set; }     
         public Address Address { get; set; }
         [StringLength(255)]
@@ -29,5 +32,6 @@ namespace NBC.Models
         [StringLength(255)]
         public String ModifiedBy { get; set; }
         public DateTime ModifiedDate { get; set; }
+    
     }
 }

@@ -12,7 +12,12 @@ namespace NBC.Models
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+        //todo set unique ยังไง ถ้าต้องการให้เช็คว่า Applicant, Consultant นี้ไม่ให้ซ้ำ
+        [ForeignKey("Applicant")]
+        public virtual int Applicant_Id { get; set; }
         public virtual Applicant Applicant { get; set; }
+        [ForeignKey("Consultant")]
+        public virtual int Consultant_Id { get; set; }
         public virtual Consultant Consultant { get; set; }
         [StringLength(255)]
         public String CreatedBy { get; set; }

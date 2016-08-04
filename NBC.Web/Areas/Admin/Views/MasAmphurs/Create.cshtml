@@ -1,53 +1,60 @@
 ﻿@model NBC.Models.MasAmphur
 
 @{
+    ViewBag.Title = "Create";
     Layout = null;
 }
 
-<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Create</title>
-</head>
-<body>
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/jqueryval")
-    
-    
-    @using (Html.BeginForm()) 
-    {
-        @Html.AntiForgeryToken()
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <div class="col-md-10">
+                @Html.Label("จังหวัด", htmlAttributes: new { @class = "control-label col-md-2" })
+                <select class="selectProvince">
+                   <option selected value="0">กรุณาเลือก</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group" hidden="hidden">
+            @Html.Label("รหัสจังหวัด", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MasProvince_Id, new { htmlAttributes = new { @class = "provinceID form-control" } })
+                @Html.ValidationMessageFor(model => model.MasProvince_Id, "", new { @class = "text-danger" })
+            </div>
+        </div>
+       
         
-        <div class="form-horizontal">
-            <h4>MasAmphur</h4>
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
-                @Html.LabelFor(model => model.Id, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Id, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
-                </div>
+        
+        
+         <div class="form-group">
+            @Html.Label("รหัสอำเภอ", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Id, new { htmlAttributes = new { @class = "amphurID form-control" } })
+                @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
             </div>
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-                </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("ชื่ออำเภอ", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
             </div>
-    
-            <div class="form-group">
+        </div>
+
+        @*<div class="form-group">
                 @Html.LabelFor(model => model.CreatedBy, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.CreatedBy, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.CreatedBy, "", new { @class = "text-danger" })
                 </div>
             </div>
-    
+
             <div class="form-group">
                 @Html.LabelFor(model => model.CreatedDate, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -55,7 +62,7 @@
                     @Html.ValidationMessageFor(model => model.CreatedDate, "", new { @class = "text-danger" })
                 </div>
             </div>
-    
+
             <div class="form-group">
                 @Html.LabelFor(model => model.ModifiedBy, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -63,25 +70,95 @@
                     @Html.ValidationMessageFor(model => model.ModifiedBy, "", new { @class = "text-danger" })
                 </div>
             </div>
-    
+            <div class="form-group">
+                @Html.Label("จังหวัด", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("MasProvince_Id", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.MasProvince_Id, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
             <div class="form-group">
                 @Html.LabelFor(model => model.ModifiedDate, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.ModifiedDate, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.ModifiedDate, "", new { @class = "text-danger" })
                 </div>
-            </div>
-    
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" />
-                </div>
+            </div>*@
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="สร้าง" class= "openCreateBox btn btn-primary btn-xs" /> |
+                @Html.ActionLink("ย้อนกลับ", "Index", "MasAmphurs", null, new { @class = "openCreateBox btn btn-primary btn-xs" })
             </div>
         </div>
-    }
-    
-    <div>
-        @Html.ActionLink("Back to List", "Index")
     </div>
-</body>
-</html>
+
+
+}
+<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-1.12.3.js"></script>
+<script>
+    $(document).ready(function () {
+          
+            var url = "/Admin/MasAmphurs/DDLProvince";
+            var $jsontwo = $('.selectProvince');
+            $jsontwo.empty();
+            $jsontwo.append($("<option />").val(0).text("กรุณาเลือก"));
+            $.ajax({
+                url: url,
+                async: false,
+                dataType: 'json',
+                success: function (data) {
+                    var obj = data;                  
+                    $.each(obj, function (index, value) {
+                        var name = value["Name"];
+                        var id = value["Id"];
+                        $jsontwo.append($("<option />").val(id).text(name));
+                       
+
+                    });
+                    //var max = getMax(data, 'Id');
+
+                    //alert(max.Id);
+                }
+            });
+       
+       
+    });
+    $('.selectProvince').change(function () {
+        // alert($('.selectProvince').val());
+        var PId = $('.selectProvince').val();
+        var url = "/Admin/MasAmphurs/DDLAmphur/" + PId;
+        var max;
+        $.ajax({
+            url: url,
+            async: false,
+            dataType: 'json',
+            success: function (data) {
+                
+                 max = getMax(data, 'Id');
+
+               
+            }
+        });
+       
+        $('.provinceID').val($('.selectProvince').val());
+        $('.amphurID').val(max.Id);
+
+    });
+    function getMax(array, propName) {
+        var max = 0;
+        var maxItem = null;
+        for (var i = 0; i < array.length; i++) {
+            var item = array[i];
+            if (item[propName] > max) {
+                max = item[propName];
+                maxItem = item;
+            }
+        }
+
+        return maxItem;
+    }
+
+</script>
+

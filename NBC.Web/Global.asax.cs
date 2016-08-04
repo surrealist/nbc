@@ -63,6 +63,7 @@ namespace NBC.Web
             builder.RegisterType<MasProvinceRepository>().As<IRepository<MasProvince>>();
             builder.RegisterType<MasSubBusinessTypeRepository>().As<IRepository<MasSubBusinessType>>();
             builder.RegisterType<MasTambolRepository>().As<IRepository<MasTambol>>();
+            builder.RegisterType<WorkPlaceRepository>().As<IRepository<WorkPlace>>();
 
 
 
@@ -81,7 +82,7 @@ namespace NBC.Web
             builder.RegisterType<TimeTableService>().AsSelf().As<IService<TimeTable>>();
             builder.RegisterType<UnitActivityService>().AsSelf().As<IService<UnitActivity>>();
             builder.RegisterType<UnitConsultService>().AsSelf().As<IService<UnitConsult>>();
-            builder.RegisterType<YearService>().AsSelf().As<IService<Year>>();
+            builder.RegisterType<YearService>().AsSelf().As<IService<Year>>(); 
             builder.RegisterType<UnitService>().AsSelf().As<IService<Unit>>();
             builder.RegisterType<UserService>().AsSelf().As<IService<User>>();
             builder.RegisterType<RoleService>().AsSelf().As<IService<Role>>();
@@ -93,10 +94,11 @@ namespace NBC.Web
             builder.RegisterType<MasProvinceService>().AsSelf().As<IService<MasProvince>>();
             builder.RegisterType<MasSubBusinessTypeService>().AsSelf().As<IService<MasSubBusinessType>>();
             builder.RegisterType<MasTambolService>().AsSelf().As<IService<MasTambol>>();
+            
 
 
 
-            builder.RegisterType<AppDbContext>().As<DbContext>();
+            builder.RegisterType<AppDbContext>().As<DbContext>().InstancePerRequest();
 
             var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));

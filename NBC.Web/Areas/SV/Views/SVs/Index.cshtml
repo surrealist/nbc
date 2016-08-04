@@ -1,0 +1,71 @@
+﻿@model  NBC.Models.SV
+
+@{
+    Layout = "~/Areas/SV/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <p class="text-center">
+        <h3 class="text-center">ข้อมูลหน่วยงาน</h3>
+    </p>
+   <hr />
+</div>
+
+   <div  >
+       <div >
+           <dl class="dl-horizontal">
+               <dt>
+                   @Html.Label("ชื่อหน่วยงาน")
+               </dt>
+
+               <dd>
+                   @Html.DisplayFor(model => model.Name)
+               </dd>
+
+               <dt>
+                   @Html.Label("ชื่อย่อหน่วยงาน")
+               </dt>
+
+               <dd>
+                   @Html.DisplayFor(model => model.Alias)
+               </dd>
+
+               <dt>
+                   @Html.Label("ที่อยู่")
+               </dt>
+
+               <dd>
+                   @Html.Label(Model.Adress.fullAddress())
+               </dd>
+
+               <dt>
+                   @Html.Label("เบอร์โทร")
+               </dt>
+
+               <dd>
+                   @Html.DisplayFor(model => model.Tel)
+               </dd>
+
+               <dt>
+                   @Html.Label("อีเมลล์")
+               </dt>
+
+               <dd>
+                   @Html.DisplayFor(model => model.Email)
+               </dd>
+
+               <dt>
+                   @Html.Label("หมายเหตุ")
+               </dt>
+
+               <dd>
+                   @Html.DisplayFor(model => model.Notes)
+               </dd>
+
+
+
+           </dl>
+       </div>
+   </div>
+    
+

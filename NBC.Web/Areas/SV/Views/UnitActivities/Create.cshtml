@@ -1,0 +1,152 @@
+﻿@model NBC.Web.Areas.SV.ViewModels.UnitActivityViewModel
+
+@using (Html.BeginForm("Create", "UnitActivities", FormMethod.Post, new { @class = "form-horizontal", role = "form" })) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.ValidationMessage("error", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.Label("ปีงบประมาณ", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select class="selectYear">
+                    <option selected value="0">กรุณาเลือก</option>
+
+                </select>
+            </div>
+
+        </div>
+        <div class="form-group">
+            @Html.Label("หน่วยร่วม", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select class="selectUnits chosen-single-with-deselect">
+                    <option selected value="0">กรุณาเลือก</option>
+                </select>
+            </div>
+
+        </div>   
+        <div class="form-group" hidden="hidden">
+            @Html.LabelFor(model => model.Year_ID, "Year_ID", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Year_ID, new { htmlAttributes = new { @class = "Year_Id form-control" } })
+                @Html.ValidationMessageFor(model => model.Year_ID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group" hidden="hidden">
+            @Html.LabelFor(model => model.Unit_ID, "Unit_Id", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Unit_ID, new { htmlAttributes = new { @class = "Unit_Id form-control" } })
+                @Html.ValidationMessageFor(model => model.Unit_ID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+       
+
+        <div class="form-group">
+            @Html.Label("กิจกรรม NBC", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NBCTarget, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NBCTarget, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("กิจกรรมบ่มเพาะ", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.INCUTarget, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.INCUTarget, "", new { @class = "text-danger" })
+            </div>
+        </div>
+       
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="บันทึก" class="btn btn-primary btn-xs" />
+                @Html.ActionLink("ย้อนกลับ", "Index", "UnitActivities", null, new { @class = "btn btn-primary btn-xs" })
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @*@Html.ActionLink("Back to List", "Index")*@
+</div>
+<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-1.12.3.js"></script>
+<script src="~/Scripts/chosen.jquery.js"></script>
+<script src="~/Scripts/chosen.jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var url = "/SV/UnitActivities/DDLYear";
+        var $jsontwo = $('.selectYear');
+        $jsontwo.empty();
+        $jsontwo.append($("<option selected />").val(-1).text("กรุณาเลือก"));
+        $.ajax({
+            url: url,
+            async: false,
+            dataType: 'json',
+            success: function (data) {
+                var obj = data;
+                $.each(obj, function (index, value) {
+                    var name = value["Name"];
+                    var id = value["Id"];
+                   // if (selectedId == id) {
+                   //   $jsontwo.append($("<option selected />").val(id).text(name));
+
+                   // }
+                   // else {
+                        $jsontwo.append($("<option />").val(id).text(name));
+                    //}
+                });
+                //var max = getMax(data, 'Id');
+
+                //alert(max.Id);
+            }
+        });
+        
+    });
+    $('.selectYear').change(function () {
+        var $jsontwo = $('.selectUnits');
+        $jsontwo.empty();
+    });
+    
+    $('.selectYear').change(function () {
+        var YId = $('.selectYear').val();
+        $('.Year_Id').val(YId);
+
+        //var selectedId = $('.Unit_Id').val();
+        var url = "/SV/UnitActivities/DDLUnits/"+YId;
+        var $jsontwo = $('.selectUnits');
+        $jsontwo.empty();
+        $jsontwo.append($("<option selected />").val(-1).text("กรุณาเลือก"));
+        $.ajax({
+            url: url,
+            async: false,
+            dataType: 'json',
+            success: function (data) {
+                var obj = data;
+                $.each(obj, function (index, value) {
+                    var name = value["Name"];
+                    var id = value["Id"];
+                    //if (selectedId == id) {
+                    //    $jsontwo.append($("<option selected />").val(id).text(name));
+
+                    //}
+                    //else {
+                    $jsontwo.append($("<option />").val(id).text(name));
+                    // }
+                });
+                $jsontwo.push();
+            }
+            
+        });
+        $('.selectUnits').chosen({ width: "75%", no_results_text: "ไม่มีขอมูลหน่วยร่วมที่ท่านต้องการ กรุณาตรวจสอบข้อมูลของท่านอีกครั้ง" });
+
+    });
+    $('.selectUnits').change(function () {
+        var YId = $('.selectUnits').val();
+        $('.Unit_Id').val(YId);
+
+    });
+</script>

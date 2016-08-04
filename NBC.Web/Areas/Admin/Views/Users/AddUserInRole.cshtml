@@ -1,5 +1,5 @@
-﻿@using NBC.Models
-@model IEnumerable<UserInRole>
+﻿@model NBC.Models.User
+@*@model IEnumerable<UserInRole>*@
 @*@model NBC.Models.UserInRole*@
 @{
     ViewBag.Title = "AddUserInRole";
@@ -9,18 +9,18 @@
 
 <div>
     @{
-        var iName = string.Empty;
-        var iuserName = string.Empty;
-        var User_Id = string.Empty;
-        var UserRole_Id = string.Empty;
-        foreach (var user in Model)
-        {
-            User_Id = Convert.ToString(user.User.Id);
-            iName = user.User.FullName;
-            iuserName = user.User.UserName;
-        }
+        var iName = Model.FullName;
+        var iuserName = Model.UserName;
+        var User_Id = Model.Id;
+        // var UserRole_Id = Model.Role_Id;
+        //foreach (var user in Model)
+        //{
+        //    User_Id = Convert.ToString(user.User.Id);
+        //    iName = user.User.FullName;
+        //    iuserName = user.User.UserName;
+        //}
         <div>
-            <label for="btnSaveUserInRole" id="User_Id" name="User_Id" hidden="hidden">@User_Id</label>
+            <label for="btnSaveUserInRole" id="User_Id" name="User_Id" hidden="hidden">@Model.Id</label>
             <dl class="dl-horizontal">
 
                 <dt>
@@ -49,31 +49,56 @@
     <div>
         @Html.Label("กำหนดสิทธิ์การเข้าใช้")
         <div>
-            @Html.DropDownList("Role", new SelectList(ViewBag.role, "Id", "RoleName"), new { @class = "form-control", onchange = "" })
+            <select class="selectRole">
+                <option selected value="0">กรุณาเลือก</option>
+                @foreach (var item in ViewBag.role)
+                {
+                    <option data-role-id="@item.Id" value="@item.Id">@item.RoleName</option>
+                }
+
+            </select>
+            @*@Html.DropDownList("Role", new SelectList(ViewBag.role, "Id", "RoleName"), new { @class = "form-control", onchange = "" })*@
         </div>
         <div>
             <label id="UserRole_Id"></label>
         </div>
+
+        @Html.Label("กำหนดหน่วยงาน")
         <div>
+            <select class="selectWorkAt">
+                <option selected value="0">กรุณาเลือก</option>
+
+            </select>
+
+
+
+        </div>
+
+        <div>
+
             <br />
             @* <button id="btnSaveUserInRole" class="btn btn-default" type="submit" name="UserRole_Id" value=@UserRole_Id>เพิ่มสิทธิ์</button>*@
-            <input id="btnSaveUserInRole" name="amount" value="เพิ่มสิทธิ์" class="btn btn-default" />
+            <input id="btnSaveUserInRole" name="amount" value="เพิ่มสิทธิ์" class="btnSaveUserInRole btn btn-default" />
         </div>
+
     </div>
 
 
 
+</div>
+<div>
+    <p>
 
-
-
+    </p>
 </div>
 <form action="~/Admin/Users/DeleteUserInRole" method="post">
-    <table id="UserInRoles" class="table">
+    <table id="UserInRoles" class="table table-bordered table-hover table-condensed">
         <thead>
             <tr>
                 <th>ลำดับที่</th>
                 <th>สิทธิ์ในการใช้งาน</th>
-                <th></th>
+                <th>หน่วยงาน</th>
+                <th>ลบ</th>
 
             </tr>
         </thead>
@@ -81,16 +106,22 @@
 
             @{
                 int count = 1;
-                foreach (var role in Model)
+                foreach (var role in Model.UserInRoles)
                 {
-                    var id = Convert.ToString(role.Id);
+                    // var id = Convert.ToString(role.Id);
                     <tr>
                         <td>@(count++)</td>
-                        <td class="Id" hidden="hidden">
-                            @Html.Label("Id", id)
-                        </td>
                         <td>
                             @Html.Label(role.Role.RoleName)
+                        </td>
+                        <td>
+                            @{
+                                if (role.WorkAt != null)
+                                {
+                                    @Html.Label(role.WorkAt.Name)
+                                }
+                            }
+
                         </td>
                         <td>
                             @{
@@ -115,40 +146,56 @@
     </table>
 </form>
 <p>
-    @*@Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |*@
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("ย้อนกลับ", "Index", "Users", null, new { @class = "openCreateBox btn btn-primary btn-xs" })
 </p>
+<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-1.12.3.js"></script>
+<script src="~/Scripts/angular.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+
 <script type="text/javascript">
-    var count = @count;
 
     $(document).ready(function () {
+        var t = $('#UserInRoles').DataTable({
+            dom: 'Bfrtip',
 
-        $('#btnSaveUserInRole').click(function () {
-            var $label = $('label[for="btnSaveUserInRole"]');
-            var User_Id = parseInt($label.text());
-            var Role_Id = $('#Role').val();
-            var url = "@Url.Content("~/Admin/Users/SaveUserInRole")"
-                + "/" +  User_Id + "?UserRole_Id=" + Role_Id;
-            // var tr = $(this).parents("tr");
+            buttons: [
 
-            $.post(url, function(result) {
-                if (result == "OK"){
+                //'copy', 'csv', 'excel', 'pdf', 'print'
+
+            ],
+        });
+        var count = @count;
+        var roleName;
+        $('.btnSaveUserInRole').click(function () {
+            //  var $label = $('label[for="btnSaveUserInRole"]');
+            var User_Id = @Model.Id;
+            //parseInt($label.text());
+            var Role_Id = $('.selectRole').val();
+            var WID = $('.selectWorkAt').val();
+            roleName = $('.selectRole').find('option:selected').text();
+            var url = "@Url.Content("~/Admin/Users/SaveUserInRole")" + "/" + User_Id + "?UserRole_Id=" + Role_Id + "&WID=" + WID + "&roleName=" + roleName;
+            // var url = "/Admin/Users/SaveUserInRole/" + User_Id + "?UserRole_Id=" + Role_Id;
+
+            $.post(url,function(result) {
+
+                if (result="OK"){
                     location.reload();
-                }else{
-                    alert(result);
                 }
+
 
             });
 
         });
-        $('#UserInRoles').on('click', 'button.delete', function () {
+        $("table#UserInRoles").on("click", "button.delete", function () {
 
             var UserInRoleId = $(this).data("userinroleId");
             var url = "@Url.Content("~/Admin/Users/DeleteUserInRole")" + "/" + UserInRoleId;
-            $.post(url, function(result) {
-                if (result == "OK"){
-                    location.reload();
-                }else{
+            var tr = $(this).parents("tr");
+            $.post(url, function (result) {
+                if (result == "OK") {
+                    tr.remove();
+                    //location.reload();
+                } else {
                     alert(result);
                 }
 
@@ -156,5 +203,44 @@
 
 
         });
+        $('.selectRole').change(function(){
+            var roleId = $('.selectRole').val();
+            roleName = $('.selectRole').find('option:selected').text();
+            var url = "/Admin/Users/DDLWorkAtList/" + roleId;
+            var mydata = [];
+            var $jsontwo = $('.selectWorkAt');
+            $jsontwo.empty();
+            $jsontwo.append($("<option />").val(0).text("กรุณาเลือก"));
+            if(roleName=="SV"||roleName=="Unit"){
+                $.ajax({
+                    url: url,
+                    async: false,
+                    dataType: 'json',
+                    success: function (data) {
+
+                        var obj = data;
+
+                        //$jsontwo.append($("<option />").val(0).text("กรุณาเลือก"));
+                        $.each(obj, function(index, value) {
+                            var name = value["Alias"];
+                            var id = value["Id"];
+                            $jsontwo.append($("<option />").val(id).text(name));
+
+                        });
+                    }
+                });
+            }
+
+
+        });
+
+        //$('.selectWorkAt').change(function(){
+        //    // alert($('.selectWorkAt').val());
+        //    var WID = $('.selectWorkAt').val();
+
+
+        //});
+
+
     });
 </script>

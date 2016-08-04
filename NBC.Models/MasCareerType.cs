@@ -10,10 +10,12 @@ namespace NBC.Models
 {
     public class MasCareerType : IRecord
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [StringLength(255)]
+        [Required]
+        [Index("IX_MasCareerTypeName", IsUnique = true)]
         public string Name { get; set; }
         [StringLength(255)]
         public String CreatedBy { get; set; }

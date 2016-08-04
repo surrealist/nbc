@@ -24,43 +24,12 @@
                 @Html.DisplayFor(model => model.Target)
             </dd>
     
-            <dt>
-                @Html.DisplayNameFor(model => model.CreatedBy)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.CreatedBy)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.CreatedDate)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.CreatedDate)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.ModifiedBy)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.ModifiedBy)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.ModifiedDate)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.ModifiedDate)
-            </dd>
+           
     
         </dl>
     </div>
     <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-        @Html.ActionLink("Back to List", "Index")
+        @Html.ActionLink("ย้อนกลับ", "Index", "SVActivityYears", null, new { @class = "openCreateBox btn btn-primary btn-xs" })
     </p>
 </body>
 </html>

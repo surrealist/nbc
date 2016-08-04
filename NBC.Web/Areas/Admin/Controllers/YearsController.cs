@@ -8,24 +8,33 @@ namespace NBC.Web.Areas.Admin.Controllers
 {
     public class YearsController : Controller
     {
+        private UserService userService;
         private YearService yearService;
         private SettingService settingService;
 
-        public YearsController(YearService yearService, SettingService settingService)
+        public YearsController(YearService yearService, SettingService settingService, UserService userService)
         {
             this.yearService = yearService;
-            this.settingService = settingService;            
+            this.settingService = settingService;
+            this.userService = userService;          
         }
 
         // GET: Admin/Years
         public ActionResult Index()
         {
+           
+            if (!userService.CurrentUserInRole("Administrators"))
+            {
+                return new HttpUnauthorizedResult();
+            }
+
             // Session["SELECTED"] = "2556";
             var items = yearService.All();
             var currentYear = settingService.Current.CurrentYearId;
             ViewBag.Y = currentYear;
-            return View(items);          
-           // return View();
+            return View(items);
+            // return View();
+
         }
         public ActionResult SetCurrentYear(string year)
         {
@@ -102,7 +111,7 @@ namespace NBC.Web.Areas.Admin.Controllers
         // GET: Admin/Years/Create
         public ActionResult Create()
         {
-            return View();
+            return PartialView();
         }
 
         // POST: Admin/Years/Create
@@ -114,6 +123,7 @@ namespace NBC.Web.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                
                 yearService.Add(year);
                 yearService.SaveChanges();
                 return RedirectToAction("Index");

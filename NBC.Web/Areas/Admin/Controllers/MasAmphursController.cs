@@ -15,17 +15,18 @@ namespace NBC.Web.Areas.Admin.Controllers
     public class MasAmphursController : Controller
     {
         private MasAmphurService  service ;
-
-        public MasAmphursController(MasAmphurService service)
+        private MasProvinceService MasProvinceService;
+        public MasAmphursController(MasAmphurService service, MasProvinceService masProvinceService)
         {
             this.service = service;
+            this.MasProvinceService = masProvinceService;
         }
 
 
         // GET: Admin/MasAmphurs
         public ActionResult Index()
         {
-            return View(service.All());
+            return View(service.GetAllAmphurd());
         }
 
         // GET: Admin/MasAmphurs/Details/5
@@ -54,7 +55,7 @@ namespace NBC.Web.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,CreatedBy,CreatedDate,ModifiedBy,ModifiedDate")] MasAmphur masAmphur)
+        public ActionResult Create(MasAmphur masAmphur)
         {
             if (ModelState.IsValid)
             {
@@ -86,11 +87,12 @@ namespace NBC.Web.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,CreatedBy,CreatedDate,ModifiedBy,ModifiedDate")] MasAmphur masAmphur)
+        public ActionResult Edit(MasAmphur masAmphur)
         {
             if (ModelState.IsValid)
             {
                 //db.Entry(masAmphur).State = EntityState.Modified;
+                service.SetModified(masAmphur);
                 service.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -121,6 +123,25 @@ namespace NBC.Web.Areas.Admin.Controllers
             service.Remove(masAmphur);
             service.SaveChanges();
             return RedirectToAction("Index");
+        }
+        [HttpGet]
+        public ActionResult DDLProvince()
+        {
+             var province = MasProvinceService.All().ToList();
+            if (province == null)
+            {
+                return HttpNotFound();
+            }
+            return Json(province, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult DDLAmphur(int Id)
+        {
+            var amphur = service.GetAmphurByProvinceId(Id);
+            if (amphur == null)
+            {
+                return HttpNotFound();
+            }
+            return Json(amphur, JsonRequestBehavior.AllowGet);
         }
 
         //    protected override void Dispose(bool disposing)

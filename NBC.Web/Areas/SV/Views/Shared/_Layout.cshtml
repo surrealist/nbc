@@ -29,6 +29,19 @@
                 @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("เกี่ยวกับโครงการ", "About", "Home")</li>
+                    <li>@Html.ActionLink("ติดต่อ", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("เมนูสำหรับผู้ดูแลระบบ", "Index", "HomeAdmin", new { Area = "Admin" }, new { })</li>
+                    <li>@Html.ActionLink("เมนูสำหรับหน่วยประสาน", "Index", "HomeSV", new { Area = "SV" }, new { })</li>
+                    <li>@Html.ActionLink("เมนูสำหรับหน่วยร่วม", "Index", "HomeUnit", new { Area = "Unit" }, new { })</li>
+                </ul>
+                @*@Html.Partial("../../../Views/Shared/_LoginPartial")*@
+
+                @*<a href="~/Views/Shared/_LoginPartial.cshtml">~/Views/Shared/_LoginPartial.cshtml</a>*@
+            </div>
+            <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav"></ul>
             </div>
         </div>
@@ -46,105 +59,47 @@
                         </a>
                     </li>
                     <li>
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                            <span class="small-nav" data-toggle="tooltip" data-placement="right" title="ตั้งค่าระบบ">
+                        <a href="/SV/SVs/Index">
+                            <span class="small-nav" data-toggle="tooltip" data-placement="right" title="ข้อมูลหน่วย กสอ.">
                                 <span class="glyphicon glyphicon-cog"></span>
                             </span>
-                            <span class="full-nav"> ตั้งค่าระบบ </span>
+                            <span class="full-nav">ข้อมูลหน่วย กสอ.</span>
                         </a>
                     </li>
                     <li>
-                        <div id="collapseTwo" class="panel-collapse collapse">
-                            <div class="panel-body">
-                                <table class="table">
-                                    <tr>
-                                        <td>
-                                            <a href="/Admin/Years/">
-                                                <span class="small-nav" data-toggle="tooltip" data-placement="right" title="ปีงบประมาณ">
-                                                    <span class="glyphicon glyphicon-credit-card"></span>
-                                                </span>
-                                                <span class="full-nav"> ปีงบประมาณ </span>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <a href="/Admin/SVs/">
-                                                <span class="small-nav" data-toggle="tooltip" data-placement="right" title="หน่วย กสอ.">
-                                                    <span class="glyphicon glyphicon-hand-right"></span>
-                                                </span>
-                                                <span class="full-nav"> หน่วย กสอ. </span>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <a href="/Admin/Units/">
-                                                <span class="small-nav" data-toggle="tooltip" data-placement="right" title="หน่วยร่วมทั้งหมด">
-                                                    <span class="glyphicon glyphicon-globe"></span>
-                                                </span>
-                                                <span class="full-nav"> หน่วยร่วมทั้งหมด </span>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <a href="http://www.jquery2dotnet.com">
-                                                <span class="small-nav" data-toggle="tooltip" data-placement="right" title="ประเภทกิจกรรมทั้งหมด">
-                                                    <span class="glyphicon glyphicon-tasks"></span>
-                                                </span>
-                                                <span class="full-nav"> ประเภทกิจกรรมทั้งหมดหน่วยร่วมทั้งหมด </span>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
+                        <a href="/SV/UnitActivities/">
+                            <span class="small-nav" data-toggle="tooltip" data-placement="right" title="ข้อมูลหน่วยร่วม">
+                                <span class="glyphicon glyphicon-list"></span>
+                            </span>
+                            <span class="full-nav">ข้อมูลหน่วยร่วม</span>
+                        </a>
                     </li>
                     <li>
                         <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-                            <span class="small-nav" data-toggle="tooltip" data-placement="right" title="ตั้งค่าปี">
+                            <span class="small-nav" data-toggle="tooltip" data-placement="right" title="รายชื่อที่ปรึกษา">
+                                <span class="glyphicon glyphicon-hand-right"></span>
+                            </span>
+                            <span class="full-nav"> รายชื่อที่ปรึกษา </span>
+                        </a>
+                    </li>
+            
+                    <li>
+                        <a href="/SV/HomeSV/">
+                            <span class="small-nav" data-toggle="tooltip" data-placement="right" title="กิจกรรมในปี">
                                 <span class="glyphicon glyphicon-calendar"></span>
                             </span>
-                            <span class="full-nav"> ตั้งค่าปี </span>
+                            <span class="full-nav"> กิจกรรมในปี </span>
                         </a>
                     </li>
                     <li>
-                        <div id="collapseThree" class="panel-collapse collapse">
-                            <div class="panel-body">
-                                <table class="table">
-                                    <tr>
-                                        <td>
-                                            <a href="/Admin/Years/">
-                                                <span class="small-nav" data-toggle="tooltip" data-placement="right" title="กำหนดเป้าหมาย">
-                                                    <span class="glyphicon glyphicon-record"></span>
-                                                </span>
-                                                <span class="full-nav"> กำหนดเป้าหมาย </span>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <a href="/Admin/SVUnitYears/">
-                                                <span class="small-nav" data-toggle="tooltip" data-placement="right" title="หน่วยร่วมในปี">
-                                                    <span class="glyphicon glyphicon-hand-right"></span>
-                                                </span>
-                                                <span class="full-nav"> หน่วยร่วมในปี </span>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <a href="/Admin/Users/">
-                            <span class="small-nav" data-toggle="tooltip" data-placement="right" title="จัดการผู้ใช้งาน">
+                        <a href="#">
+                            <span class="small-nav" data-toggle="tooltip" data-placement="right" title="รายชื่อผู้เข้าร่วมโครงการ">
                                 <span class="glyphicon glyphicon-user"></span>
                             </span>
-                            <span class="full-nav"> จัดการผู้ใช้งาน </span>
+                            <span class="full-nav"> รายชื่อผู้เข้าร่วมโครงการ </span>
                         </a>
                     </li>
+                    
                     <li>
                         <a href="#">
                             <span class="small-nav" data-toggle="tooltip" data-placement="right" title="รายงาน">

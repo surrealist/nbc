@@ -14,6 +14,8 @@ namespace NBC.Models
         public int Id { get; set; }
      
         [StringLength(255)]
+        [Required]
+        [Index("IX_MasProvinceName", IsUnique = true)]
         public string Name { get; set; }
         [StringLength(255)]
         public String CreatedBy { get; set; }

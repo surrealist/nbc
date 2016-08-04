@@ -1,0 +1,238 @@
+﻿@model NBC.Models.Consultant
+
+@{
+   
+        Layout = "~/Areas/SV/Views/Shared/_Layout.cshtml";
+    
+
+}
+
+
+    @using (Html.BeginForm()) 
+    {
+        @Html.AntiForgeryToken()
+        
+        <div class="form-horizontal">
+            <h4>Consultant</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+           <table>
+               <tr>
+                   <td class="text-right">เลขประจำตัวประชาชน</td>
+                   <td>@Html.TextBoxFor(model => model.Citizenid, new
+                   {
+                       maxlength = 13,
+                       onkeydown = "javascript:maskInput()",
+                       @class = "Citizenid form-control"
+                   })
+                @Html.ValidationMessageFor(model => model.Citizenid, "", new { @class = "text-danger" })</td>
+                   <td class="text-right">คำนำหน้าชื่อ</td>
+                   <td>@Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })</td>
+                  
+               </tr>
+               <tr>
+                   <td class="text-right">ชื่อ</td>
+                   <td>@Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })</td>
+                   <td class="text-right">นาทสกุล</td>
+                   <td>@Html.EditorFor(model => model.SurName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SurName, "", new { @class = "text-danger" })</td>
+               </tr>
+               <tr>
+                   <td class="text-right">ที่อยู่</td>
+                   <td>
+                       <table>
+                           <tr>
+                               <td class="text-right">บ้านเลขที่</td>
+                               <td>@Html.EditorFor(model => model.Address.No, new { htmlAttributes = new { @class = "form-control" } })</td>
+                               <td class="text-right">หมู่ที่</td>
+                               <td>@Html.EditorFor(model => model.Address.Moo, new { htmlAttributes = new { @class = "form-control" } })</td>
+                           </tr>
+                           <tr>
+                               <td class="text-right">ซอย</td>
+                               <td>@Html.EditorFor(model => model.Address.Soi, new { htmlAttributes = new { @class = "form-control" } })</td>
+                               <td class="text-right">ถนน</td>
+                               <td>@Html.EditorFor(model => model.Address.Road, new { htmlAttributes = new { @class = "form-control" } })</td>
+                           </tr>
+                           <tr>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                           </tr>
+                       </table>
+                   </td>
+                   <td>@Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })</td>
+                   <td></td>
+                   <td></td>
+               </tr>
+               <tr>
+                   <td>@Html.LabelFor(model => model.Tel, htmlAttributes: new { @class = "control-label col-md-2" })</td>
+                   <td>@Html.EditorFor(model => model.Tel, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Tel, "", new { @class = "text-danger" })</td>
+                   <td>gg</td>
+                   <td>ggg</td>
+               </tr>
+               <tr>
+                   <td>ttt</td>
+                   <td>ggg</td>
+                   <td>gg</td>
+                   <td>ggg</td>
+               </tr>
+               <tr>
+                   <td>ttt</td>
+                   <td>ggg</td>
+                   <td>gg</td>
+                   <td>ggg</td>
+               </tr>
+               <tr>
+                   <td>ttt</td>
+                   <td>ggg</td>
+                   <td>gg</td>
+                   <td>ggg</td>
+               </tr>
+               <tr>
+                   <td>ttt</td>
+                   <td>ggg</td>
+                   <td>gg</td>
+                   <td>ggg</td>
+               </tr>
+               <tr>
+                   <td>ttt</td>
+                   <td>ggg</td>
+                   <td>gg</td>
+                   <td>ggg</td>
+               </tr>
+           </table>
+           
+            <div class="form-group">
+               
+                <div class="col-md-10">
+                   
+                </div>
+            </div>
+
+
+            <div class="form-group">
+               
+                <div class="col-md-10">
+                   
+                </div>
+            </div>
+    
+            <div class="form-group">
+               
+                <div class="col-md-10">
+                  
+                </div>
+            </div>
+    
+            <div class="form-group">
+               
+                <div class="col-md-10">
+                   
+                </div>
+            </div>
+    
+            <div class="form-group">
+                
+                <div class="col-md-10">
+                   
+                </div>
+            </div>
+    
+            <div class="form-group">
+               
+                <div class="col-md-10">
+                   
+                </div>
+            </div>
+    
+            <div class="form-group">
+                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+    
+            <div class="form-group">
+                @Html.LabelFor(model => model.Notes, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Notes, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Notes, "", new { @class = "text-danger" })
+                </div>
+            </div>
+    
+            <div class="form-group">
+                @Html.LabelFor(model => model.CreatedBy, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CreatedBy, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CreatedBy, "", new { @class = "text-danger" })
+                </div>
+            </div>
+    
+            <div class="form-group">
+                @Html.LabelFor(model => model.CreatedDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CreatedDate, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CreatedDate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+    
+            <div class="form-group">
+                @Html.LabelFor(model => model.ModifiedBy, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ModifiedBy, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ModifiedBy, "", new { @class = "text-danger" })
+                </div>
+            </div>
+    
+            <div class="form-group">
+                @Html.LabelFor(model => model.ModifiedDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ModifiedDate, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ModifiedDate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+    
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+    
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+<script>
+   
+    function maskInput(e) {
+        //check if we have "e" or "window.event" and use them as "event"
+        //Firefox doesn't have window.event 
+        var event = e || window.event
+
+        var key_code = event.keyCode;
+        var oElement = e ? e.target : window.event.srcElement;
+        if (!event.shiftKey && !event.ctrlKey && !event.altKey) {
+            if ((key_code > 47 && key_code < 58) ||
+                (key_code > 95 && key_code < 106)) {
+
+                if (key_code > 95)
+                    key_code -= (95 - 47);
+                oElement.value = oElement.value;
+            } else if (key_code == 8) {
+                oElement.value = oElement.value;
+            } else if (key_code != 9) {
+                event.returnValue = false;
+            }
+        }
+    }
+    $(document).ready(function () {
+        $('#myTextbox').keydown(maskInput);
+    });
+</script>

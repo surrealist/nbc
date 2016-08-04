@@ -21,7 +21,14 @@ namespace NBC.Services
             var key1 = (int)keys[0];
             return Query(x => x.Id == key1).SingleOrDefault();
         }
-
+        public List<UnitActivity> getUnitActivityBySvIDUnitIDYearID(int Unit_ID,int SV_ID, int Year)
+        {
+            return Query(x => x.SVActivityYear.Year_Id == Year && x.Unit_Id == Unit_ID && x.SVActivityYear.SV.Id == SV_ID ).ToList();
+        }
+        public List<UnitActivity> getUnitActivityBySvIDYearID(int SV_ID, int Year)
+        {
+            return Query(x => x.SVActivityYear.Year_Id == Year && x.SVActivityYear.SV.Id == SV_ID).ToList();
+        }
         public override UnitActivity Add(UnitActivity item)
         {
             //not implement

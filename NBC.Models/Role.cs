@@ -10,6 +10,8 @@ namespace NBC.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         [StringLength(255)]
+        [Required]
+        [Index("IX_RoleName",IsUnique =true)]
         public string RoleName { get; set; }
 
         public bool isEnable { get; set; }
@@ -21,6 +23,11 @@ namespace NBC.Models
         public String ModifiedBy { get; set; }
 
         public DateTime ModifiedDate { get; set; }
-       
+        public virtual ICollection<UserInRole> UserInRoles { get; set; }
+
+        public Role()
+        {
+            UserInRoles = new HashSet<UserInRole>();
+        }
     }
 }

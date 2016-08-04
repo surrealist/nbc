@@ -90,6 +90,7 @@ namespace NBC.Web.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 //db.Entry(masEducationType).State = EntityState.Modified;
+                service.SetModified(masEducationType);
                 service.SaveChanges();
                 return RedirectToAction("Index");
             }

@@ -24,7 +24,7 @@
                 @Html.DisplayFor(model => model.Name)
             </dd>
     
-            <dt>
+            @*<dt>
                 @Html.DisplayNameFor(model => model.CreatedBy)
             </dt>
     
@@ -54,13 +54,12 @@
     
             <dd>
                 @Html.DisplayFor(model => model.ModifiedDate)
-            </dd>
+            </dd>*@
     
         </dl>
     </div>
     <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-        @Html.ActionLink("Back to List", "Index")
+        @Html.ActionLink("ย้อนกลับ", "Index", "MasAmphurs", null, new { @class = "openCreateBox btn btn-primary btn-xs" })
     </p>
 </body>
 </html>

@@ -3,69 +3,192 @@
 @{
     Layout = null;
 }
+@*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/css/bootstrap-select.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/js/bootstrap-select.min.js"></script>*@
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Create</title>
-</head>
 <body>
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/jqueryval")
-    
-    
-    @using (Html.BeginForm()) 
+   
+    @using (Html.BeginForm("Create", "SVUnitYears", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
     {
         @Html.AntiForgeryToken()
-        
+
         <div class="form-horizontal">
-            <h4>เพิ่ม/แก้ไขหน่วยร่วมแยกหน่วยกสอ. แยกรายปี</h4>
-            <hr />
+
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group">
-                @Html.LabelFor(model => model.CreatedBy, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.Label("ปีงบประมาณ ", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.CreatedBy, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.CreatedBy, "", new { @class = "text-danger" })
+                    <select class="selectYear">
+                        <option selected value="0">กรุณาเลือก</option>
+
+                    </select>
                 </div>
+
             </div>
-    
             <div class="form-group">
-                @Html.LabelFor(model => model.CreatedDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.Label("หน่วย กสอ ", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.CreatedDate, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.CreatedDate, "", new { @class = "text-danger" })
+                    <select class="selectSVs">
+                        <option selected value="0">กรุณาเลือก</option>
+                    </select>
+                </div>
+
+            </div>
+            <div class="form-group" >
+                @Html.Label("หน่วยร่วม", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <select class="selectUnits chosen-single-with-deselect">
+                        <option selected value="0">กรุณาเลือก</option>
+                    </select>
+                </div>
+
+            </div>           
+            <div class="form-group" hidden="hidden">
+                @Html.Label("ปี", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Year.Id, new { htmlAttributes = new { @class = "Year_Id form-control" } })
+                    @Html.ValidationMessageFor(model => model.Year.Id, "", new { @class = "text-danger" })
                 </div>
             </div>
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.ModifiedBy, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="form-group" hidden="hidden">
+                @Html.Label("หน่วย กสอ ", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.ModifiedBy, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.ModifiedBy, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.SV.Id, new { htmlAttributes = new { @class = "SV_Id form-control" } })
+                    @Html.ValidationMessageFor(model => model.SV.Id, "", new { @class = "text-danger" })
                 </div>
             </div>
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.ModifiedDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="form-group" hidden="hidden">
+                @Html.Label("หน่วยร่วม", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.ModifiedDate, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.ModifiedDate, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.Unit.Id, new { htmlAttributes = new { @class = "Unit_Id form-control" } })
+                    @Html.ValidationMessageFor(model => model.Unit.Id, "", new { @class = "text-danger" })
                 </div>
-            </div>
-    
+            </div>    
+
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" />
+                    <input type="submit" value="บันทึก" class="btn btn-default" />
+                    @Html.ActionLink("ย้อนกลับ", "Index", "SVUnitYears", null, new { @class = "btn btn-default" })
                 </div>
             </div>
         </div>
     }
+
     
-    <div>
-        @Html.ActionLink("Back to List", "Index")
-    </div>
 </body>
-</html>
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  @*<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>*@
+@*<script src="~/Scripts/bootstrap.js"></script>*@
+
+<script src="~/Scripts/chosen.jquery.js"></script>
+<script src="~/Scripts/chosen.jquery.min.js"></script>
+<script>
+   
+    $(document).ready(function () {
+        
+        var selectedId = $('.Year_Id').val();
+        var url = "/Admin/SVUnitYears/DDLYear";
+        var $jsontwo = $('.selectYear');
+        $jsontwo.empty();
+        $jsontwo.append($("<option selected />").val(-1).text("กรุณาเลือก"));
+        $.ajax({
+            url: url,
+            async: false,
+            dataType: 'json',
+            success: function (data) {
+                var obj = data;
+                $.each(obj, function (index, value) {
+                    var name = value["Name"];
+                    var id = value["Id"];
+                    if (selectedId == id) {
+                        $jsontwo.append($("<option selected />").val(id).text(name));
+
+                    }
+                    else {
+                        $jsontwo.append($("<option />").val(id).text(name));
+                    }
+                });
+                //var max = getMax(data, 'Id');
+
+                //alert(max.Id);
+            }
+        });
+        var selectedId = $('.SV_Id').val();
+        var url = "/Admin/SVUnitYears/DDLSVs";
+        var $jsontwo = $('.selectSVs');
+        $jsontwo.empty();
+        $jsontwo.append($("<option selected />").val(-1).text("กรุณาเลือก"));
+        $.ajax({
+            url: url,
+            async: false,
+            dataType: 'json',
+            success: function (data) {
+                var obj = data;
+                $.each(obj, function (index, value) {
+                    var name = value["Name"];
+                    var id = value["Id"];
+                    if (selectedId == id) {
+                        $jsontwo.append($("<option selected />").val(id).text(name));
+
+                    }
+                    else {
+                        $jsontwo.append($("<option />").val(id).text(name));
+                    }
+                });
+                //var max = getMax(data, 'Id');
+
+                //alert(max.Id);
+            }
+        });
+        var selectedId = $('.Unit_Id').val();
+        var url = "/Admin/SVUnitYears/DDLUnits";
+        var $jsontwo = $('.selectUnits');
+        $jsontwo.empty();
+        $jsontwo.append($("<option selected />").val(-1).text("กรุณาเลือก"));
+        $.ajax({
+            url: url,
+            async: false,
+            dataType: 'json',
+            success: function (data) {
+                var obj = data;
+                $.each(obj, function (index, value) {
+                    var name = value["Name"];
+                    var id = value["Id"];
+                    if (selectedId == id) {
+                        $jsontwo.append($("<option selected />").val(id).text(name));
+
+                    }
+                    else {
+                        $jsontwo.append($("<option />").val(id).text(name));
+                    }
+                });
+                //var max = getMax(data, 'Id');
+
+                //alert(max.Id);
+            }
+        });
+        $('.selectUnits').chosen({ width: "75%", no_results_text: "ไม่มีขอมูลหน่วยร่วมที่ท่านต้องการ กรุณาตรวจสอบข้อมูลของท่านอีกครั้ง" });
+        
+    });
+   
+    $('.selectYear').change(function () {
+        var YId = $('.selectYear').val();
+        $('.Year_Id').val(YId);
+
+    });
+    $('.selectSVs').change(function () {
+        var YId = $('.selectSVs').val();
+        $('.SV_Id').val(YId);
+
+    });
+    $('.selectUnits').change(function () {
+        var YId = $('.selectUnits').val();
+        $('.Unit_Id').val(YId);
+
+    });
+
+</script>

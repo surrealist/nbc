@@ -10,69 +10,425 @@
 <body ng-app="myApp">
     <div class="container">
         <div class="row">
-            <h2 class="text-left">หน่วย กสอ.</h2>
-            <p>
-                @Html.ActionLink("เพิ่มรายชื่อหน่วยร่วมในปี", "Create")
-            </p>
-        </div>
+            <h2 class="text-center">รายชื่อหน่วยร่วมแยกตามปีและหน่วย กสอ.</h2>
+            <div>
+                <div class="form-group">
+                    @Html.Label("ปีงบประมาณ")
+                    <div class="text-left">
+                        <select class="selectYearIndex">
+                            <option selected value="0">กรุณาเลือก</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                @*<label class="text-left">หน่วย กสอ.</label>*@
+                @Html.Label("หน่วย กสอ")
+                <div class="text-left">
+                    <select class="selectSVsIndex">
+                        <option selected value="0">กรุณาเลือก</option>
+                    </select>
+                </div>
+
+            </div>
+            <div class="text-left">
+                <p>
+                    <button class="openCreateBox btn btn-primary btn-xs" data-title="create" data-toggle="modal" data-target="#create">เพิ่มรายชื่อหน่วยร่วมในปี</button>
+                    <button id="exportButton" class="btn btn-lg btn-danger btn-xs clearfix"><span class="fa fa-file-text"></span> Export to PDF</button>
+                </p>
+            </div>
+            <div>
+            </div>
 
 
-        <div class="row">
+            <div class="row well well-sm">
 
-            <div class="col-md-12">
-                <table id="tblSVunitYear" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                    <thead>
-                        <tr>
-                            <th>
-                               ที่
-                            </th>
-                            <th>
-                               หน่วย กสอ.
-                            </th>
-                            <th>
-                               ชื่อย่อหน่วยร่วม
-                            </th>
-                            <th>
-                               ชื่อเต็มหน่วยร่วม
-                            </th>
-                            <th>
-                                ที่อยู่ติดต่อ
-                            </th>
-                            <th>
-                               เบอร์โทร
-                            </th>
-                            <th>
-                               เบอร์แฟกซ์
-                            </th>
-                            <th>
-                               อีเมล์
-                            </th>
-                            <th></th>
-                        </tr>
-
-                        @foreach (var item in Model)
-            {
+                <div class="col-md-12">
+                    <table id="tblSVunitYear" class="table table-stripe table-bordered table-hover" cellspacing="0" width="100%">
+                        <thead>
                             <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.CreatedBy)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.CreatedDate)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.ModifiedBy)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.ModifiedDate)
-                                </td>
-                                <td>
-                                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                                </td>
+                                <th>ที่</th>
+                                <th>ปีงบประมาณ</th>
+                                <th>หน่วยงาน</th>
+                                <th>ชื่อเต็มหน่วยร่วม</th>
+                                <th>ชื่อย่อหน่วยร่วม</th>
+                                <th width="20%">ที่อยู่ติดต่อ</th>
+                                <th>เบอร์โทร</th>
+                                <th>อีเมล์</th>
+                                <th width="20%">หัวหน้าหน่วยงาน</th>
+                                <th width="20%">ผู้ประสานงาน</th>
+                                @*<th>
+                                        แก้ไข
+                                    </th>
+                                    <th>
+                                        ดูข้อมูล
+                                    </th>*@
+                                <th>
+                                    ลบ
+                                </th>
+                                <th>
+                                   
+                                </th>
                             </tr>
-                        }
+                        </thead>
+                        <tbody>
+                            @{
+                                var count = 1;
+                            }
 
-                </table>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@count</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Year.Id)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.SV.Name)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Unit.Name)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Unit.Alias)</td>
+                                    <td>
+                                        @{
+                                            var No = item.Unit.Adress.No;
+                                            var Moo = item.Unit.Adress.Moo;
+                                            var MooBan = item.Unit.Adress.MooBan;
+                                            var AmphurName = item.Unit.Adress.AmphurName;
+                                            var Building = item.Unit.Adress.Building;
+                                            var Floor = item.Unit.Adress.Floor;
+                                            var ProvinceName = item.Unit.Adress.ProvinceName;
+                                            var Road = item.Unit.Adress.Road;
+                                            var Soi = item.Unit.Adress.Soi;
+                                            var TambolName = item.Unit.Adress.TambolName;
+                                            var ZipCode = item.Unit.Adress.ZipCode;
+                                            var address = "";
+                                            if (No != null) { address = "บ้านเลขที่ " + No; }
+                                            if (Moo != null) { address = address + " หมู่ที่ " + Moo; }
+                                            if (Floor != null) { address = address + " ชั้นที่ " + Floor; }
+                                            if (Building != null) { address = address + " ตึก/อาคาร " + Building; }
+                                            if (MooBan != null) { address = address + " หมู่บ้าน " + MooBan; }
+                                            if (Soi != null) { address = address + " ซอย " + Soi; }
+                                            if (Road != null) { address = address + " ถนน " + Road; }
+                                            if (TambolName != null) { address = address + " ตำบล/แขวง " + TambolName; }
+                                            if (AmphurName != null) { address = address + " อำเภอ/เขต " + AmphurName; }
+                                            if (ProvinceName != null) { address = address + " จังหวัด " + ProvinceName; }
+                                            if (ZipCode != null) { address = address + " รหัสไปรษณีย์ " + ZipCode; }
+
+                                        }
+                                        @address
+                                    </td>
+                                    <td>@Html.DisplayFor(modelItem => item.Unit.Tel)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Unit.Email)</td>
+                                    <td>
+                                        @{
+                                            var HeadPersonName = item.Unit.HeadPersonName;
+                                            var HeadPersonTel = item.Unit.HeadPersonTel;
+                                            var HeadPersonEmail = item.Unit.HeadPersonEmail;
+                                            var Header = "";
+                                            if (HeadPersonName != null) { Header = "ชื่อ " + HeadPersonName; }
+                                            if (HeadPersonTel != null) { Header = Header + " เบอร์โทร " + HeadPersonTel; }
+                                            if (HeadPersonEmail != null) { Header = Header + " อีเมลล์ " + HeadPersonEmail; }
+                                        }
+                                        @Header
+                                    </td>
+                                    <td>
+                                        @{
+                                            var ContactPersonName = item.Unit.ContactPersonName;
+                                            var ConactPersonTel = item.Unit.ConactPersonTel;
+                                            var ContactPersonEmail = item.Unit.ContactPersonEmail;
+                                            var contact = "";
+                                            if (ContactPersonName != null) { contact = "ชื่อ " + ContactPersonName; }
+                                            if (ConactPersonTel != null) { contact = contact + " เบอร์โทร " + ConactPersonTel; }
+                                            if (ContactPersonEmail != null) { contact = contact + " อีเมลล์ " + ContactPersonEmail; }
+                                        }
+                                        @contact
+                                    </td>
+                                    @*<td><p data-placement="top" data-toggle="tooltip" title="แก้ไข"> <button class="openEditBox btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-user-id="@item.Id" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
+                                        <td><p data-placement="top" data-toggle="tooltip" title="ดูข้อมูล"><button class="openDetailBox btn btn-info btn-xs" data-title="Detail" data-toggle="modal" data-user-id="@item.Id" data-target="#detail"><span class="glyphicon glyphicon-user"></span></button></p></td>*@
+                                    <td><p data-placement="top" data-toggle="tooltip" title="ลบ"><button class="openDeleteBox btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-user-id="@item.Id" data-target="#delete"><span class="glyphicon glyphicon-trash"></span></button></p></td>
+                                    <td>@item.Unit.Adress.fullAddress()</td>
+                                </tr>
+                                                count++;
+
+
+
+
+                                            }
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" tabindex="-1" role="dialog" id="edit">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    @* <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>*@
+                    <h4 class="modal-title">แก้ไขข้อมูล</h4>
+                </div>
+                <div class="modal-body">
+                    <p>One fine body&hellip;</p>
+                </div>
+                @*<div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>*@
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="detail">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    @* <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>*@
+                    <h4 class="modal-title">ข้อมูลหน่วย กสอ.</h4>
+                </div>
+                <div class="modal-body">
+                    <p>One fine body&hellip;</p>
+                </div>
+                @*<div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>*@
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="delete">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    @*<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>*@
+                    <h4 class="modal-title">ลบข้อมูล</h4>
+                </div>
+                <div class="modal-body">
+                    <p>One fine body&hellip;</p>
+                </div>
+                @*<div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>*@
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="create">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">เพิ่มเป้าหมายรายกิจกรรม</h4>
+                </div>
+                <div class="modal-body">
+                    <p>One fine body&hellip;</p>
+                </div>
+                @*<div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>*@
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 </body>
-</html>
+
+<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-1.12.3.js"></script>
+<script src="~/Scripts/jquerysession.js"></script>
+<script src="~/Scripts/jquery.tabledit.js"></script>
+<script src="~/Scripts/jquery.tabledit.min.js"></script>
+<link href="~/Content/css/chosen.css" rel="stylesheet" />
+
+<script type="text/javascript" charset="utf8" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css "></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.2.1/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.2.1/js/buttons.flash.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.2.1/js/buttons.html5.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.2.1/js/buttons.print.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.2.1/css/buttons.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="http://www.shieldui.com/shared/components/latest/css/light/all.min.css" />
+<script type="text/javascript" src="http://www.shieldui.com/shared/components/latest/js/shieldui-all.min.js"></script>
+<script type="text/javascript" src="http://www.shieldui.com/shared/components/latest/js/jszip.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var table = $('#tblSVunitYear').DataTable({
+            dom: 'Bfrtip',
+            buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
+            addFont: 'Tahoma',
+        });
+        var selectedId = $('.Year_Id').val();
+        var url = "/Admin/SVUnitYears/DDLYear";
+        var $jsontwo = $('.selectYearIndex');
+        $jsontwo.empty();
+        $jsontwo.append($("<option selected />").val(-1).text("กรุณาเลือก"));
+        $.ajax({
+            url: url,
+            async: false,
+            dataType: 'json',
+            success: function (data) {
+                var obj = data;
+                $.each(obj, function (index, value) {
+                    var name = value["Name"];
+                    var id = value["Id"];
+                    if (selectedId == id) {
+                        $jsontwo.append($("<option selected />").val(id).text(name));
+
+                    }
+                    else {
+                        $jsontwo.append($("<option />").val(id).text(name));
+                    }
+                });
+
+            }
+        });
+        var selectedId = $('.SV_Id').val();
+        var url = "/Admin/SVUnitYears/DDLSVs";
+        var $jsontwo = $('.selectSVsIndex');
+        $jsontwo.empty();
+        $jsontwo.append($("<option selected />").val(-1).text("กรุณาเลือก"));
+        $.ajax({
+            url: url,
+            async: false,
+            dataType: 'json',
+            success: function (data) {
+                var obj = data;
+                $.each(obj, function (index, value) {
+                    var name = value["Name"];
+                    var id = value["Id"];
+                    if (selectedId == id) {
+                        $jsontwo.append($("<option selected />").val(id).text(name));
+
+                    }
+                    else {
+                        $jsontwo.append($("<option />").val(id).text(name));
+                    }
+                });
+
+            }
+        });
+    });
+    $('.openCreateBox').on('click', function (event) {
+
+        var modal = $("#create")
+        var url = "/Admin/SVUnitYears/Create";
+        $.get(url).success(function (html) {
+            modal.find(".modal-body").html(html);
+            modal.modal("show");
+        })
+    });
+    $('.openEditBox').on('click', function (event) {
+        var button = $(this) // Button that triggered the modal
+        var userId = button.data('userId') // Extract info from data-* attributes
+        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+
+        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        var modal = $("#edit")
+        var u = userId
+        var url = "/Admin/SVUnitYears/Edit/" + u
+        $.get(url).success(function (html) {
+            modal.find(".modal-body").html(html);
+            modal.modal("show");
+        })
+    });
+    $('.openDetailBox').on('click', function (event) {
+        var button = $(this) // Button that triggered the modal
+        var userId = button.data('userId') // Extract info from data-* attributes
+        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+
+        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        var modal = $("#detail")
+        var u = userId
+        var url = "/Admin/SVUnitYears/Details/" + u;
+        $.get(url).success(function (html) {
+            modal.find(".modal-body").html(html);
+            modal.modal("show");
+        })
+    });
+    $('.openDeleteBox').on('click', function (event) {
+        var button = $(this) // Button that triggered the modal
+        var userId = button.data('userId') // Extract info from data-* attributes
+        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+
+        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        var modal = $("#delete")
+        var u = userId
+
+        var url = "/Admin/SVUnitYears/Delete/" + u;
+        $.get(url).success(function (html) {
+            modal.find(".modal-body").html(html);
+            modal.modal("show");
+        })
+    });
+    jQuery(function ($) {
+        $("#exportButton").click(function () {
+            // parse the HTML table element having an id=exportTable
+            var dataSource = shield.DataSource.create({
+                data: "#tblSVunitYear",
+                schema: {
+                    type: "table",
+                    fields: {
+                        ที่: { type: Number },
+                        ปีงบประมาณ: { type: String },
+                        หน่วยงาน: { type: String },
+                        ชื่อเต็มหน่วยร่วม: { type: String },
+                        ชื่อย่อหน่วยร่วม: { type: String },
+                        ที่อยู่ติดต่อ: { type: String },
+                        เบอร์โทร: { type: String },
+                        อีเมล์: { type: String },
+                        หัวหน้าหน่วยงาน: { type: String },
+                        ผู้ประสานงาน: { type: String }
+                    }
+                }
+            });
+
+            // when parsing is done, export the data to PDF
+            dataSource.read().then(function (data) {
+                var pdf = new shield.exp.PDFDocument({
+                    author: "PrepBootstrap",                   
+                    created: new Date()
+                });
+
+                pdf.addPage("a4", "portrait");
+                pdf.addFont("");
+                pdf.table(
+                    5,
+                    50,
+                    data,
+                    [
+                        { field: "ที่", title: "ที่" },
+                        { field: "ปีงบประมาณ", title: "ปีงบประมาณ", width: 50 },
+                        { field: "หน่วยงาน", title: "หน่วยงาน", width: 50 },
+                         { field: "ชื่อเต็มหน่วยร่วม", title: "ชื่อเต็มหน่วยร่วม", width: 50 },
+                          { field: "ชื่อย่อหน่วยร่วม", title: "ชื่อย่อหน่วยร่วม", width: 50 },
+                           { field: "ที่อยู่ติดต่อ", title: "ที่อยู่ติดต่อ", width: 150 },
+                            { field: "เบอร์โทร", title: "เบอร์โทร", width: 50 },
+                             { field: "อีเมล์", title: "อีเมล์", width: 50 },
+                              { field: "หัวหน้าหน่วยงาน", title: "หัวหน้าหน่วยงาน", width: 50 },
+                               { field: "ผู้ประสานงาน", title: "ผู้ประสานงาน", width: 50 }
+                    ],
+                    {
+                        margins: {
+                            top: 50                           
+                          
+                        },fontSize:10,printHeader:"Test"
+                       
+                    }
+                );
+                
+                pdf.saveAs({
+                    fileName: "รายชื่อหน่วยร่วม"
+                });
+            });
+        });
+    });
+</script>
+<style>
+   /*table{
+ font-family:'Angsana New';
+ font-size:18px;
+
+}*/
+</style>

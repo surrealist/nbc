@@ -21,15 +21,26 @@ namespace NBC.DataAccess.Contexts {
 
         public virtual DbSet<Setting> Settings { get; set; }
 
-        public virtual DbSet<SV> SV { get; set; }
-
+        public virtual DbSet<WorkPlace> WorkPlace { get; set; }
+        public virtual DbSet<SV> SV {
+            get
+            {
+                return Set<SV>();
+            }            
+        }
+        public virtual DbSet<Unit> Units {
+            get
+            {
+                return Set<Unit>();
+            }
+        }
         public virtual DbSet<SVActivityYear> SVActivityYears { get; set; }
 
         public virtual DbSet<SVUnitYear> SVUnitYear { get; set; }
 
         public virtual DbSet<TimeTable> TimeTables { get; set; }
 
-        public virtual DbSet<Unit> Units { get; set; }
+   
 
         public virtual DbSet<UnitActivity> UnitActivities { get; set; }
 

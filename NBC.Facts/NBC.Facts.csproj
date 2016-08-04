@@ -116,7 +116,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Fakes\FakeYearRepository.cs" />
+    <Compile Include="Fakes\FakeRepository_T.cs" />
+    <Compile Include="Services\SettingServiceFacts.cs" />
     <Compile Include="Services\SVServiceFacts.cs" />
     <Compile Include="SVFacts.cs" />
     <Compile Include="UnitFacts.cs" />

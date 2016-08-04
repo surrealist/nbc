@@ -21,6 +21,14 @@ namespace NBC.Services
             var key1 = (int)keys[0];
             return Query(x => x.Id == key1).SingleOrDefault();
         }
+        public List<SVActivityYear> getSVActivityYearBySVid(int SV_ID,int Year) {
+            return Query(x => x.SV.Id == SV_ID && x.Year.Id == Year).ToList();
+        }
+        
+        public List<SVActivityYear> getSVActivityYearByYear(int Year_ID)
+        {
+            return Query(x => x.Year.Id == Year_ID).ToList();
+        }
 
         public override SVActivityYear Add(SVActivityYear item)
         {
@@ -35,7 +43,7 @@ namespace NBC.Services
                 item.CreatedDate = DateTime.Now;
                 item.ModifiedDate = DateTime.Now;
                 base.Add(item);
-                base.SaveChanges();
+               // base.SaveChanges();
                 return item;
             }
             else

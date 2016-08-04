@@ -13,8 +13,11 @@ namespace NBC.Models
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
         [StringLength(255)]
+        [Required]       
         public string Name { get; set; }
-        public virtual MasProvince Province { get; set; }
+        [ForeignKey("MasProvince")]
+        public virtual int MasProvince_Id { get; set; }
+        public virtual MasProvince MasProvince { get; set; }
         [StringLength(255)]
         public String CreatedBy { get; set; }
         public DateTime CreatedDate { get; set; }

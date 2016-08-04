@@ -13,8 +13,10 @@ namespace NBC.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         [StringLength(255)]
+        [Required]
         public string Name { get; set; }          
         [StringLength(255)]
+        [Required]
         public string PhysicalLocation { get; set; }
         [StringLength(255)]
         public String CreatedBy { get; set; }

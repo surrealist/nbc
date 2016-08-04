@@ -20,8 +20,9 @@ namespace NBC.Web.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
         private UserService UserService;
-        public AccountController()
+        public AccountController(UserService userService)
         {
+            this.UserService = userService;
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
@@ -115,10 +116,15 @@ namespace NBC.Web.Controllers
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
+            var userName = model.UserName;
+            User user =  UserService.GetUserByUserName(model.UserName);
             var result = await SignInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
+                    user.LastLogin = DateTime.Now;
+                    UserService.SetModified(user);
+                    UserService.SaveChanges();
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");

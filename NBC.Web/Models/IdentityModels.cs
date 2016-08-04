@@ -29,5 +29,7 @@ namespace NBC.Web.Models
         {
             return new ApplicationDbContext();
         }
+
+       
     }
 }

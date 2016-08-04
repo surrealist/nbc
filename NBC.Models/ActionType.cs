@@ -9,6 +9,8 @@ namespace NBC.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         [StringLength(255)]
+        [Required]
+        [Index("IX_ActionTpeName",IsUnique = true)]
         public String Name { get; set; }
         [StringLength(255)]
         public String CreatedBy { get; set; }

@@ -2,18 +2,17 @@
 
 @{
     ViewBag.Title = "Create";
-    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+   // Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>เพิ่มปีงบประมาณ</h2>
+@*<h2>เพิ่มปีงบประมาณ</h2>*@
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        @*<h4>ปีงบประมาณ</h4>*@
-        <hr />
+
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.Label("รหัสปีงบประมาณ", htmlAttributes: new { @class = "control-label col-md-2" })
@@ -34,7 +33,7 @@
         <div class="form-group">
             @Html.Label("วันที่เริ่มปีงบประมาณ", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "datepicker form-control" } })
                 @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -42,51 +41,47 @@
         <div class="form-group">
             @Html.Label("วันที่สิ้นสุดปีงบประมาณ", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control" } })
+
+                @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "datepicker form-control" } })
                 @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.CreatedBy, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CreatedBy, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CreatedBy, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.CreatedDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CreatedDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CreatedDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ModifiedBy, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ModifiedBy, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ModifiedBy, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ModifiedDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ModifiedDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ModifiedDate, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="บันทึก" class="btn btn-default" />
+                <input type="submit" value="สร้าง" class="openCreateBox btn btn-primary btn-xs" /> |
+                @Html.ActionLink("ย้อนกลับ", "Index", "Years", null, new { @class = "openCreateBox btn btn-primary btn-xs" })
             </div>
         </div>
     </div>
+
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+
+<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-1.12.3.js"></script>
+<script type="text/javascript" charset="utf8" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="~/Scripts/bootstrap-datepicker.js"></script>
+
+<script src="~/Scripts/bootstrap-datepicker-thai.js"></script>
+<script src="~/Scripts/locales/bootstrap-datepicker.th.js"></script>
+
+<link href="~/Content/css/bootstrap-datepicker.css" rel="stylesheet" />
+
+
+<script language="javascript">
+    
+
+    $('.datepicker').datepicker({
+        language: 'th-th',
+        isBuddhist: true,
+        format: 'dd/mm/yyyy',
+        todayBtn: true,
+        todayHighlight: true,
+        autoclose: true
+    });
+
+    $('.datepicker').datepicker('update', Date.now.toString());
+   
+</script>

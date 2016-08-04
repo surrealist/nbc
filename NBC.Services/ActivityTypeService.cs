@@ -15,7 +15,7 @@ namespace NBC.Services
         }
         public override ActivityType Find(params object[] keys)
         {
-            var key1 = (int)keys[0];
+            var key1 = (string)keys[0];
             return Query(x => x.Id == key1).SingleOrDefault();
         }
 

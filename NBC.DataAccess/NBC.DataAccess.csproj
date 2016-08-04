@@ -64,13 +64,33 @@
     <Compile Include="Contexts\AppDbContext.cs" />
     <Compile Include="Bases\IRepository_T.cs" />
     <Compile Include="Contexts\FakeAppDbContext.cs" />
-    <Compile Include="Migrations\201607050550212_jengReinitial.cs" />
-    <Compile Include="Migrations\201607050550212_jengReinitial.Designer.cs">
-      <DependentUpon>201607050550212_jengReinitial.cs</DependentUpon>
+    <Compile Include="Migrations\201607110936262_JengCreate.cs" />
+    <Compile Include="Migrations\201607110936262_JengCreate.Designer.cs">
+      <DependentUpon>201607110936262_JengCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201607070521051_jengMod.cs" />
-    <Compile Include="Migrations\201607070521051_jengMod.Designer.cs">
-      <DependentUpon>201607070521051_jengMod.cs</DependentUpon>
+    <Compile Include="Migrations\201607111046000_jengCreate2.cs" />
+    <Compile Include="Migrations\201607111046000_jengCreate2.Designer.cs">
+      <DependentUpon>201607111046000_jengCreate2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607120458100_YingMasAmTam.cs" />
+    <Compile Include="Migrations\201607120458100_YingMasAmTam.Designer.cs">
+      <DependentUpon>201607120458100_YingMasAmTam.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607141123188_jome.cs" />
+    <Compile Include="Migrations\201607141123188_jome.Designer.cs">
+      <DependentUpon>201607141123188_jome.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607250645375_jomeSV.cs" />
+    <Compile Include="Migrations\201607250645375_jomeSV.Designer.cs">
+      <DependentUpon>201607250645375_jomeSV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607270917415_YingseedMas.cs" />
+    <Compile Include="Migrations\201607270917415_YingseedMas.Designer.cs">
+      <DependentUpon>201607270917415_YingseedMas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608020417427_JomeModelApplicant.cs" />
+    <Compile Include="Migrations\201608020417427_JomeModelApplicant.Designer.cs">
+      <DependentUpon>201608020417427_JomeModelApplicant.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -91,6 +111,7 @@
     <Compile Include="Repositories\PersonRepository.cs" />
     <Compile Include="Repositories\SettingRepository.cs" />
     <Compile Include="Repositories\SVActivityYearRepository.cs" />
+    <Compile Include="Repositories\WorkPlaceRepository.cs" />
     <Compile Include="Repositories\SVRepository.cs" />
     <Compile Include="Repositories\SVUnitYear.cs" />
     <Compile Include="Repositories\TimeTableRepository.cs" />
@@ -113,11 +134,26 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201607050550212_jengReinitial.resx">
-      <DependentUpon>201607050550212_jengReinitial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201607110936262_JengCreate.resx">
+      <DependentUpon>201607110936262_JengCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607070521051_jengMod.resx">
-      <DependentUpon>201607070521051_jengMod.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201607111046000_jengCreate2.resx">
+      <DependentUpon>201607111046000_jengCreate2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607120458100_YingMasAmTam.resx">
+      <DependentUpon>201607120458100_YingMasAmTam.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607141123188_jome.resx">
+      <DependentUpon>201607141123188_jome.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607250645375_jomeSV.resx">
+      <DependentUpon>201607250645375_jomeSV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607270917415_YingseedMas.resx">
+      <DependentUpon>201607270917415_YingseedMas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608020417427_JomeModelApplicant.resx">
+      <DependentUpon>201608020417427_JomeModelApplicant.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

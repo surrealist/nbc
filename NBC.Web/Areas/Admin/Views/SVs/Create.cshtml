@@ -1,28 +1,24 @@
 ﻿@model NBC.Models.SV
 
-@{
-    ViewBag.Title = "Create";
-    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
-}
-    
-    <h2>เพิ่มหน่วยร่วม</h2>
+<body>
 
-    @using (Html.BeginForm()) 
+    @using (Html.BeginForm("Create", "SVs", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
     {
         @Html.AntiForgeryToken()
-        
+
         <div class="form-horizontal">
-            @*<h4>SV</h4>*@
-            <hr />
+
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">                
+            @Html.HiddenFor(model => model.Id)
+
+            <div class="form-group">
                 @Html.Label("ชื่อ", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">                   
+                <div class="col-md-10">
                     @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
                 </div>
             </div>
-    
+
             <div class="form-group">
                 @Html.Label("ชื่อย่อ", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -30,39 +26,445 @@
                     @Html.ValidationMessageFor(model => model.Alias, "", new { @class = "text-danger" })
                 </div>
             </div>
+
             <div class="form-group">
-                @Html.Label("ที่อยู่", htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.Label("บ้านเลข", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Adress, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Adress, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.Adress.No, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Adress.No, "", new { @class = "text-danger" })
                 </div>
             </div>
-                <div class="form-group">
-                    @Html.Label("เบอร์โทร", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Tel, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Tel, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Create" class="btn btn-default" />
-                    </div>
+            <div class="form-group">
+                @Html.Label("หมู่ที่", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Adress.Moo, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Adress.Moo, "", new { @class = "text-danger" })
                 </div>
             </div>
-    }
-    
-  <div>
-    @Html.ActionLink("Back to List", "Index")
+            <div class="form-group">
+                @Html.Label("ชั้น", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Adress.Floor, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Adress.Floor, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("ตึก/อาคาร", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Adress.Building, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Adress.Building, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("หมู่บ้าน", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Adress.MooBan, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Adress.MooBan, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("ซอย", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Adress.Soi, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Adress.Soi, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("ถนน", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Adress.Road, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Adress.Road, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group" hidden="hidden">
+                @Html.LabelFor(model => model.Adress.Province_Id, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Adress.Province_Id, new { htmlAttributes = new { @class = "provinceID form-control" } })
+                    @Html.ValidationMessageFor(model => model.Adress.Province_Id, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group" hidden="hidden">
+                @Html.LabelFor(model => model.Adress.ProvinceName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Adress.ProvinceName, new { htmlAttributes = new { @class = "provinceName form-control" } })
+                    @Html.ValidationMessageFor(model => model.Adress.ProvinceName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("จังหวัด", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <select class="selectProvince">
+                        <option selected value="-1">กรุณาเลือก</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group" hidden="hidden">
+                @Html.LabelFor(model => model.Adress.Amphur_Id, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Adress.Amphur_Id, new { htmlAttributes = new { @class = "amphurID form-control" } })
+                    @Html.ValidationMessageFor(model => model.Adress.Amphur_Id, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group" hidden="hidden">
+                @Html.LabelFor(model => model.Adress.AmphurName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Adress.AmphurName, new { htmlAttributes = new { @class = "amphurName form-control" } })
+                    @Html.ValidationMessageFor(model => model.Adress.AmphurName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("อำเภอ/เขต", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <select class="selectAmphur">
+                        <option selected value="-1">กรุณาเลือก</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group" hidden="hidden">
+                @Html.LabelFor(model => model.Adress.Tambol_Id, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Adress.Tambol_Id, new { htmlAttributes = new { @class = "tambolId form-control" } })
+                    @Html.ValidationMessageFor(model => model.Adress.Tambol_Id, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group" hidden="hidden">
+                @Html.LabelFor(model => model.Adress.TambolName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Adress.TambolName, new { htmlAttributes = new { @class = "tambolName form-control" } })
+                    @Html.ValidationMessageFor(model => model.Adress.TambolName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("ตำบล/แขวง", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <select class="selectTambol">
+                        <option selected value="-1">กรุณาเลือก</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("รหัสไปรษณีย์", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Adress.ZipCode, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Adress.ZipCode, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Adress.Latitude, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Adress.Latitude, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Adress.Latitude, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Adress.Longtitude, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Adress.Longtitude, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Adress.Longtitude, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                @Html.Label("เบอร์โทร", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Tel, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Tel, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("อีเมลล์", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("หมายเหตุ", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Notes, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Notes, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="สร้าง" class="openCreateBox btn btn-primary btn-xs" /> 
+    @Html.ActionLink("ย้อนกลับ", "Index", "SVs", null, new { @class = "openCreateBox btn btn-primary btn-xs" })
 </div>
+            </div>
+        </div>
+    }
 
+   
+</body>
+<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-1.12.3.js"></script>
+
+<script>
+    $(document).ready(function () {
+        var selectedId = $('.provinceID').val();
+        var url = "/Admin/MasAmphurs/DDLProvince";
+        var $jsontwo = $('.selectProvince');
+        $jsontwo.empty();
+        $jsontwo.append($("<option selected />").val(-1).text("กรุณาเลือก"));
+        $.ajax({
+            url: url,
+            async: false,
+            dataType: 'json',
+            success: function (data) {
+                var obj = data;
+                $.each(obj, function (index, value) {
+                    var name = value["Name"];
+                    var id = value["Id"];
+                    if (selectedId == id) {
+                        $jsontwo.append($("<option selected />").val(id).text(name));
+
+                    }
+                    else {
+                        $jsontwo.append($("<option />").val(id).text(name));
+                    }
+                });
+                //var max = getMax(data, 'Id');
+
+                //alert(max.Id);
+            }
+        });
+
+        var PId = $('.selectProvince').val();
+        selectedId = $('.amphurID').val();
+        url = "/Admin/SVs/DDLAmphur/" + PId;
+        var $jsontwo = $('.selectAmphur');
+        $jsontwo.empty();
+        $jsontwo.append($("<option />").val(-1).text("กรุณาเลือก"));
+        $.ajax({
+            url: url,
+            async: false,
+            dataType: 'json',
+            success: function (data) {
+                var obj = data;
+                $.each(obj, function (index, value) {
+                    var name = value["Name"];
+                    var id = value["Id"];
+                    if (selectedId == id) {
+                        $jsontwo.append($("<option selected />").val(id).text(name));
+                    }
+                    else {
+                        $jsontwo.append($("<option />").val(id).text(name));
+                    }
+                });
+            }
+        });
+        var AId = $('.selectAmphur').val();
+        selectedId = $('.tambolId').val();
+        url = "/Admin/SVs/DDLTambol/" + AId;
+        var $jsontwo = $('.selectTambol');
+        $jsontwo.empty();
+        $jsontwo.append($("<option />").val(-1).text("กรุณาเลือก"));
+        $.ajax({
+            url: url,
+            async: false,
+            dataType: 'json',
+            success: function (data) {
+                var obj = data;
+                $.each(obj, function (index, value) {
+                    var name = value["Name"];
+                    var id = value["Id"];
+                    if (selectedId == id) {
+                        $jsontwo.append($("<option selected />").val(id).text(name));
+                    }
+                    else {
+                        $jsontwo.append($("<option />").val(id).text(name));
+                    }
+                });
+            }
+        });
+    });
+    $('.selectProvince').change(function () {
+        // alert($('.selectProvince').val());
+        var PId = $('.selectProvince').val();
+        var url = "/Admin/SVs/DDLProvince";
+        var pName;
+        var max;
+        $.ajax({
+            url: url,
+            async: false,
+            dataType: 'json',
+            success: function (data) {
+                var obj = data;
+
+                $.each(obj, function (index, value) {
+                    var name = value["Name"];
+                    var id = value["Id"];
+                    if (id == PId) {
+                        pName = name;
+                    }
+                });
+
+            }
+
+        });
+
+
+
+        $('.provinceID').val($('.selectProvince').val());
+        $('.provinceName').val(pName);
+        $('.amphurID').val("");
+        $('.amphurName').val("");
+        $('.tambolId').val("");
+        $('.tambolName').val("");
+
+
+    });
+
+    $('.selectProvince').change(function () {
+        var PId = $('.selectProvince').val();
+        var selectedId = $('.amphurID').val();
+        url = "/Admin/SVs/DDLAmphur/" + PId
+        var $jsontwo = $('.selectAmphur');
+        $jsontwo.empty();
+        $jsontwo.append($("<option />").val(-1).text("กรุณาเลือก"));
+        $.ajax({
+            url: url,
+            async: false,
+            dataType: 'json',
+            success: function (data) {
+                var obj = data;
+                $.each(obj, function (index, value) {
+                    var name = value["Name"];
+                    var id = value["Id"];
+                    $jsontwo.append($("<option />").val(id).text(name));
+
+                });
+                //var max = getMax(data, 'Id');
+
+                //alert(max.Id);
+            }
+        });
+        var AId = $('.selectAmphur').val();
+        selectedId = $('.tambolId').val();
+        url = "/Admin/SVs/DDLTambol/" + AId;
+        var $jsontwo = $('.selectTambol');
+        $jsontwo.empty();
+        $jsontwo.append($("<option />").val(-1).text("กรุณาเลือก"));
+        $.ajax({
+            url: url,
+            async: false,
+            dataType: 'json',
+            success: function (data) {
+                var obj = data;
+                $.each(obj, function (index, value) {
+                    var name = value["Name"];
+                    var id = value["Id"];
+                    if (selectedId == id) {
+                        $jsontwo.append($("<option selected />").val(id).text(name));
+                    }
+                    else {
+                        $jsontwo.append($("<option />").val(id).text(name));
+                    }
+                });
+            }
+        });
+    });
+    $('.selectAmphur').change(function () {
+        // alert($('.selectProvince').val());
+        var PId = $('.selectProvince').val();
+        var AId = $('.selectAmphur').val();
+        var url = "/Admin/SVs/DDLAmphur/" + PId;
+        var aName;
+        var max;
+        $.ajax({
+            url: url,
+            async: false,
+            dataType: 'json',
+            success: function (data) {
+                var obj = data;
+
+                $.each(obj, function (index, value) {
+                    var name = value["Name"];
+                    var id = value["Id"];
+                    if (id == AId) {
+                        aName = name;
+                    }
+                });
+
+            }
+
+        });
+
+
+
+        $('.amphurID').val(AId);
+        $('.amphurName').val(aName);
+        $('.tambolId').val("");
+        $('.tambolName').val("");
+
+    });
+    $('.selectAmphur').change(function () {
+        // alert($('.selectProvince').val());
+
+        var AId = $('.selectAmphur').val();
+        selectedId = $('.tambolId').val();
+        url = "/Admin/SVs/DDLTambol/" + AId;
+        var $jsontwo = $('.selectTambol');
+        $jsontwo.empty();
+        $jsontwo.append($("<option />").val(-1).text("กรุณาเลือก"));
+        $.ajax({
+            url: url,
+            async: false,
+            dataType: 'json',
+            success: function (data) {
+                var obj = data;
+                $.each(obj, function (index, value) {
+                    var name = value["Name"];
+                    var id = value["Id"];
+                    if (selectedId == id) {
+                        $jsontwo.append($("<option selected />").val(id).text(name));
+                    }
+                    else {
+                        $jsontwo.append($("<option />").val(id).text(name));
+                    }
+                });
+            }
+        });
+
+    });
+    $('.selectTambol').change(function () {
+        // alert($('.selectProvince').val());
+        var AId = $('.selectAmphur').val();
+        var TId = $('.selectTambol').val();
+        var url = "/Admin/SVs/DDLTambol/" + AId;
+        var tName;
+
+        $.ajax({
+            url: url,
+            async: false,
+            dataType: 'json',
+            success: function (data) {
+                var obj = data;
+
+                $.each(obj, function (index, value) {
+                    var name = value["Name"];
+                    var id = value["Id"];
+                    if (id == TId) {
+                        tName = name;
+                    }
+                });
+
+            }
+
+        });
+
+
+
+        $('.tambolId').val(TId);
+
+
+        $('.tambolName').val(tName);
+        // $('.amphurID').val(max.Id);
+
+    });
+</script>

@@ -15,16 +15,20 @@ namespace NBC.Web.Areas.Admin.Controllers
     public class MasTambolsController : Controller
     {
         private MasTambolService service;
+        private MasProvinceService proService;
+        private MasAmphurService amService;
 
-        public MasTambolsController(MasTambolService service)
+        public MasTambolsController(MasTambolService service,MasProvinceService proService,MasAmphurService amService)
         {
             this.service = service;
+            this.proService = proService;
+            this.amService = amService;
         }
 
         // GET: Admin/MasTambols
         public ActionResult Index()
         {
-            return View(service.All());
+            return View(service.GetAllTambol());
         }
 
         // GET: Admin/MasTambols/Details/5
@@ -53,7 +57,7 @@ namespace NBC.Web.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Latitude,Longtitude,CreatedBy,CreatedDate,ModifiedBy,ModifiedDate")] MasTambol masTambol)
+        public ActionResult Create(MasTambol masTambol)
         {
             if (ModelState.IsValid)
             {
@@ -85,15 +89,25 @@ namespace NBC.Web.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Latitude,Longtitude,CreatedBy,CreatedDate,ModifiedBy,ModifiedDate")] MasTambol masTambol)
+        public ActionResult Edit(MasTambol masTambol)
         {
-            if (ModelState.IsValid)
+            try
             {
-                //db.Entry(masTambol).State = EntityState.Modified;
+                MasTambol thisTambol = service.Find(masTambol.Id);
+                thisTambol.Name = masTambol.Name;
+                service.SetModified(thisTambol);
                 service.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(masTambol);
+            catch (Exception ex)
+            {
+               return View(masTambol);
+                
+            }
+                //db.Entry(masTambol).State = EntityState.Modified;
+               
+            
+            
         }
 
         // GET: Admin/MasTambols/Delete/5
@@ -120,6 +134,36 @@ namespace NBC.Web.Areas.Admin.Controllers
             service.Remove(masTambol);
             service.SaveChanges();
             return RedirectToAction("Index");
+        }
+        [HttpGet]
+        public ActionResult DDLProvince()
+        {
+            var province = proService.All().ToList();
+            if (province == null)
+            {
+                return HttpNotFound();
+            }
+            return Json(province, JsonRequestBehavior.AllowGet);
+        }
+        [HttpGet]
+        public ActionResult DDLAmphur(int Id)
+        {
+            var amphur = amService.GetAmphurByProvinceId(Id);
+            if (amphur == null)
+            {
+                return HttpNotFound();
+            }
+            return Json(amphur, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult DDLTambol(int Id)
+        {
+            var tambol = service.GetTambolByAmphurId(Id);
+            if (tambol == null)
+            {
+                return HttpNotFound();
+            }
+            return Json(tambol, JsonRequestBehavior.AllowGet);
         }
 
         //protected override void Dispose(bool disposing)

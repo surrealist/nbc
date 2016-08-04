@@ -10,12 +10,16 @@ namespace NBC.Models
 {
     public class MasSubBusinessType : IRecord
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [StringLength(255)]
+        [Required]
+        [Index("IX_MasSubBusinessTypeName", IsUnique = true)]
         public string Name { get; set; }
-        public MasBusinessType BusinessType { get; set; }
+        [ForeignKey("MasBusinessType")]
+        public virtual int MasBusinessType_Id { get; set; }
+        public virtual MasBusinessType MasBusinessType { get; set; }
         [StringLength(255)]
         public String CreatedBy { get; set; }
         public DateTime CreatedDate { get; set; }

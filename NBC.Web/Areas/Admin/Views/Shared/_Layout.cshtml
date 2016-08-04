@@ -8,10 +8,13 @@
     @Scripts.Render("~/bundles/bootstrap")
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+   
+
     <link href="~/Content/bootsnipp_submenu.css" rel="stylesheet" />
     <link href="~/Content/jquery.dataTables.min.css" rel="stylesheet" />
     <link href="~/Content/buttons.dataTables.min.css" rel="stylesheet" />
     <link href="~/Content/bootsnipp_iconmenu.css" rel="stylesheet" />
+    <link href="~/Content/css/chosen.css" rel="stylesheet" />
     @*<link href="~/Content/font-awesome.css" rel="stylesheet" />*@
     <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
   
@@ -159,6 +162,123 @@
                             </div>
                         </div>
                     </li>
+
+
+                    @*act-section*@
+
+                    <li>
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseMas">
+                            <span class="small-nav" data-toggle="tooltip" data-placement="right" title="ตั้งค่าพื้นฐาน">
+                                <span class="glyphicon glyphicon-cog"></span>
+                            </span>
+                            <span class="full-nav"> ตั้งค่าพื้นฐาน </span>
+                        </a>
+                    </li>
+                    <li>
+                        <div id="collapseMas" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <div style="background-color:purple">
+                                    <table class="table">
+                                        <tr>
+                                            <td>
+                                                <a href="/Admin/MasAmphurs/">
+                                                    <span class="small-nav" data-toggle="tooltip" data-placement="right" title="อำเภอ">
+                                                        <span class="fa-stack fa-lg">
+                                                            <i class="fa fa-circle-thin fa-stack-2x"></i>
+                                                            <i class="fa fa-location-arrow fa-stack-1x fa-inverse"></i>
+                                                        </span>
+                                                    </span>
+                                                    <span class="full-nav"> อำเภอ </span>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a href="/Admin/MasBusinessTypes/">
+                                                    <span class="small-nav" data-toggle="tooltip" data-placement="right" title="ประเภทธุรกิจ">
+                                                        <span class="fa-stack fa-lg">
+                                                            <i class="fa fa-circle-thin fa-stack-2x"></i>
+                                                            <i class="fa fa-building-o fa-stack-1x fa-inverse"></i>
+                                                        </span>
+                                                    </span>
+                                                    <span class="full-nav"> ประเภทธุรกิจ </span>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a href="/Admin/MasCareerTypes/">
+                                                    <span class="small-nav" data-toggle="tooltip" data-placement="right" title="ประเภทอาชีพ">
+                                                        <span class="fa-stack fa-lg">
+                                                            <i class="fa fa-circle-thin fa-stack-2x"></i>
+                                                            <i class="fa fa-users fa-stack-1x fa-inverse"></i>
+                                                        </span>
+                                                    </span>
+                                                    <span class="full-nav"> ประเภทอาชีพ </span>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a href="/Admin/MasEducationTypes/">
+                                                    <span class="small-nav" data-toggle="tooltip" data-placement="right" title="ประเภทการศึกษา">
+                                                        <span class="fa-stack fa-lg">
+                                                            <i class="fa fa-circle-thin fa-stack-2x"></i>
+                                                            <i class="fa fa-book fa-stack-1x fa-inverse"></i>
+                                                        </span>
+                                                    </span>
+                                                    <span class="full-nav"> ประเภทการศึกษา </span>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a href="/Admin/MasProvinces/">
+                                                    <span class="small-nav" data-toggle="tooltip" data-placement="right" title="จังหวัด">
+                                                        <span class="fa-stack fa-lg">
+                                                            <i class="fa fa-circle-thin fa-stack-2x"></i>
+                                                            <i class="fa fa-map-marker fa-stack-1x fa-inverse"></i>
+                                                        </span>
+                                                    </span>
+                                                    <span class="full-nav"> จังหวัด </span>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a href="/Admin/MasSubBusinessTypes/">
+                                                    <span class="small-nav" data-toggle="tooltip" data-placement="right" title="ประเภทธุรกิจย่อย">
+                                                        <span class="fa-stack fa-lg">
+                                                            <i class="fa fa-circle-thin fa-stack-2x"></i>
+                                                            <i class="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
+                                                        </span>
+                                                    </span>
+                                                    <span class="full-nav"> ประเภทธุรกิจย่อย </span>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a href="/Admin/MasTambols/">
+                                                    <span class="small-nav" data-toggle="tooltip" data-placement="right" title="ตำบล">
+                                                        <span class="fa-stack fa-lg">
+                                                            <i class="fa fa-circle-thin fa-stack-2x"></i>
+                                                            <i class="fa fa-thumb-tack fa-stack-1x fa-inverse"></i>
+                                                        </span>
+                                                    </span>
+                                                    <span class="full-nav"> ตำบล </span>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    @*act-section*@
+
+
+
                     <li>
                         <a href="/Admin/Users/">
                             <span class="small-nav" data-toggle="tooltip" data-placement="right" title="จัดการผู้ใช้งาน">

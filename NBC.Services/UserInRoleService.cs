@@ -20,11 +20,23 @@ namespace NBC.Services
             var key1 = (int)keys[0];
             return Query(x => x.Id == key1).SingleOrDefault();
         }
-        public UserInRole GetUserInRoleByUserIdAndUserRoleId(int? User_Id,int? UserRole_Id)
+        public UserInRole GetUserInRoleByUserIdAndUserRoleId(int User_Id,int UserRole_Id)
         {
-            return Query(x => x.Role.Id  == UserRole_Id && x.User.Id == User_Id).SingleOrDefault();
+            var dataContexts = new DataAccess.Contexts.AppDbContext();
+
+            var q = (from u in dataContexts.UserInRoles where u.User_Id == User_Id && u.Role_Id == UserRole_Id select u);
+            if (q.Count() != 0)
+            {
+                var resoult = q.SingleOrDefault();
+
+                return (resoult);
+            }
+            else
+            {
+                return (null);
+            }
         }
-        public List<UserInRole> GetUserInRoleByUserId(int? Id)
+        public List<UserInRole> GetUserInRolesByUserId(int? Id)
         {
             var dataContexts = new DataAccess.Contexts.AppDbContext();
            
@@ -39,6 +51,10 @@ namespace NBC.Services
                 return (null);
             }
            
+        }
+        public IQueryable<UserInRole> GetUserInRolesByUserName(string name)
+        {
+            return Query(u => u.User.UserName == name);
         }
         public override UserInRole Add(UserInRole item)
         {

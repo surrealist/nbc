@@ -90,6 +90,7 @@ namespace NBC.Web.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 //db.Entry(masCareerType).State = EntityState.Modified;
+                service.SetModified(masCareerType);
                 service.SaveChanges();
                 return RedirectToAction("Index");
             }

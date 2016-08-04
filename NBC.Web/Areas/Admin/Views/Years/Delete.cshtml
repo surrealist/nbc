@@ -43,9 +43,10 @@
 
         <div class="form-actions no-color">
           <p> 
-              <input type="submit" value="ต้องการลบข้อมูล" class="btn btn-default" /> <br />
+              <input type="submit" value="ต้องการลบข้อมูล" class="openCreateBox btn btn-primary btn-xs" />
+              @Html.ActionLink("ย้อนกลับ", "Index", "Years", null, new { @class = "openCreateBox btn btn-primary btn-xs" })
             </p> 
-            @Html.ActionLink("Back to List", "Index")
+      
         </div>
     }
 </div>

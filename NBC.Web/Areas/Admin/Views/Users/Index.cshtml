@@ -10,9 +10,10 @@
 <body>
     <div class="container">
         <div class="row">
-                        <p>
-                @Html.ActionLink("เพิ่มผู้ใช้งานระบบ", "Create")
-            </p>
+            <p>
+                @*@Html.ActionLink("เพิ่มผู้ใช้งานระบบ", "Create")*@
+                <button class="openCreateBox btn btn-primary btn-xs" data-title="create" data-toggle="modal" data-target="#create">เพิ่มผู้ใช้งานระบบ</button>
+</p>
         </div>
 
         <div class="row">
@@ -53,10 +54,17 @@
                                 แก้ไขข้อมูล
                             </th>
                             <th>
-                                ลบข้อมูล
+                                กำหนดสิทธ์ผู้ใช้งาน
                             </th>
                             <th>
                                 ดูข้อมูล
+                            </th>
+                            <th>
+                                ลบข้อมูล
+                            </th>
+                            
+                            <th>
+                                เปิด/ปิดการใช้งาน
                             </th>
                            
                         </tr>
@@ -67,9 +75,11 @@
                         @foreach (var item in Model)
                         {
                             <tr>
+
                                 <td id="ID" hidden="hidden">
                                     @Html.DisplayFor(modelItem => item.Id)
                                 </td>
+
                                 <td class="Std">
                                     @Html.DisplayFor(modelItem => item.UserName)
                                 </td>
@@ -91,21 +101,35 @@
                                 <td>
                                     @Html.DisplayFor(modelItem => @item.Email)
                                 </td>
-                                <td class="MA">
+                                <td>
 
-                                   
-                                    <p data-placement="top" data-toggle="tooltip" title="ลบ"> <button class="openEditBox btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-user-id="@item.Id" data-target="#AddUerInRole"><span class="glyphicon glyphicon-pencil"></span></button></p>
-                                    
-                                    
+
+                                    <p data-placement="top" data-toggle="tooltip" title="แก้ไข"> <button class="openEditBox btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-user-id="@item.Id" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button></p>
 
 
 
+
+
+                                </td>
+                                <td>
+                                    <p data-placement="top" data-toggle="tooltip" title="กำหนดสิทธิ์"> <button class="openAddUerInRoleBox btn btn-warning btn-xs" data-title="addUerInRole" data-toggle="modal" data-user-id="@item.Id" data-target="#addUerInRole"><span class="glyphicon glyphicon-eye-open"></span></button></p>
+                                </td>
+                                <td>
+                                    <p data-placement="top" data-toggle="tooltip" title="ดูข้อมูล"><button class="openDetailBox btn btn-info btn-xs" data-title="Detail" data-toggle="modal" data-user-id="@item.Id" data-target="#detail"><span class="glyphicon glyphicon-user"></span></button></p>
                                 </td>
                                 <td>
                                     <p data-placement="top" data-toggle="tooltip" title="ลบ"><button class="openDeleteBox btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-user-id="@item.Id" data-target="#delete"><span class="glyphicon glyphicon-trash"></span></button></p>
                                 </td>
+                               
                                 <td>
-                                    <p data-placement="top" data-toggle="tooltip" title="ดูข้อมูล"><button class="openDetailBox btn btn-info btn-xs" data-title="Detail" data-toggle="modal" data-user-id="@item.Id" data-target="#detail"><span class="glyphicon glyphicon-user"></span></button></p>
+                                    @if (item.isEnable == true)
+                                    {
+                                        <button id="year" name="year" class="enableUser glyphicon glyphicon-ok" data-title="EnableUser" data-toggle="modal" data-user-id="@item.Id"></button>
+                                    }
+                                    else
+                                    {
+                                        <button id="year" name="year" class="enableUser btn btn-default" data-title="EnableUser" data-toggle="modal" data-user-id="@item.Id"></button>
+                                    }
                                 </td>
                                
                             </tr>
@@ -120,12 +144,29 @@
         </div>
 
     </div>
-    <div class="modal fade" tabindex="-1" role="dialog" id="AddUerInRole">
+    <div class="modal fade" tabindex="-1" role="dialog" id="edit">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title">แก้ไขข้อมูลผู้ใช้งาน</h4>
+                </div>
+                <div class="modal-body">
+                    <p>One fine body&hellip;</p>
+                </div>
+                @*<div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>*@
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="addUerInRole">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">กำหนดสิทธิ์ผู้ใช้งานระบบ</h4>
                 </div>
                 <div class="modal-body">
                     <p>One fine body&hellip;</p>
@@ -172,11 +213,30 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="create">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">เพิ่มผู้ใช้งานระบบ</h4>
+                </div>
+                <div class="modal-body">
+                    <p>One fine body&hellip;</p>
+                </div>
+                @*<div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>*@
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 
 </body>
 
 <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-1.12.3.js"></script>
 <script src="~/Scripts/jquerysession.js"></script>
+<script src="~/Scripts/jquery.tabledit.js"></script>
+<script src="~/Scripts/jquery.tabledit.min.js"></script>
 <script type="text/javascript" charset="utf8" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css "></script>
@@ -211,15 +271,29 @@
 
         });
 
+        $('.openAddUerInRoleBox').on('click', function (event) {
+            var button = $(this) // Button that triggered the modal
+            var userId = button.data('userId') // Extract info from data-* attributes
+            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+
+            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+            var modal = $("#addUerInRole")
+            var u = userId
+            var url = "/Admin/Users/AddUserInRole/" + u
+            $.get(url).success(function (html) {
+                modal.find(".modal-body").html(html);
+                modal.modal("show");
+            })
+        });
         $('.openEditBox').on('click', function (event) {
             var button = $(this) // Button that triggered the modal
             var userId = button.data('userId') // Extract info from data-* attributes
             // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
 
             // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-            var modal = $("#AddUerInRole")
+            var modal = $("#edit")
             var u = userId
-            var url = "/Admin/Users/AddUserInRole/"+ u
+            var url = "/Admin/Users/Edit/" + u
             $.get(url).success(function (html) {
                 modal.find(".modal-body").html(html);
                 modal.modal("show");
@@ -254,7 +328,30 @@
                 modal.modal("show");
             })
         });
-
+        $('.openCreateBox').on('click', function (event) {
+            
+            var modal = $("#create")
+            var url = "/Admin/Users/Create";
+            $.get(url).success(function (html) {
+                modal.find(".modal-body").html(html);
+                modal.modal("show");
+            })
+        });
+        $('.enableUser').on('click', function (event) {
+            var button = $(this) // Button that triggered the modal
+            var userId = button.data('userId') // Extract info from data-* attributes
+            // alert(userId);
+            var url = "/Admin/Users/SetEnableUser/" + userId;
+            $.ajax({
+                method: "POST",
+                url: url,
+                success: function () {
+                    location.reload();
+                }
+                
+            })
+            
+        });
 
 
     });

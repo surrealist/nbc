@@ -20,7 +20,14 @@ namespace NBC.Services
             var key1 = (int)keys[0];
             return Query(x => x.Id == key1).SingleOrDefault();
         }
-
+        public List<MasAmphur> GetAmphurByProvinceId (int Id)
+        {            
+            return Query(x => x.MasProvince_Id == Id).ToList();
+        }
+        public List<MasAmphur> GetAllAmphurd()
+        {
+            return Query(x => x.Id != 0).ToList();
+        }
         public override MasAmphur Add(MasAmphur item)
         {
             MasAmphur action = Query(x => x.Name == item.Name).SingleOrDefault();

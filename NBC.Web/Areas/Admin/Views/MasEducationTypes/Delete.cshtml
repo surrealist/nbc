@@ -1,72 +1,65 @@
 ﻿@model NBC.Models.MasEducationType
 
 @{
+    ViewBag.Title = "Delete";
     Layout = null;
 }
 
-<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Delete</title>
-</head>
-<body>
-    <h3>Are you sure you want to delete this?</h3>
-    <div>
-        <h4>MasEducationType</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.Name)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Name)
-            </dd>
-    
-            <dt>
+
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            ประเภทธุรกิจ
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        @*<dt>
                 @Html.DisplayNameFor(model => model.CreatedBy)
             </dt>
-    
+
             <dd>
                 @Html.DisplayFor(model => model.CreatedBy)
-            </dd>
-    
-            <dt>
+            </dd>*@
+
+        @*<dt>
                 @Html.DisplayNameFor(model => model.CreatedDate)
             </dt>
-    
+
             <dd>
                 @Html.DisplayFor(model => model.CreatedDate)
             </dd>
-    
+
             <dt>
                 @Html.DisplayNameFor(model => model.ModifiedBy)
             </dt>
-    
+
             <dd>
                 @Html.DisplayFor(model => model.ModifiedBy)
             </dd>
-    
+
             <dt>
                 @Html.DisplayNameFor(model => model.ModifiedDate)
             </dt>
-    
+
             <dd>
                 @Html.DisplayFor(model => model.ModifiedDate)
-            </dd>
-    
-        </dl>
-    
-        @using (Html.BeginForm()) {
-            @Html.AntiForgeryToken()
-    
-            <div class="form-actions no-color">
-                <input type="submit" value="Delete" class="btn btn-default" /> |
-                @Html.ActionLink("Back to List", "Index")
-            </div>
-        }
-    </div>
-</body>
-</html>
+            </dd>*@
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="ต้องการลบ" class="openCreateBox btn btn-primary btn-xs"  /> | 
+            @Html.ActionLink("ย้อนกลับ", "Index", "MasEducationTypes", null, new { @class = "openCreateBox btn btn-primary btn-xs" })
+        </div>
+    }
+</div>
+

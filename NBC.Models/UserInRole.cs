@@ -10,13 +10,12 @@ namespace NBC.Models
        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         [ForeignKey("User")]
-        public int User_Id { get; set; }
+        public virtual int User_Id { get; set; }
         public virtual User User { get; set; }
         [ForeignKey("Role")]
-        public int Role_Id { get; set; }
-        public virtual Role Role { get; set; }
-             
-        //public virtual WorkPlace WorkAt { get; set; }
+        public virtual int Role_Id { get; set; }
+        public virtual Role Role { get; set; }             
+        public virtual WorkPlace WorkAt { get; set; }
         public bool isEnable { get; set; }
         [StringLength(255)]
         public String CreatedBy { get; set; }

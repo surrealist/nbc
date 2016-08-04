@@ -58,6 +58,7 @@
     <Compile Include="ActivityTypeService.cs" />
     <Compile Include="ActualWorkService.cs" />
     <Compile Include="ApplicantService.cs" />
+    <Compile Include="RootClass.cs" />
     <Compile Include="Bases\IService_T.cs" />
     <Compile Include="Bases\ServiceBase_T.cs" />
     <Compile Include="MasBusniessTypeService.cs" />

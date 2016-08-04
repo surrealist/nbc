@@ -1,129 +1,144 @@
-﻿using System.Net;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 using System.Web.Mvc;
-using NBC.Models;
 using NBC.Services;
-using System;
+using NBC.Web.Models;
+using NBC.Models;
+
 
 namespace NBC.Web.Areas.Admin.Controllers
 {
     public class SVsController : Controller
     {
-        private SVService svService;
-        private SettingService settingService;
-
-        public SVsController(SVService svService,SettingService settingService)
-        {
-            this.svService = svService;
-            this.settingService = settingService;
-        }
-
         // GET: Admin/SVs
+        private SVService SVService;
+        private MasAmphurService MasAmphurService;
+        private MasProvinceService MasProvinceService;
+        private MasTambolService MasTambolService;
+        public SVsController(SVService svService, MasAmphurService masAmphurService, MasProvinceService masProvinceService, MasTambolService masTambolService)
+        {
+            this.SVService = svService;
+            this.MasAmphurService = masAmphurService;
+            this.MasProvinceService = masProvinceService;
+            this.MasTambolService = masTambolService;
+        }
         public ActionResult Index()
         {
-            return View(svService.All());
+
+            
+            return View(SVService.All());
         }
 
         // GET: Admin/SVs/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-           NBC.Models.SV sv = svService.Find(id);
-            if (sv == null)
-            {
-                return HttpNotFound();
-            }
-            return View(sv);
+            NBC.Models.SV sv = SVService.Find(id);
+            return PartialView(sv);
         }
 
         // GET: Admin/SVs/Create
         public ActionResult Create()
         {
-            return View();
+            return PartialView();
         }
 
         // POST: Admin/SVs/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Alias,Tel,Email,CreatedBy,CreatedDate,ModifiedBy,ModifiedDate")] NBC.Models.SV sv)
+        public ActionResult Create(NBC.Models.SV sv)
         {
-            if (ModelState.IsValid)
+            try
             {
-                svService.Add(sv);
-                svService.SaveChanges();
+                // TODO: Add insert logic here
+                
+                SVService.Add(sv);
+                SVService.SaveChanges();
+
                 return RedirectToAction("Index");
             }
-
-            return View(sv);
+            catch
+            {
+                return View();
+            }
         }
 
         // GET: Admin/SVs/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            NBC.Models.SV sv = svService.Find(id);
-            if (sv == null)
-            {
-                return HttpNotFound();
-            }
+            NBC.Models.SV sv = SVService.Find(id);
             return PartialView(sv);
         }
 
         // POST: Admin/SVs/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Alias,Tel,Email,CreatedBy,CreatedDate,ModifiedBy,ModifiedDate")] NBC.Models.SV sv)
+        public ActionResult Edit(NBC.Models.SV sv)
         {
             if (ModelState.IsValid)
             {
-                svService.SetModified(sv);
-                svService.SaveChanges();
+                //db.Entry(unit).State = EntityState.Modified;               
+                SVService.SetModified(sv);
+                SVService.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(sv);
         }
 
         // GET: Admin/SVs/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int id)
         {
-            if (id == null)
+            NBC.Models.SV sv = SVService.Find(id);
+            return View(sv);
+        }
+
+        // POST: Admin/SVs/Delete/5
+        [HttpPost]
+        public ActionResult Delete(NBC.Models.SV sv)
+        {
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                // TODO: Add delete logic here
+                sv = SVService.Find(sv.Id);
+                SVService.Remove(sv);
+                SVService.SaveChanges();
+
+                return RedirectToAction("Index");
             }
-            NBC.Models.SV sv = svService.Find(id);
-            if (sv == null)
+            catch
+            {
+                return View();
+            }
+        }
+        [HttpGet]
+        public ActionResult DDLProvince()
+        {
+            var province = MasProvinceService.All().ToList();
+            if (province == null)
             {
                 return HttpNotFound();
             }
-            return View(sv);
+            return Json(province, JsonRequestBehavior.AllowGet);
         }
-        // POST: Admin/SVs/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        [HttpGet]
+        public ActionResult DDLAmphur(int Id)
         {
-            NBC.Models.SV sv = svService.Find(id);
-            svService.Remove(sv);
-            svService.SaveChanges();
-            return RedirectToAction("Index");
+            var amphur = MasAmphurService.GetAmphurByProvinceId(Id);
+            if (amphur == null)
+            {
+                return HttpNotFound();
+            }
+            return Json(amphur, JsonRequestBehavior.AllowGet);
         }
-
-        //    protected override void Dispose(bool disposing)
-        //    {
-        //        if (disposing)
-        //        {
-        //            db.Dispose();
-        //        }
-        //        base.Dispose(disposing);
-        //    }
+        [HttpGet]
+        public ActionResult DDLTambol(int Id)
+        {
+            var tambol = MasTambolService.GetTambolByAmphurId(Id);
+            if (tambol == null)
+            {
+                return HttpNotFound();
+            }
+            return Json(tambol, JsonRequestBehavior.AllowGet);
+        }
     }
 }

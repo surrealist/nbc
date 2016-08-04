@@ -35,6 +35,12 @@ namespace NBC.Models
         public DateTime CreatedDate { get; set; }
         [StringLength(255)]
         public String ModifiedBy { get; set; }
-        public DateTime ModifiedDate { get; set; }    
+        public DateTime ModifiedDate { get; set; }
+        public virtual ICollection<UserInRole> UserInRoles { get; set; }
+
+        public User()
+        {
+            UserInRoles = new HashSet<UserInRole>();
+        }
     }
 }

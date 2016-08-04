@@ -63,8 +63,8 @@
             @Html.AntiForgeryToken()
     
             <div class="form-actions no-color">
-                <input type="submit" value="Delete" class="btn btn-default" /> |
-                @Html.ActionLink("Back to List", "Index")
+                <input type="submit" value="Delete" class="openCreateBox btn btn-primary btn-xs" /> |
+                @Html.ActionLink("ย้อนกลับ", "Index", "SVActivityYears", null, new { @class = "openCreateBox btn btn-primary btn-xs" })
             </div>
         }
     </div>

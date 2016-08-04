@@ -2,15 +2,22 @@
 using System.Web.Mvc;
 using NBC.Models;
 using NBC.Services;
+using System.Linq;
 
 namespace NBC.Web.Areas.Admin.Controllers
 {
     public class UnitsController : Controller
     {
         private UnitService unitService;
-        public UnitsController(UnitService unitService)
+        private MasAmphurService MasAmphurService;
+        private MasProvinceService MasProvinceService;
+        private MasTambolService MasTambolService;
+        public UnitsController(UnitService unitService, MasAmphurService masAmphurService, MasProvinceService masProvinceService, MasTambolService masTambolService)
         {
             this.unitService = unitService;
+            this.MasAmphurService = masAmphurService;
+            this.MasProvinceService = masProvinceService;
+            this.MasTambolService = masTambolService;
         }
 
 
@@ -23,54 +30,45 @@ namespace NBC.Web.Areas.Admin.Controllers
         // GET: Admin/Units/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            NBC.Models.Unit unit = unitService.Find(id);
-            if (unit == null)
-            {
-                return HttpNotFound();
-            }
-            return View(unit);
+            
+            NBC.Models.Unit unit = unitService.Find(id);          
+            return PartialView(unit);
         }
 
         // GET: Admin/Units/Create
         public ActionResult Create()
         {
-            return View();
+            return PartialView();
         }
 
         // POST: Admin/Units/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Alias,Address,Tel,Email,ContactPersonName,ConactPersonTel,ContactPersonEmail,HeadPersonName,HeadPersonTel,HeadPersonEmail,Notes,CreatedBy,CreatedDate,ModifiedBy,ModifiedDate")] NBC.Models.Unit unit)
+        [HttpPost]        
+        public ActionResult Create(NBC.Models.Unit unit)
         {
-            if (ModelState.IsValid)
+            try
             {
+                // TODO: Add insert logic here
+
                 unitService.Add(unit);
                 unitService.SaveChanges();
+
                 return RedirectToAction("Index");
             }
-
-            return View(unit);
+            catch
+            {
+                return View();
+            }
         }
 
         // GET: Admin/Units/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+          
             NBC.Models.Unit unit = unitService.Find(id);
-            if (unit == null)
-            {
-                return HttpNotFound();
-            }
-            return View(unit);
+
+            return PartialView(unit);
         }
 
         // POST: Admin/Units/Edit/5
@@ -78,12 +76,12 @@ namespace NBC.Web.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Alias,Address,Tel,Email,ContactPersonName,ConactPersonTel,ContactPersonEmail,HeadPersonName,HeadPersonTel,HeadPersonEmail,Notes,CreatedBy,CreatedDate,ModifiedBy,ModifiedDate")] NBC.Models.Unit unit)
+        public ActionResult Edit(NBC.Models.Unit unit)
         {
             if (ModelState.IsValid)
             {
                 //db.Entry(unit).State = EntityState.Modified;               
-
+                unitService.SetModified(unit);
                 unitService.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -93,36 +91,60 @@ namespace NBC.Web.Areas.Admin.Controllers
         // GET: Admin/Units/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            NBC.Models.Unit unit = unitService.Find(id);
-            if (unit == null)
-            {
-                return HttpNotFound();
-            }
+         
+            NBC.Models.Unit unit = unitService.Find(id);         
             return View(unit);
         }
 
         // POST: Admin/Units/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult Delete(NBC.Models.Unit unit, FormCollection collection)
         {
-            NBC.Models.Unit unit = unitService.Find(id);
-            unitService.Remove(unit);
-            unitService.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                // TODO: Add delete logic here
+
+                unitService.Remove(unit);
+                unitService.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
         }
 
-        //protected override void Dispose(bool disposing)
-        //{
-        //    if (disposing)
-        //    {
-        //        db.Dispose();
-        //    }
-        //    base.Dispose(disposing);
-        //}
+        [HttpGet]
+        public ActionResult DDLProvince()
+        {
+            var province = MasProvinceService.All().ToList();
+            if (province == null)
+            {
+                return HttpNotFound();
+            }
+            return Json(province, JsonRequestBehavior.AllowGet);
+        }
+        [HttpGet]
+        public ActionResult DDLAmphur(int Id)
+        {
+            var amphur = MasAmphurService.GetAmphurByProvinceId(Id);
+            if (amphur == null)
+            {
+                return HttpNotFound();
+            }
+            return Json(amphur, JsonRequestBehavior.AllowGet);
+        }
+        [HttpGet]
+        public ActionResult DDLTambol(int Id)
+        {
+            var tambol = MasTambolService.GetTambolByAmphurId(Id);
+            if (tambol == null)
+            {
+                return HttpNotFound();
+            }
+            return Json(tambol, JsonRequestBehavior.AllowGet);
+        }
     }
 }

@@ -19,6 +19,11 @@ namespace NBC.Models {
         [StringLength(255)]
         public String HeadPersonEmail { get; set; }        
 
-        public virtual List<UnitConsult> Consults { get; set; }
+        public virtual ICollection<UnitConsult> UnitConsults { get; set; }
+
+        public Unit()
+        {
+            UnitConsults = new HashSet<UnitConsult>();
+        }
     }
 }

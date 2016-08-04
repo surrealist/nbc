@@ -7,10 +7,13 @@ namespace NBC.Models
     public class ActivityType:IRecord
     {
         
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [StringLength(10)]
+        public string Id { get; set; }
         
         [StringLength(255)]
+        [Required]
+        [Index("IX_ActivityTypeName",IsUnique = true)]
         public String Name { get; set; }
 
         public DateTime CreatedDate { get; set; }

@@ -1,0 +1,250 @@
+﻿@model IEnumerable<NBC.Web.Areas.SV.ViewModels.UnitActivityViewModel>
+
+@{
+    Layout = "~/Areas/SV/Views/Shared/_Layout.cshtml";
+    int currentYear = (int)(ViewBag.Y);
+}
+<div>
+    <h3 class="text-center">ข้อมูลหน่ยวร่วม</h3>
+</div>
+<div>
+    <div class="form-group">
+        @Html.Label("ปีงบประมาณ")
+        <div class="text-left">
+            <select class="selectYearIndex">
+                <option selected value="0">กรุณาเลือก</option>
+            </select>
+        </div>
+    </div>
+</div>
+<div>
+    หน่ยว กสอ.: @ViewBag.SV
+</div>
+<div>
+    <p>
+
+    </p>
+</div>
+<div class="text-left">
+    <p>
+        <button class="openCreateBox btn btn-primary btn-xs" data-title="create" data-toggle="modal" data-target="#create">เพิ่มเป้าหมายรายกิจกรรม</button>
+    </p>
+</div>
+<div class="row well well-sm">
+
+    <div class="col-md-12">
+        <table id="example" class="table table-stripe table-bordered table-hover" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th>ที่</th>
+                    <th>หน่วยงานร่วม</th>
+                    <th>กิจกรรมบ่มเพาะ</th>
+                    <th>กิจกรรม NBC </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    var count = 1;
+                }
+
+                @foreach (var item in Model)
+                {
+
+                    <tr data-id="@item.Unit_ID">
+                        <td>@count</td>
+                        <td>@Html.DisplayFor(modelItem => item.UnitName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.NBCTarget)</td>
+                        <td>@Html.DisplayFor(modelItem => item.INCUTarget)</td>
+
+                    </tr>
+                    count++;
+
+
+
+
+                }
+            </tbody>
+
+        </table>
+    </div>
+</div>
+<div class="modal fade" tabindex="-1" role="dialog" id="create">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">เพิ่มเป้าหมายรายกิจกรรมของหน่วยร่วม</h4>
+            </div>
+            <div class="modal-body">
+                <p>Loading......&hellip;</p>
+            </div>
+            @*<div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>*@
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-1.12.3.js"></script>
+<script src="~/Scripts/jquerysession.js"></script>
+<script src="~/Scripts/jquery.tabledit.js"></script>
+<script src="~/Scripts/jquery.tabledit.min.js"></script>
+<link href="~/Content/css/chosen.css" rel="stylesheet" />
+
+<script type="text/javascript" charset="utf8" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css "></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.2.1/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.2.1/js/buttons.flash.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.2.1/js/buttons.html5.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.2.1/js/buttons.print.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.2.1/css/buttons.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="http://www.shieldui.com/shared/components/latest/css/light/all.min.css" />
+<script type="text/javascript" src="http://www.shieldui.com/shared/components/latest/js/shieldui-all.min.js"></script>
+<script type="text/javascript" src="http://www.shieldui.com/shared/components/latest/js/jszip.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var table = $('#example').DataTable({
+            dom: 'Bfrtip',
+            buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
+            addFont: 'Tahoma',
+        });
+        $('#example').Tabledit({
+            url: 'UnitActivities/index',
+            columns: {
+                identifier: [0, 'id'],
+                editable: [[2, 'NBCTarget'], [3, 'INCUTarget']]
+            }
+        });
+        var selectedId = $('.Year_IdIndex').val();
+        selectedId = @currentYear;
+        var url = "/SV/UnitActivities/DDLYear/";
+        var $jsontwo = $('.selectYearIndex');
+        $jsontwo.empty();
+        $jsontwo.append($("<option selected />").val(-1).text("กรุณาเลือก"));
+        $.ajax({
+            url: url,
+            async: false,
+            dataType: 'json',
+            success: function (data) {
+                var obj = data;
+                $.each(obj, function (index, value) {
+                    var name = value["Name"];
+                    var id = value["Id"];
+                    if (selectedId == id) {
+                        $jsontwo.append($("<option selected />").val(id).text(name));
+                    }
+                    else {
+                        $jsontwo.append($("<option />").val(id).text(name));
+                    }
+                });
+
+            }
+        });
+    });
+    $("#example").on('click','button.tabledit-save-button',function () {
+        var id = $(this).parents('tr').data('id');
+        //var nbc = $('.NBCTarget.tabledit-edit-mode').find('input.tabledit-input.form-control.input-sm').val();
+        //var incu = $('.INCUTarge.tabledit-edit-mode').find('input.tabledit-input.form-control.input-sm').val();
+        // var test = $('.NBCTarget').find('input');
+        var nbc = 0;
+        var incu = 0;
+        $("#example tr").each(function(index,value){
+            if (index != 0){
+                id = $(this).data('id');
+
+                $(this).find('td').each(function(indextd,valuetd){
+                    if (indextd == 2){
+                        incu  = $(this).find('input.tabledit-input.form-control.input-sm').val();
+                    }
+                    if(indextd == 3){
+                        nbc  = $(this).find('input.tabledit-input.form-control.input-sm').val();
+                    }
+                    //var test =  $(this).find('input.tabledit-input.form-control.input-sm').val();
+                });
+
+                var year = $('.selectYearIndex').val();
+                var url = "@Url.Content("~/SV/UnitActivities/EditTarget")" + "/" + id + "?NBCTarget=" + nbc + "&INCUTarge=" + incu + "&Year=" + year;
+                $.post(url, function (result) {
+
+                });
+
+
+            }
+
+        });
+    });
+    $("#example").on('click','button.tabledit-confirm-button',function () {
+        var id = $(this).parents('tr').data('id');
+        var year = $('.selectYearIndex').val();
+        var url = "@Url.Content("~/SV/UnitActivities/DeleteConfirmed")" + "/" + id + "?Year=" + year;
+
+        var tr = $(this).parents("tr");
+        $.post(url, function (result) {
+            if (result == "OK") {
+                tr.remove();
+
+            } else {
+                alert(result);
+            }
+        });
+
+
+    });
+
+    $('.openCreateBox').on('click', function (event) {
+
+        var modal = $("#create")
+        var url = "/SV/UnitActivities/Create";
+        $.get(url).success(function (html) {
+            modal.find(".modal-body").html(html);
+            modal.modal("show");
+        })
+    });
+    $('.selectYearIndex').change(function(){
+        var YId = $('.selectYearIndex').val();
+        var url = "/SV/UnitActivities/index" + "/" + YId;
+        $('#example tbody').empty();
+        var count=1;
+        var obj = Object;
+        $.ajax({
+            type: 'POST',
+            url: url,
+            async: false,
+            dataType: 'json',
+            success: function (data) {
+                obj = data;
+
+            }
+        });
+        $.each(obj, function (index, value) {
+            $("#example tbody").append(
+                "<tr data-id='" + value["Unit_ID"] +"'>"+
+                "<td>"+count+"</td>"+
+                "<td>"+value["UnitName"]+"</td>"+
+                "<td class='INCUTarget'>"+value["INCUTarget"]+"</td>"+
+                "<td class='NBCTarget'>"+value["NBCTarget"]+"</td>"+               
+                "</tr>");
+            
+            count++;
+        });
+        var numData = obj.length; 
+        var text = "Showing 1 to " + numData + " of " + numData + " entries";
+        $(".dataTables_info").text(text);
+        $('#example').Tabledit({
+            url: 'SVActivityYears/index',
+            columns: {
+                identifier: [0, 'id'],
+                editable: [[2, 'INCUTarget'], [3, 'NBCTarget']]
+            }
+        });
+    });
+
+</script>

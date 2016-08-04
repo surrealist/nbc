@@ -40,6 +40,10 @@ namespace NBC.Services
                 throw new Exception("This MasSubBusinessType is already exist.");
             }
         }
+        public List<MasSubBusinessType> GetAllBusinessTypes()
+        {
+            return Query(x => x.Id != 0).ToList();
+        }
         public override MasSubBusinessType Remove(MasSubBusinessType item)
         {
             return base.Remove(item);

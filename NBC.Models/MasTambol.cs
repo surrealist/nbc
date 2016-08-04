@@ -14,11 +14,13 @@ namespace NBC.Models
         public int Id { get; set; }
 
         [StringLength(255)]
+        [Required]      
         public string Name { get; set; }
-        public virtual MasAmphur Amphur { get; set; }
-        public virtual MasProvince Province { get; set; }
-        public float Latitude { get; set; }
-        public float Longtitude { get; set; }
+        [ForeignKey("MasAmphur")]
+        public virtual int MasAmphur_Id { get; set; }
+        public virtual MasAmphur MasAmphur { get; set; }       
+        public float? Latitude { get; set; }
+        public float? Longtitude { get; set; }
         [StringLength(255)]
         public String CreatedBy { get; set; }
         public DateTime CreatedDate { get; set; }

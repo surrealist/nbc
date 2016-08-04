@@ -10,10 +10,10 @@
     <div class="container">
         <div class="row">
             <h2 class="text-center">อาชีพทั้งหมด</h2>
-            <p>
+            <div>
+                <p data-placement="top" data-toggle="tooltip" title="เพิ่มอาชีพ"> <button class="openCreateBox btn btn-default" data-title="Create" data-toggle="modal" data-target="#create">เพิ่มอาชีพ</button></p>
 
-                <button>@Html.ActionLink("เพิ่มอาชีพ", "Create")</button>
-            </p>
+            </div>
         </div>
 
         <div class="row">
@@ -27,13 +27,16 @@
                         <tr>
 
                             <th>
-                                ID
+                                ลำดับ
                             </th>
                             <th>
                                 อาชีพ
                             </th>
                             <th>
-
+                                แก้ไข
+                            </th>
+                            <th>
+                                ลบ
                             </th>
                         </tr>
 
@@ -43,17 +46,20 @@
                         @foreach (var item in Model)
                         {
                             <tr>
-                                <td id="Name">
-                                    @Html.DisplayFor(modelItem => item.Id)
+                                <td class="col-md-1">
+
                                 </td>
                                 <td class="Std">
                                     @Html.DisplayFor(modelItem => item.Name)
                                 </td>
-                                <td class="MA">
+                                <td class="MA col-md-1">
 
-                                    <p data-placement="top" data-toggle="tooltip" title="แก้ไข"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button></p>
-                                    <p data-placement="top" data-toggle="tooltip" title="ลบ"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete"><span class="glyphicon glyphicon-trash"></span></button></p>
-                                    @*<p data-placement="top" data-toggle="tooltip" title="ดูข้อมูล"><button class="btn btn-info btn-xs" data-title="Detail" data-toggle="modal" data-target="#detail"><span class="glyphicon glyphicon-user"></span></button></p>*@
+                                    <p data-placement="top" data-toggle="tooltip" title="แก้ไข"> <button class="openEditBox btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-show-id="@item.Id" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button></p>
+                                </td>
+                                <td class="MA col-md-1">
+
+                                 
+                                    <p data-placement="top" data-toggle="tooltip" title="ลบ"><button class="openDeleteBox btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-show-id="@item.Id" data-target="#delete"><span class="glyphicon glyphicon-trash"></span></button></p>
 
                                 </td>
                             </tr>
@@ -68,95 +74,59 @@
         </div>
     </div>
 
-    <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+    <div class="modal fade" tabindex="-1" role="dialog" id="create">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h4 class="modal-title custom_align" id="Heading">แก้ไขข้อมูลปีงบประมาณ</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">เพิ่มข้อมูล</h4>
                 </div>
                 <div class="modal-body">
-                    @{
-                        foreach (var it in Model)
-                        {
-                            @Html.Partial("Edit", it)
-                        }
-
-                    }
-
-
+                    <p>Error&hellip;</p>
                 </div>
-                <div class="modal-footer ">
+                @*<div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>*@
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 
-                </div>
-            </div>
-            <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-    </div>
-
-
-
-    <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+    <div class="modal fade" tabindex="-1" role="dialog" id="edit">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h4 class="modal-title custom_align" id="Heading">ข้อความแจ้งเตือน</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">แก้ไขข้อมูล</h4>
                 </div>
                 <div class="modal-body">
-
-                    <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span>คุณต้องการที่จะลบข้อมูลนี้ใช่หรือไม่</div>
-
+                    <p>Error&hellip;</p>
                 </div>
-                <div class="modal-footer ">
-                    <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-ok-sign"></span> ใช่ ต้องการลบ</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> ไม่ใช่</button>
-                </div>
-            </div>
-            <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-    </div>
+                @*<div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>*@
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 
-    <div class="modal fade" id="detail" tabindex="-1" role="dialog" aria-labelledby="detail" aria-hidden="true">
+    <div class="modal fade" tabindex="-1" role="dialog" id="delete">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h4 class="modal-title custom_align" id="Heading">ข้อมูลปีงบประมาณ</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">ท่านต้องการที่จะลบข้อมูลนี้ใช่หรือไม่?</h4>
                 </div>
                 <div class="modal-body">
-                    @{
-
-
-                        foreach (var it in Model)
-                        {
-                            try
-                            {
-                                if (Session["SELECTED"].ToString() == it.Name)
-                                {
-                                    @Html.Partial("Details", it)
-                                }
-                            }
-                            catch (Exception)
-                            {
-
-
-                            }
-
-
-                        }
-
-                    }
-
+                    <p>Error&hellip;</p>
                 </div>
-
-            </div>
-            <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-    </div>
+                @*<div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>*@
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 </body>
 
 
@@ -186,34 +156,59 @@
 
     $(document).ready(function () {
 
-        var table = $('#example').DataTable({
-
+        var t = $('#example').DataTable({
+            "columnDefs": [{
+                "searchable": false,
+                "orderable": false,
+                "targets": 0
+            }],
+            "order": [[1, 'asc']],
             dom: 'Bfrtip',
-
-
             buttons: [
-
-
-
+  'copy', 'csv', 'excel', 'pdf', 'print'
             ],
 
 
         });
-        //var table = $('#example').DataTable({
-        //    responsive: {
-        //        details: {
-        //            display: $.fn.dataTable.Responsive.display.modal({
-        //                header: function (row) {
-        //                    var data = row.data();
-        //                    return 'Details for ' + data[0] + ' ' + data[1];
-        //                }
-        //            }),
-        //            renderer: $.fn.dataTable.Responsive.renderer.tableAll({
-        //                tableClass: 'table'
-        //            })
-        //        }
-        //    }
-        //});
+
+        t.on('order.dt search.dt', function () {
+            t.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+                cell.innerHTML = i + 1;
+            });
+        }).draw();
+
+        $('.openCreateBox').on('click', function (event) {
+
+            var modal = $("#create")
+
+            var url = "/Admin/MasCareerTypes/Create/";
+            $.get(url).success(function (html) {
+                modal.find(".modal-body").html(html);
+                modal.modal("show");
+            })
+        });
+        $('.openEditBox').on('click', function (event) {
+            var button = $(this)
+            var Id = button.data('showId')
+
+            var modal = $("#edit")
+
+            var url = "/Admin/MasCareerTypes/Edit/" + Id;
+            $.get(url).success(function (html) {
+                modal.find(".modal-body").html(html);
+                modal.modal("show");
+            })
+        });
+        $('.openDeleteBox').on('click', function (event) {
+            var button = $(this)
+            var Id = button.data('showId')
+            var modal = $("#delete")
+            var url = "/Admin/MasCareerTypes/Delete/" + Id;
+            $.get(url).success(function (html) {
+                modal.find(".modal-body").html(html);
+                modal.modal("show");
+            })
+        });
 
 
 

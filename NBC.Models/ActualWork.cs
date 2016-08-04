@@ -13,12 +13,19 @@ namespace NBC.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public int SeqId { get; set; }
+
+        [ForeignKey("Applicant")]
+        [Index("IX_ActualWorkApplicant",IsUnique = true)]
+        public virtual int Applicant_Id { get; set; }
         public virtual Applicant Applicant { get; set; }
+        [ForeignKey("ActionType")]
+        public virtual int ActionType_Id { get; set; }
         public virtual ActionType ActionType { get; set; }  
         public DateTime ActionDate { get; set; }
         [StringLength(2048)]
         public String ActionDetail { get; set; }
-        public decimal ActionManDay { get; set; }        
+        public decimal ActionManDay { get; set; } 
+        [Required]       
         public virtual FileDaily FileDailyReport { get; set; }
         public virtual FileAction FileAction { get; set; }
         [StringLength(255)]

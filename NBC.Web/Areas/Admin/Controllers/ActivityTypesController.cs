@@ -91,6 +91,7 @@ namespace NBC.Web.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 //db.Entry(activityType).State = EntityState.Modified;
+                service.SetModified(activityType);
                 service.SaveChanges();
                 return RedirectToAction("Index");
             }

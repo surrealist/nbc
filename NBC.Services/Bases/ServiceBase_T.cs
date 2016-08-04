@@ -10,9 +10,18 @@ namespace NBC.Services.Bases
 {
     public abstract class ServiceBase<T> : IService<T> where T : class
     {
-
+        //private RootClass _RootClass;
         private readonly IRepository<T> _BaseRepo;
 
+        //public ServiceBase(IRepository<T> baseRepo, RootClass rootClass)
+        //{
+        //    if (baseRepo == null)
+        //    {
+        //        throw new ArgumentNullException(nameof(baseRepo));
+        //    }
+        //    _BaseRepo = baseRepo;
+        //    _RootClass = rootClass;
+        //}
         public ServiceBase(IRepository<T> baseRepo)
         {
             if (baseRepo == null)
@@ -20,6 +29,7 @@ namespace NBC.Services.Bases
                 throw new ArgumentNullException(nameof(baseRepo));
             }
             _BaseRepo = baseRepo;
+            
         }
         public virtual void SetModified(T item)
         {

@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><html>
+  <head>
+    <title>xUnit.net Test Results</title>
+    <style type="text/css">
+          body { font-family: Calibri, Verdana, Arial, sans-serif; background-color: White; color: Black; }
+          h2,h3,h4,h5 { margin: 0; padding: 0; }
+          h3 { font-weight: normal; }
+          h4 { margin: 0.5em 0; }
+          h5 { font-weight: normal; font-style: italic; margin-bottom: 0.75em; }
+          h6 { font-size: 0.9em; font-weight: bold; margin: 0.5em 0 0 0.75em; padding: 0; }
+          pre,table { font-family: Consolas; font-size: 0.8em; margin: 0 0 0 1em; padding: 0; }
+          table { padding-bottom: 0.25em; }
+          th { padding: 0 0.5em; border-right: 1px solid #bbb; text-align: left; }
+          td { padding-left: 0.5em; }
+          .divided { border-top: solid 1px #f0f5fa; padding-top: 0.5em; }
+          .row, .altrow { padding: 0.1em 0.3em; }
+          .row { background-color: #f0f5fa; }
+          .altrow { background-color: #e1ebf4; }
+          .success, .failure, .skipped { font-family: Arial Unicode MS; font-weight: normal; float: left; width: 1em; display: block; }
+          .success { color: #0c0; }
+          .failure { color: #c00; }
+          .skipped { color: #cc0; }
+          .timing { float: right; }
+          .indent { margin: 0.25em 0 0.5em 2em; }
+          .clickable { cursor: pointer; }
+          .testcount { font-size: 85%; }
+        </style>
+    <script language="javascript">
+          function ToggleClass(id) {
+            var elem = document.getElementById(id);
+            if (elem.style.display == "none") {
+              elem.style.display = "block";
+            }
+            else {
+              elem.style.display = "none";
+            }
+          }
+        </script>
+  </head>
+  <body>
+    <h3 class="divided">
+      <b>Assemblies Run</b>
+    </h3>
+    <div>D:\tfs\nbc\nbc-master\NBC.Facts\bin\Debug\NBC.Facts.DLL</div>
+    <h3 class="divided">
+      <b>Summary</b>
+    </h3>
+    <div>
+          Tests run: <a href="#all"><b>6</b></a>  
+          
+            Failures: <a href="#failures"><b>1</b></a>,
+          
+          Run time: <b>4.660s</b></div>
+    <br />
+    <h2>
+      <a id="failures" />Failed tests
+          </h2>
+    <div class="row">
+      <span class="timing">0.1030422s
+        </span>
+      <span class="failure">✘</span>
+       NBC.Facts.Services.YearServiceFacts+AddMethod.CannotDelteYearHasSVTarget<br clear="all" /><pre>Assert.Equal() Failure\r\nExpected: 1\r\nActual:   0</pre><pre>   at NBC.Facts.Services.YearServiceFacts.AddMethod.CannotDelteYearHasSVTarget() in D:\tfs\nbc\nbc-master\NBC.Facts\Services\YearServiceFacts.cs:line 144</pre></div>
+    <br />
+    <h2>
+      <a id="all" />All tests
+        </h2>
+    <h5>Click test class name to expand/collapse test details</h5>
+    <h3>
+      <span class="timing">0.729s
+            </span>
+      <span class="clickable" onclick="ToggleClass('classID0E2B')" ondblclick="ToggleClass('classID0E2B')">
+        <span class="success">✔</span>
+               NBC.Facts.Services.SettingServiceFacts+General
+               <span class="testcount">
+                (2 tests)
+              </span></span>
+      <br clear="all" />
+    </h3>
+    <div class="indent" style="display: none;" id="classID0E2B">
+      <div class="row">
+        <span class="timing">0.0035043s
+        </span>
+        <span class="success">✔</span>
+       NBC.Facts.Services.SettingServiceFacts+General.EnsureGetDefaultSetting_HasSetting<br clear="all" /></div>
+      <div class="altrow">
+        <span class="timing">0.725577s
+        </span>
+        <span class="success">✔</span>
+       NBC.Facts.Services.SettingServiceFacts+General.EnsureGetDefaultSetting_NoSetting<br clear="all" /></div>
+    </div>
+    <h3>
+      <span class="timing">3.912s
+            </span>
+      <span class="clickable" onclick="ToggleClass('classID0EY')" ondblclick="ToggleClass('classID0EY')">
+        <span class="failure">✘</span>
+               NBC.Facts.Services.YearServiceFacts+AddMethod
+               <span class="testcount">
+                (4 tests)
+              </span></span>
+      <br clear="all" />
+    </h3>
+    <div class="indent" id="classID0EY">
+      <div class="row">
+        <span class="timing">0.0054788s
+        </span>
+        <span class="success">✔</span>
+       NBC.Facts.Services.YearServiceFacts+AddMethod.CanAdd2Year<br clear="all" /></div>
+      <div class="altrow">
+        <span class="timing">3.7888311s
+        </span>
+        <span class="success">✔</span>
+       NBC.Facts.Services.YearServiceFacts+AddMethod.CanAddAYear<br clear="all" /></div>
+      <div class="row">
+        <span class="timing">0.0149518s
+        </span>
+        <span class="success">✔</span>
+       NBC.Facts.Services.YearServiceFacts+AddMethod.CannotAddDupYear<br clear="all" /></div>
+      <div class="altrow">
+        <span class="timing">0.1030422s
+        </span>
+        <span class="failure">✘</span>
+       NBC.Facts.Services.YearServiceFacts+AddMethod.CannotDelteYearHasSVTarget<br clear="all" /><pre>Assert.Equal() Failure\r\nExpected: 1\r\nActual:   0</pre><pre>   at NBC.Facts.Services.YearServiceFacts.AddMethod.CannotDelteYearHasSVTarget() in D:\tfs\nbc\nbc-master\NBC.Facts\Services\YearServiceFacts.cs:line 144</pre></div>
+    </div>
+  </body>
+</html>

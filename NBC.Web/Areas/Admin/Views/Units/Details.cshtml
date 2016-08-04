@@ -1,147 +1,204 @@
 ﻿@model NBC.Models.Unit
 
 @{
-    ViewBag.Title = "Details";
-    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    Layout = null;
 }
 
-<h2>Details</h2>
+<!DOCTYPE html>
 
-<div>
-    <h4>Unit</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+
+</head>
+<body>
+    <div>
+        <dl class="dl-horizontal">
+            <dt>
+                ชื่อ
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+
+            <dt>
+                ชื่อย่อ
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Alias)
+            </dd>
+
+            <dt>
+                บ้านเลขที่
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Adress.No)
+            </dd>
+
+            @*<dt>
+           หมู่ที่
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+            @Html.DisplayFor(model => model.Adress.No)
+        </dd>*@
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Alias)
+            @*<dt>
+            ชั้น
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Alias)
+            @Html.DisplayFor(model => model.Adress.Floor)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Address)
+            ตึก/อาคาร
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Address)
+            @Html.DisplayFor(model => model.Adress.Building)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Tel)
+            หมู่บ้าน
         </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Tel)
+        <dd>*@
+            @*@Html.DisplayFor(model => model.Adress.MooBan
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Email)
+           ซอย
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Email)
+            @Html.DisplayFor(model => model.Adress.Soi)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ContactPersonName)
+           ถนน
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ContactPersonName)
+            @Html.DisplayFor(model => model.Adress.Road)
+        </dd>*@
+
+            @*<dt>
+            ตำบล
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Adress.TambolName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ConactPersonTel)
+            อำเภอ
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ConactPersonTel)
+            @Html.DisplayFor(model => model.Adress.AmphurName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ContactPersonEmail)
+            จังหวัด
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ContactPersonEmail)
+            @Html.DisplayFor(model => model.Adress.ProvinceName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.HeadPersonName)
+           รหัสไปรษณีย์
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.HeadPersonName)
-        </dd>
+            @Html.DisplayFor(model => model.Adress.ZipCode)
+        </dd>*@
 
-        <dt>
-            @Html.DisplayNameFor(model => model.HeadPersonTel)
-        </dt>
+            <dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.HeadPersonTel)
-        </dd>
+                เบอร์โทร
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.HeadPersonEmail)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Tel)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.HeadPersonEmail)
-        </dd>
+            <dt>
+                อีเมลล์
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Notes)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Notes)
-        </dd>
+            <dt>
+                ผู้ประสาน
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatedBy)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ContactPersonName)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.CreatedBy)
-        </dd>
+            <dt>
+                เบอร์ติดต่อผู้ประสาน
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatedDate)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ConactPersonTel)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.CreatedDate)
-        </dd>
+            <dt>
+                E-mail ผู้ประสาน
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ModifiedBy)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ContactPersonEmail)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.ModifiedBy)
-        </dd>
+            <dt>
+                หัวหน้าโครงการ
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ModifiedDate)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.HeadPersonName)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.ModifiedDate)
-        </dd>
+            <dt>
+                เบอร์ติดต่อหัวหน้าโครงการ
+            </dt>
 
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+            <dd>
+                @Html.DisplayFor(model => model.HeadPersonTel)
+            </dd>
+
+            <dt>
+                E-mail หัวหน้าโครงการ
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.HeadPersonEmail)
+            </dd>
+
+            <dt>
+               หมายเหตุ
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Notes)
+            </dd>
+           
+
+        </dl>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">           
+            @Html.ActionLink("ย้อนกลับ", "Index", "Units", null, new { @class = "openCreateBox btn btn-primary btn-xs" })
+        </div>
+    </div>
+    </div>
+</body>
+</html>

@@ -3,12 +3,12 @@ using System.Linq;
 using NBC.DataAccess.Bases;
 using NBC.Models;
 using NBC.Services.Bases;
-
+using System.Collections.Generic;
 
 namespace NBC.Services {
     public class YearService : ServiceBase<Year>
     {
-
+        NBC.DataAccess.Contexts.AppDbContext db = new DataAccess.Contexts.AppDbContext();
         public YearService(IRepository<Year> baseRepo) : base(baseRepo)
         {
             //
@@ -24,6 +24,13 @@ namespace NBC.Services {
         {            
             return Query(x => x.Id == Id).SingleOrDefault();
         }
+        
+        public object GetYear()
+        {
+            var years = (from u in db.Years select new { u.Id, u.Name }).ToList();
+            return years;
+        }
+
         public override Year Add(Year item)
         {
             Year year = Find(item.Id);

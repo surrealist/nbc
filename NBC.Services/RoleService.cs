@@ -26,23 +26,23 @@ namespace NBC.Services
             return Query(x => x.RoleName == Name).SingleOrDefault();
         }     
 
-        public override Role Add(Role item)
-        {
-            Role Roler = Find(item.Id);
+        //public override Role Add(Role item)
+        //{
+        //    Role Roler = Find(item.Id);
 
-            if (Roler == null)
-            {
-                item.CreatedDate = DateTime.Now;
-                item.ModifiedDate = DateTime.Now;
-                Roler = base.Add(item);
-                base.SaveChanges();
-                return Roler;
-            }
-            else
-            {
-                throw new Exception("Already exist.");
-            }
-        }
+        //    if (Roler == null)
+        //    {
+        //        item.CreatedDate = DateTime.Now;
+        //        item.ModifiedDate = DateTime.Now;
+        //        Roler = base.Add(item);
+        //        base.SaveChanges();
+        //        return Roler;
+        //    }
+        //    else
+        //    {
+        //        throw new Exception("Already exist.");
+        //    }
+        //}
         public override Role Remove(Role item)
         {
             return base.Remove(item);

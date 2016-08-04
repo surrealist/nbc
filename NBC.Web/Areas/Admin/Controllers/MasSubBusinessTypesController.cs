@@ -16,15 +16,18 @@ namespace NBC.Web.Areas.Admin.Controllers
     {
         private MasSubBusinessTypeService service;
 
-        public MasSubBusinessTypesController(MasSubBusinessTypeService service)
+        private MasBusinessTypeService busService;
+
+        public MasSubBusinessTypesController(MasSubBusinessTypeService service, MasBusinessTypeService busService)
         {
-            this.service = service; 
+            this.service = service;
+            this.busService = busService;
         }
 
         // GET: Admin/MasSubBusinessTypes
         public ActionResult Index()
         {
-            return View(service.All());
+            return View(service.GetAllBusinessTypes());
         }
 
         // GET: Admin/MasSubBusinessTypes/Details/5
@@ -53,7 +56,7 @@ namespace NBC.Web.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,CreatedBy,CreatedDate,ModifiedBy,ModifiedDate")] MasSubBusinessType masSubBusinessType)
+        public ActionResult Create([Bind(Include = "Id,Name,MasBusinessType_Id,CreatedBy,CreatedDate,ModifiedBy,ModifiedDate")] MasSubBusinessType masSubBusinessType)
         {
             if (ModelState.IsValid)
             {
@@ -85,11 +88,12 @@ namespace NBC.Web.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,CreatedBy,CreatedDate,ModifiedBy,ModifiedDate")] MasSubBusinessType masSubBusinessType)
+        public ActionResult Edit([Bind(Include = "Id,Name,MasBusinessType_Id,CreatedBy,CreatedDate,ModifiedBy,ModifiedDate")] MasSubBusinessType masSubBusinessType)
         {
             if (ModelState.IsValid)
             {
                 //db.Entry(masSubBusinessType).State = EntityState.Modified;
+                service.SetModified(masSubBusinessType);
                 service.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -130,5 +134,24 @@ namespace NBC.Web.Areas.Admin.Controllers
         //    }
         //    base.Dispose(disposing);
         //}
+
+        public ActionResult DDLBusiness()
+        {
+            var business = busService.All().ToList();
+            if (business == null)
+            {
+                return HttpNotFound();
+            }
+            return Json(business, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult DDLSubBusiness(int Id)
+        {
+            var amphur = service.Find(Id);
+            if (amphur == null)
+            {
+                return HttpNotFound();
+            }
+            return Json(amphur, JsonRequestBehavior.AllowGet);
+        }
     }
 }

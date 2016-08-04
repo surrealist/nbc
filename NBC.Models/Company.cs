@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 namespace NBC.Models
@@ -9,9 +10,12 @@ namespace NBC.Models
         public int Id { get; set; }
 
         [StringLength(255)]
+        [Required]
+        [Index("IX_CompanyName",IsUnique = true)]
         public string Name { get; set; }       
         public Address Address  { get; set; }
         [StringLength(255)]
+        [Index("IX_CompanyComCode", IsUnique = true)]
         public string ComCode { get; set; }
         public virtual MasSubBusinessType SubBusinessType { get; set; }
         [StringLength(2048)]
@@ -22,6 +26,12 @@ namespace NBC.Models
         [StringLength(255)]
         public string ModifiedBy { get; set; }
         public DateTime ModifiedDate { get; set; }
+        public virtual ICollection<Applicant> Applicants { get; set; }
+
+        public Company()
+        {
+            Applicants = new HashSet<Applicant>();
+        }
     }
 
 

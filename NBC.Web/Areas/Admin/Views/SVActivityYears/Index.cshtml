@@ -1,17 +1,38 @@
-﻿@using NBC.Models
-@model IEnumerable<NBC.Models.SVActivityYear>
+﻿
+@model IEnumerable<NBC.Web.Areas.Admin.ViewModels.SVActivityYearsIndexVM>
 
 @{
+    ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    int currentYear = (int)(ViewBag.Y);
 }
 
+@User.Identity.Name
 
-<body>
     <div class="container">
         <div class="row">
             <h2 class="text-center">กำหนดเป้าหมายรายกิจกรรม</h2>
+
         </div>
 
+        <div>
+            <div class="form-group">
+                @Html.Label("ปีงบประมาณ")
+                <div class="text-left">
+                    <select class="selectYearIndex">
+                        <option selected value="0">กรุณาเลือก</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="text-left">
+            <p>
+                <button class="openCreateBox btn btn-primary btn-xs" data-title="create" data-toggle="modal" data-target="#create">เพิ่มเป้าหมายรายกิจกรรม</button>
+            </p>
+        </div>
+        <div>
+
+        </div>
         <div class="row">
 
 
@@ -23,50 +44,42 @@
                         <tr>
 
                             <th>
-                                ID
+                                ลำดับที่
                             </th>
                             <th>
                                 หน่วย สกอ.
                             </th>
                             <th>
-                                กิจกรรม NBC
-                            </th>
-                            <th>
                                 กิจกรรมบ่มเพาะ
                             </th>
                             <th>
-
+                                กิจกรรม NBC
                             </th>
+
                         </tr>
 
                     </thead>
 
                     <tbody>
+                        @{
+                            var count = 1;
+                        }
                         @foreach (var item in Model)
                         {
-                            <tr>
-                                <td id="Name">
-                                   @Html.DisplayFor(modelItem => item.Id)
-                                </td>
-                                <td class="Std">
-                                @*   @Html.DisplayFor(modelItem => item.)*@
+                            <tr data-id="@item.SV_ID">
+                                <td>
+                                    @count
+                                    @* @Html.DisplayFor(modelItem => item.SV_ID)*@
                                 </td>
                                 <td>
-                                   @Html.DisplayFor(modelItem => item.Target)
-                                   
+                                    @Html.DisplayFor(modelItem => item.SVName)
                                 </td>
-                                <td>
-                                 @Html.DisplayFor(modelItem => item.Target)
-                                </td>
-                                <td class="MA">
 
-                                    @*<p data-placement="top" data-toggle="tooltip" title="แก้ไข"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button></p>
-                                    <p data-placement="top" data-toggle="tooltip" title="ลบ"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete"><span class="glyphicon glyphicon-trash"></span></button></p>*@
-                                    @*<p data-placement="top" data-toggle="tooltip" title="ดูข้อมูล"><button class="btn btn-info btn-xs" data-title="Detail" data-toggle="modal" data-target="#detail"><span class="glyphicon glyphicon-user"></span></button></p>*@
+                                <td class="NBCTarget" data-id="@item.SV_ID">@Html.DisplayFor(modelItem => item.NBCTarget, new { htmlAttributes = new { @class = "form-control" } })</td>
+                                <td class="INCUTarget" data-id="@item.SV_ID">@Html.DisplayFor(modelItem => item.INCUTarget, new { htmlAttributes = new { @class = "form-control" } })</td>
 
-                                </td>
                             </tr>
-
+                            count++;
                         }
                     </tbody>
 
@@ -77,15 +90,34 @@
         </div>
     </div>
 
-  
-</body>
+    <div class="modal fade" tabindex="-1" role="dialog" id="create">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">เพิ่มเป้าหมายรายกิจกรรม</h4>
+                </div>
+                <div class="modal-body">
+                    <p>One fine body&hellip;</p>
+                </div>
+                @*<div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>*@
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
 
 
 
 <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-1.12.3.js"></script>
 <script src="~/Scripts/jquerysession.js"></script>
-<script src="~/Scripts/jquery.tabledit.js"></script>
-<script src="~/Scripts/jquery.tabledit.min.js"></script>
+@*<script src="~/Scripts/jquery.tabledit.js"></script>
+<script src="~/Scripts/jquery.tabledit.min.js"></script>*@
+<script src="~/Scripts/DataTables/jquery.tabledit.js"></script>
+<script src="~/Scripts/DataTables/jquery.tabledit.min.js"></script>
+<script src="~/Scripts/DataTables/table-edits.js"></script>
 
 <script type="text/javascript" charset="utf8" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
@@ -103,8 +135,6 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.2.1/css/buttons.dataTables.min.css">
 
 
-
-
 <script>
 
     $(document).ready(function () {
@@ -115,16 +145,147 @@
 
         });
         $('#example').Tabledit({
-            url: 'example.php',           
+            url: 'SVActivityYears/index',
             columns: {
                 identifier: [0, 'id'],
-                editable: [[2, 'Target'], [3, 'Target']]
+                editable: [[2, 'INCUTarget'], [3, 'NBCTarget']]
             }
         });
+        
+
+        var selectedId = $('.Year_IdIndex').val();
+        selectedId = @currentYear;
+        var url = "/Admin/SVActivityYears/DDLYear";
+        var $jsontwo = $('.selectYearIndex');
+        $jsontwo.empty();
+        $jsontwo.append($("<option selected />").val(-1).text("กรุณาเลือก"));
+        $.ajax({
+            url: url,
+            async: false,
+            dataType: 'json',
+            success: function (data) {
+                var obj = data;
+                $.each(obj, function (index, value) {
+                    var name = value["Name"];
+                    var id = value["Id"];
+                    if (selectedId == id) {
+                        $jsontwo.append($("<option selected />").val(id).text(name));
+                    }
+                    else {
+                        $jsontwo.append($("<option />").val(id).text(name));
+                    }
+                });
+
+            }
+        });
+        
+
        
+        
+   
+
+
+        $("#example").on('click','button.tabledit-save-button',function () {
+            var id = $(this).parents('tr').data('id');
+            //var nbc = $('.NBCTarget.tabledit-edit-mode').find('input.tabledit-input.form-control.input-sm').val();
+            //var incu = $('.INCUTarge.tabledit-edit-mode').find('input.tabledit-input.form-control.input-sm').val();
+            // var test = $('.NBCTarget').find('input');
+            var nbc = 0;
+            var incu = 0;
+            $("#example tr").each(function(index,value){
+                if (index != 0){
+                    id = $(this).data('id');
+
+                    $(this).find('td').each(function(indextd,valuetd){       
+                        if (indextd == 2){
+                            incu  = $(this).find('input.tabledit-input.form-control.input-sm').val();
+                        }
+                        if(indextd == 3){
+                            nbc  = $(this).find('input.tabledit-input.form-control.input-sm').val();
+                        }
+                        //var test =  $(this).find('input.tabledit-input.form-control.input-sm').val();
+                    });
+
+                    var year = $('.selectYearIndex').val();
+                    var url = "@Url.Content("~/Admin/SVActivityYears/EditTarget")" + "/" + id + "?NBCTarget=" + nbc + "&INCUTarge=" + incu + "&Year=" + year;
+                    $.post(url, function (result) {
+
+                    });
+
+
+                }
+                
+            });
+            //var nbc = $('.NBCTarget').find('input.tabledit-input.form-control.input-sm').val();
+            //var incu = $('.INCUTarget').find('input.tabledit-input.form-control.input-sm').val();
+            
+        });
+        $("#example").on('click','button.tabledit-confirm-button',function () {
+            var id = $(this).parents('tr').data('id');
+            var year = $('.selectYearIndex').val();
+            var url = "@Url.Content("~/Admin/SVActivityYears/DeleteConfirmed")" + "/" + id + "?Year=" + year;
+
+            var tr = $(this).parents("tr");
+            $.post(url, function (result) {
+                if (result == "OK") {
+                    tr.remove();
+                   
+                } else {
+                    alert(result);
+                }
+            });
+
+
+        });
+
     });
 
+    $('.openCreateBox').on('click', function (event) {
 
+        var modal = $("#create")
+        var url = "/Admin/SVActivityYears/Create";
+        $.get(url).success(function (html) {
+            modal.find(".modal-body").html(html);
+            modal.modal("show");
+        })
+    });
+    $('.selectYearIndex').change(function(){
+        var YId = $('.selectYearIndex').val();
+        var url = "/Admin/SVActivityYears/index" + "/" + YId;
+        $('#example tbody').empty();
+        var count=1;
+        var obj = Object;
+        $.ajax({
+            type: 'POST',
+            url: url,
+            async: false,
+            dataType: 'json',
+            success: function (data) {
+                obj = data;
 
+            }
+        });
+        $.each(obj, function (index, value) {
+            $("#example tbody").append(
+                "<tr data-id='" + value["SV_ID"] +"'>"+
+                "<td>"+count+"</td>"+
+                "<td>"+value["SVName"]+"</td>"+
+                "<td class='INCUTarget'>"+value["INCUTarget"]+"</td>"+
+                "<td class='NBCTarget'>"+value["NBCTarget"]+"</td>"+               
+                "</tr>");
+            
+            count++;
+        });
+        var numData = obj.length; 
+        var text = "Showing 1 to " + numData + " of " + numData + " entries";
+        $(".dataTables_info").text(text);
+        $('#example').Tabledit({
+            url: 'SVActivityYears/index',
+            columns: {
+                identifier: [0, 'id'],
+                editable: [[2, 'INCUTarget'], [3, 'NBCTarget']]
+            }
+        });
+    });
 
 </script>

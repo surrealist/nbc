@@ -11,17 +11,23 @@ using NBC.DataAccess.Contexts;
 namespace NBC.Services {
  public class SVService : ServiceBase<SV>
     {
+        
         public SVService(IRepository<SV> baseRepo) : base(baseRepo)
         {
-            
+           
         }
-
+        
         public override SV Find(params object[] keys)
         {
             var key = (int)keys[0];
             return Query(x => x.Id == key).SingleOrDefault();
         }
+        public SV GetWorkAtSV(int id)
+        {
+            var workAt = Query(x => (x.Id == id)).SingleOrDefault();
 
+            return workAt;
+        }
         public override SV Add(SV item)
         {
 
@@ -54,5 +60,10 @@ namespace NBC.Services {
         {
             return base.SaveChanges();
         }
+
+        //public void SetModified(SV SV)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

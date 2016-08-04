@@ -13,10 +13,11 @@ namespace NBC.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         [StringLength(255)]
+        [Required]
+        [Index("IX_WorkPlaceName", IsUnique = true)]
         public String Name { get; set; }
         [StringLength(255)]
         public String Alias { get; set; }
-
         public Address Adress { get; set; }
         [StringLength(255)]
         public String Tel { get; set; }
